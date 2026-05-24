@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}{{ tr('register_title', lang) }} — {{ ev.name }}{% endblock %}
+
+{% block content %}
+<div class="register-wrap" style="--ev-primary:{{ev.primary}};--ev-secondary:{{ev.secondary}};--ev-bg:{{ev.bg}};">
+  <div class="container">
+
+    {% if ev.languages|length > 1 %}
+    <div class="text-center mb-4">
+      {% for l in ev.languages %}
+      <a href="{{ url_for('register', slug=slug, lang=l) }}"
+         class="btn btn-sm me-1 rounded-pill {{ 'btn-primary' if lang==l else 'btn-outline-secondary' }}"
+         style="{% if lang==l %}background:{{ev.primary}};border-color:{{ev.primary}};{% endif %}">
+        {{ {'ru':'🇷🇺 Русский','en':'🇬🇧 English','nl':'🇳🇱 Nederlands'}[l] }}
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="register-card">
+      <!-- Card top -->
+      <div class="register-card-top" style="background:linear-gradient(135deg,{{ev.primary}},{{ev.secondary}});">
+        <div class="d-flex align-items-center gap-3">
+          <span style="font-size:2.5rem;">{{ ev.emoji }}</span>
+          <div>
+            <div style="font-size:.8rem;opacity:.8;margin-bottom:3px;">
+              {% if lang=='ru' %}Регистрация на мероприятие{% elif lang=='en' %}Event registration{% elif lang=='nl' %}Evenement registratie{% endif %}
+            </div>
+            <h2 style="margin:0;font-size:1.3rem;font-weight:800;">
+              {% if lang=='en' and ev.get('name_en') %}{{ ev.name_en }}
+              {% elif lang=='nl' and ev.get('name_nl') %}{{ ev.name_nl }}
+              {% else %}{{ ev.name }}{% endif %}
+            </h2>
+            <div style="font-size:.82rem;opacity:.8;margin-top:4px;">
+              <i class="bi bi-calendar3 me-1"></i>{{ ev.date }} &nbsp;·&nbsp;
+              <i class="bi bi-geo-alt me-1"></i>{{ ev.city }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="register-card-body">
+        <form method="POST" action="{{ url_for('register', slug=slug, lang=lang) }}" novalidate>
+
+          <!-- Registration type -->
+          <div class="mb-4">
+            <label class="form-label">{{ tr('reg_type', lang) }}</label>
+            <div class="reg-type-cards">
+              {% for type_key, type_label in ev.reg_types.items() %}
+              <div>
+                <input class="reg-type-radio" type="radio" name="reg_type"
+                       id="rt_{{ type_key }}" value="{{ type_key }}"
+                       {% if loop.first %}checked{% endif %}>
+                <label class="reg-type-label" for="rt_{{ type_key }}">
+                  {% if type_key == 'participant' %}<i class="bi bi-person-badge d-block mb-1" style="font-size:1.3rem;"></i>
+                  {% elif type_key == 'guest' %}<i class="bi bi-person d-block mb-1" style="font-size:1.3rem;"></i>
+                  {% elif type_key == 'volunteer' %}<i class="bi bi-heart d-block mb-1" style="font-size:1.3rem;"></i>
+                  {% endif %}
+                  {{ type_label }}
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <!-- Name -->
+            <div class="col-12">
+              <label class="form-label" for="fname">
+                {{ tr('name', lang) }} <span style="color:{{ev.primary}};">*</span>
+              </label>
+              <input type="text" class="form-control" id="fname" name="name"
+                     placeholder="{% if lang=='ru' %}Иван Иванов{% elif lang=='en' %}John Smith{% elif lang=='nl' %}Jan Jansen{% endif %}"
+                     required>
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-6">
+              <label class="form-label" for="femail">{{ tr('email', lang) }}</label>
+              <input type="email" class="form-control" id="femail" name="email"
+                     placeholder="email@example.com">
+            </div>
+
+            <!-- Phone -->
+            <div class="col-md-6">
+              <label class="form-label" for="fphone">{{ tr('phone', lang) }}</label>
+              <input type="tel" class="form-control" id="fphone" name="phone"
+                     placeholder="+7 (___) ___-__-__">
+            </div>
+
+            <!-- Organization -->
+            <div class="col-md-6">
+              <label class="form-label" for="forg">{{ tr('organization', lang) }}</label>
+              <input type="text" class="form-control" id="forg" name="organization"
+                     placeholder="{% if lang=='ru' %}Название организации{% elif lang=='en' %}Organization name{% elif lang=='nl' %}Naam organisatie{% endif %}">
+            </div>
+
+            <!-- Position -->
+            <div class="col-md-6">
+              <label class="form-label" for="fpos">{{ tr('position', lang) }}</label>
+              <input type="text" class="form-control" id="fpos" name="position"
+                     placeholder="{% if lang=='ru' %}Должность{% elif lang=='en' %}Job title{% elif lang=='nl' %}Functie{% endif %}">
+            </div>
+
+            <!-- Notes -->
+            <div class="col-12">
+              <label class="form-label" for="fnotes">{{ tr('notes', lang) }}</label>
+              <textarea class="form-control" id="fnotes" name="notes" rows="2"
+                        placeholder="{% if lang=='ru' %}Дополнительная информация, пожелания...{% elif lang=='en' %}Additional information, requests...{% elif lang=='nl' %}Extra informatie, verzoeken...{% endif %}"></textarea>
+            </div>
+          </div>
+
+          <div class="mt-4 d-flex gap-3 align-items-center">
+            <button type="submit" class="btn-ev px-5 py-2"
+                    style="--ev-primary:{{ev.primary}};--ev-secondary:{{ev.secondary}};">
+              <i class="bi bi-check2-circle me-2"></i>{{ tr('submit', lang) }}
+            </button>
+            <a href="{{ url_for('event_detail', slug=slug, lang=lang) }}"
+               class="text-muted text-decoration-none" style="font-size:.88rem;">
+              <i class="bi bi-arrow-left me-1"></i>
+              {% if lang=='ru' %}Назад{% elif lang=='en' %}Back{% elif lang=='nl' %}Terug{% endif %}
+            </a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

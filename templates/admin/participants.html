@@ -1,0 +1,208 @@
+{% extends "admin/base.html" %}
+{% set slug_current = slug %}
+{% block title %}Участники — {{ ev.name }}{% endblock %}
+{% block page_title %}{{ ev.emoji }} {{ ev.name }}{% endblock %}
+
+{% block topbar_actions %}
+<a href="{{ url_for('admin_export', slug=slug) }}"
+   class="btn btn-sm btn-outline-success rounded-pill px-3">
+  <i class="bi bi-download me-1"></i>Экспорт CSV
+</a>
+<a href="{{ url_for('event_detail', slug=slug) }}" target="_blank"
+   class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+  <i class="bi bi-box-arrow-up-right me-1"></i>Страница
+</a>
+{% endblock %}
+
+{% block content %}
+
+<!-- Stats row -->
+<div class="row g-3 mb-4">
+  {% set total = (counts.pending or 0) + (counts.confirmed or 0) + (counts.declined or 0) + (counts.attended or 0) %}
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="--ev-primary:{{ev.primary}};">
+      <div class="stat-num">{{ total }}</div>
+      <div class="stat-label">Всего заявок</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="--ev-primary:#f59e0b;">
+      <div class="stat-num">{{ counts.pending or 0 }}</div>
+      <div class="stat-label">Ожидают</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="--ev-primary:#059669;">
+      <div class="stat-num">{{ counts.confirmed or 0 }}</div>
+      <div class="stat-label">Подтверждены</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="--ev-primary:#0284c7;">
+      <div class="stat-num">{{ counts.attended or 0 }}</div>
+      <div class="stat-label">Присутствовали</div>
+    </div>
+  </div>
+</div>
+
+<!-- Nav links -->
+<div class="d-flex gap-2 mb-4 flex-wrap">
+  <a href="{{ url_for('admin_participants', slug=slug) }}"
+     class="btn btn-sm rounded-pill {{ 'text-white' if sf=='all' else 'btn-outline-secondary' }}"
+     style="{% if sf=='all' %}background:{{ev.primary}};border-color:{{ev.primary}};{% endif %}">
+    Все <span class="badge bg-white" style="color:{{ev.primary}};">{{ total }}</span>
+  </a>
+  {% for s_key, s_label in status_labels.items() %}
+  <a href="{{ url_for('admin_participants', slug=slug, status=s_key, type=tf) }}"
+     class="btn btn-sm rounded-pill {{ 'text-white' if sf==s_key else 'btn-outline-secondary' }}"
+     style="{% if sf==s_key %}background:{{ev.primary}};border-color:{{ev.primary}};{% endif %}">
+    {{ s_label }}
+    <span class="badge bg-white ms-1" style="color:{{ev.primary}};">{{ counts.get(s_key, 0) }}</span>
+  </a>
+  {% endfor %}
+
+  {% if ev.has_staff %}
+  <a href="{{ url_for('admin_staff', slug=slug) }}"
+     class="btn btn-sm btn-outline-secondary rounded-pill ms-auto">
+    <i class="bi bi-person-badge me-1"></i>Команда
+  </a>
+  {% endif %}
+</div>
+
+<!-- Table -->
+<div class="admin-table-wrap">
+  <div class="admin-table-head">
+    <div style="font-weight:700;font-size:.95rem;">
+      Список участников
+      <span class="text-muted fw-normal" style="font-size:.85rem;margin-left:6px;">{{ regs|length }}</span>
+    </div>
+    <!-- Type filter -->
+    <div class="d-flex align-items-center gap-2">
+      <span class="text-muted" style="font-size:.82rem;">Тип:</span>
+      <select class="form-select form-select-sm rounded-pill"
+              style="width:auto;"
+              onchange="window.location.href='{{ url_for('admin_participants', slug=slug) }}?status={{ sf }}&type='+this.value">
+        <option value="all" {{ 'selected' if tf=='all' }}>Все типы</option>
+        {% for tk, tl in ev.reg_types.items() %}
+        <option value="{{ tk }}" {{ 'selected' if tf==tk }}>{{ tl }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  {% if not regs %}
+  <div class="text-center py-5 text-muted">
+    <i class="bi bi-inbox display-5 d-block mb-2"></i>
+    Заявок нет
+  </div>
+  {% else %}
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Имя</th>
+          <th>Контакт</th>
+          <th>Организация</th>
+          <th>Тип</th>
+          {% if ev.languages|length > 1 %}<th>Язык</th>{% endif %}
+          <th>Статус</th>
+          <th>Дата</th>
+          <th style="width:130px;">Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in regs %}
+        <tr>
+          <td style="color:#aaa;font-size:.8rem;">{{ r.id }}</td>
+          <td>
+            <div style="font-weight:600;">{{ r.name }}</div>
+            {% if r.position %}<div style="font-size:.75rem;color:#aaa;">{{ r.position }}</div>{% endif %}
+            {% if r.notes %}<div style="font-size:.73rem;color:#bbb;margin-top:2px;" title="{{ r.notes }}">
+              <i class="bi bi-chat-left-text"></i> {{ r.notes[:40] }}{% if r.notes|length > 40 %}…{% endif %}
+            </div>{% endif %}
+          </td>
+          <td>
+            {% if r.email %}
+            <div style="font-size:.82rem;"><a href="mailto:{{ r.email }}" style="color:#555;">{{ r.email }}</a></div>
+            {% endif %}
+            {% if r.phone %}
+            <div style="font-size:.82rem;color:#888;">{{ r.phone }}</div>
+            {% endif %}
+          </td>
+          <td style="font-size:.85rem;color:#555;">{{ r.organization or '—' }}</td>
+          <td>
+            <span class="ev-tag">{{ ev.reg_types.get(r.reg_type, r.reg_type) }}</span>
+          </td>
+          {% if ev.languages|length > 1 %}
+          <td>
+            <span style="font-size:.8rem;">
+              {{ {'ru':'🇷🇺','en':'🇬🇧','nl':'🇳🇱'}.get(r.language, r.language) }}
+            </span>
+          </td>
+          {% endif %}
+          <td>
+            <span class="badge-status badge-{{ r.status }}">
+              {{ status_labels.get(r.status, r.status) }}
+            </span>
+          </td>
+          <td style="font-size:.75rem;color:#aaa;white-space:nowrap;">
+            {{ r.created_at[:10] if r.created_at else '—' }}
+          </td>
+          <td>
+            <div class="d-flex gap-1">
+              <!-- Status update dropdown -->
+              <div class="dropdown">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill dropdown-toggle"
+                        data-bs-toggle="dropdown" style="font-size:.75rem;padding:3px 10px;">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <ul class="dropdown-menu shadow-sm border-0 rounded-3">
+                  {% for s_key, s_label in status_labels.items() %}
+                  <li>
+                    <form method="POST" action="{{ url_for('admin_update_participant', slug=slug) }}">
+                      <input type="hidden" name="reg_id" value="{{ r.id }}">
+                      <input type="hidden" name="status" value="{{ s_key }}">
+                      <input type="hidden" name="sf" value="{{ sf }}">
+                      <input type="hidden" name="tf" value="{{ tf }}">
+                      <button type="submit"
+                              class="dropdown-item {{ 'fw-bold' if r.status == s_key }}"
+                              style="font-size:.85rem;">
+                        <span class="badge-status badge-{{s_key}} me-2">{{ s_label }}</span>
+                      </button>
+                    </form>
+                  </li>
+                  {% endfor %}
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <form method="POST" action="{{ url_for('admin_delete_participant', slug=slug) }}"
+                          onsubmit="return confirm('Удалить заявку?')">
+                      <input type="hidden" name="reg_id" value="{{ r.id }}">
+                      <button type="submit" class="dropdown-item text-danger" style="font-size:.85rem;">
+                        <i class="bi bi-trash me-2"></i>Удалить
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Register link -->
+<div class="mt-4 p-3 rounded-3 text-center" style="background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);">
+  <span style="font-size:.85rem;color:#888;">Ссылка для регистрации: </span>
+  <code style="color:{{ev.primary}};">{{ request.host_url }}event/{{ slug }}/register</code>
+  <button class="btn btn-sm btn-outline-secondary ms-2 rounded-pill"
+          onclick="navigator.clipboard.writeText('{{ request.host_url }}event/{{ slug }}/register').then(()=>alert('Скопировано!'))">
+    <i class="bi bi-copy"></i>
+  </button>
+</div>
+
+{% endblock %}

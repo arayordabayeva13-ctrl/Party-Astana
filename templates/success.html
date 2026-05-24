@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ tr('success_title', lang) }} — ATLAS Events{% endblock %}
+
+{% block content %}
+<div class="success-wrap" style="--ev-primary:{{ev.primary}};--ev-secondary:{{ev.secondary}};background:{{ev.bg}};">
+  <div class="container">
+    <div class="success-card" style="--ev-primary:{{ev.primary}};--ev-secondary:{{ev.secondary}};">
+      <div class="success-icon" style="background:linear-gradient(135deg,{{ev.primary}},{{ev.secondary}});">
+        <i class="bi bi-check2-circle"></i>
+      </div>
+      <h2 style="font-weight:900;font-size:1.6rem;margin-bottom:10px;">
+        {{ tr('success_title', lang) }}
+      </h2>
+      <p style="color:#666;font-size:.95rem;line-height:1.65;max-width:380px;margin:0 auto 28px;">
+        {{ tr('success_body', lang) }}
+      </p>
+
+      <div style="background:{{ev.bg}};border-radius:14px;padding:18px 24px;margin-bottom:28px;text-align:left;">
+        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#aaa;margin-bottom:10px;">
+          {% if lang=='ru' %}Мероприятие{% elif lang=='en' %}Event{% elif lang=='nl' %}Evenement{% endif %}
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:2rem;">{{ ev.emoji }}</span>
+          <div>
+            <div style="font-weight:700;color:#222;">
+              {% if lang=='en' and ev.get('name_en') %}{{ ev.name_en }}
+              {% elif lang=='nl' and ev.get('name_nl') %}{{ ev.name_nl }}
+              {% else %}{{ ev.name }}{% endif %}
+            </div>
+            <div style="font-size:.83rem;color:#888;margin-top:2px;">
+              <i class="bi bi-calendar3 me-1"></i>{{ ev.date }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <a href="{{ url_for('event_detail', slug=slug, lang=lang) }}"
+           class="btn-ev text-center"
+           style="--ev-primary:{{ev.primary}};--ev-secondary:{{ev.secondary}};">
+          <i class="bi bi-calendar-event me-2"></i>
+          {% if lang=='ru' %}Вернуться к мероприятию{% elif lang=='en' %}Back to event{% elif lang=='nl' %}Terug naar evenement{% endif %}
+        </a>
+        <a href="{{ url_for('index') }}"
+           class="text-muted text-decoration-none text-center" style="font-size:.88rem;padding:8px;">
+          <i class="bi bi-grid me-1"></i>
+          {% if lang=='ru' %}Все мероприятия{% elif lang=='en' %}All events{% elif lang=='nl' %}Alle evenementen{% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

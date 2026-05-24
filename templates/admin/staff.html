@@ -1,0 +1,235 @@
+{% extends "admin/base.html" %}
+{% set slug_current = slug %}
+{% block title %}Команда — {{ ev.name }}{% endblock %}
+{% block page_title %}{{ ev.emoji }} Команда мероприятия{% endblock %}
+
+{% block topbar_actions %}
+<a href="{{ url_for('admin_participants', slug=slug) }}"
+   class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+  <i class="bi bi-people me-1"></i>Участники
+</a>
+{% endblock %}
+
+{% block content %}
+
+<!-- Category tabs -->
+<div class="staff-tabs mb-4">
+  {% for cat_key, cat_info in staff_cats.items() %}
+  <a href="{{ url_for('admin_staff', slug=slug, category=cat_key) }}"
+     class="staff-tab {{ 'active' if category == cat_key }}"
+     style="{% if category==cat_key %}background:{{ev.primary}};border-color:{{ev.primary}};{% endif %}">
+    <i class="bi {{ cat_info.icon }} me-2"></i>{{ cat_info.ru }}
+    {% if cat_counts.get(cat_key) %}
+    <span class="badge {{ 'bg-white' if category==cat_key else 'bg-secondary' }}"
+          style="{{ 'color:'+ev.primary if category==cat_key else '' }}">
+      {{ cat_counts[cat_key] }}
+    </span>
+    {% endif %}
+  </a>
+  {% endfor %}
+</div>
+
+<!-- Add form -->
+<div class="add-panel mb-4">
+  <div class="add-panel-title">
+    <i class="bi bi-plus-circle me-2" style="color:{{ev.primary}};"></i>
+    Добавить:
+    {% if category == 'organizer' %}Организатора
+    {% elif category == 'selector' %}Подборщика участников
+    {% elif category == 'musician' %}Музыканта
+    {% elif category == 'catering' %}Поставщика кейтеринга
+    {% endif %}
+  </div>
+
+  <form method="POST" action="{{ url_for('admin_add_staff', slug=slug) }}">
+    <input type="hidden" name="category" value="{{ category }}">
+    <div class="row g-3">
+
+      <!-- Common fields -->
+      <div class="col-md-4">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Имя *</label>
+        <input type="text" class="form-control form-control-sm" name="name"
+               placeholder="Полное имя" required
+               style="--ev-primary:{{ev.primary}};">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Телефон</label>
+        <input type="tel" class="form-control form-control-sm" name="phone" placeholder="+7...">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Email</label>
+        <input type="email" class="form-control form-control-sm" name="email" placeholder="email@...">
+      </div>
+
+      {% if category == 'organizer' %}
+      <div class="col-md-6">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Роль / функция</label>
+        <input type="text" class="form-control form-control-sm" name="role"
+               placeholder="Координатор, SMM, логистика...">
+      </div>
+
+      {% elif category == 'selector' %}
+      <div class="col-md-6">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Зона отбора</label>
+        <input type="text" class="form-control form-control-sm" name="assignment"
+               placeholder="НКО, музыканты, мастера...">
+      </div>
+
+      {% elif category == 'musician' %}
+      <div class="col-md-4">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Инструмент / жанр</label>
+        <input type="text" class="form-control form-control-sm" name="instrument"
+               placeholder="Скрипка, джаз-вокал...">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Роль</label>
+        <input type="text" class="form-control form-control-sm" name="role"
+               placeholder="Солист, ансамбль...">
+      </div>
+
+      {% elif category == 'catering' %}
+      <div class="col-md-4">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Компания</label>
+        <input type="text" class="form-control form-control-sm" name="company"
+               placeholder="Название компании">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Меню / услуги</label>
+        <input type="text" class="form-control form-control-sm" name="menu_items"
+               placeholder="Фуршет, кофе-брейк, барбекю...">
+      </div>
+      {% endif %}
+
+      <div class="col-md-6">
+        <label class="form-label" style="font-size:.82rem;font-weight:600;color:#666;">Примечание</label>
+        <input type="text" class="form-control form-control-sm" name="notes" placeholder="Доп. информация">
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-sm rounded-pill px-4 text-white fw-600"
+                style="background:{{ev.primary}};font-weight:600;">
+          <i class="bi bi-plus-lg me-1"></i>Добавить
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Staff list -->
+<div class="admin-table-wrap">
+  <div class="admin-table-head">
+    <div style="font-weight:700;">
+      {{ staff_cats[category].ru }}
+      <span class="text-muted fw-normal" style="font-size:.85rem;margin-left:6px;">
+        {{ staff_list|length }}
+      </span>
+    </div>
+  </div>
+
+  {% if not staff_list %}
+  <div class="text-center py-5 text-muted">
+    <i class="bi bi-inbox display-5 d-block mb-2"></i>
+    Список пуст — добавьте первого
+  </div>
+  {% else %}
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Имя</th>
+          <th>Контакт</th>
+          {% if category == 'organizer' %}<th>Роль</th>
+          {% elif category == 'selector' %}<th>Зона отбора</th>
+          {% elif category == 'musician' %}<th>Инструмент</th><th>Роль</th>
+          {% elif category == 'catering' %}<th>Компания</th><th>Меню</th>
+          {% endif %}
+          <th>Примечание</th>
+          <th>Статус</th>
+          <th>Добавлен</th>
+          <th style="width:100px;">Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in staff_list %}
+        <tr>
+          <td style="font-weight:600;">{{ s.name }}</td>
+          <td style="font-size:.82rem;">
+            {% if s.email %}<div><a href="mailto:{{s.email}}" style="color:#555;">{{s.email}}</a></div>{% endif %}
+            {% if s.phone %}<div style="color:#888;">{{s.phone}}</div>{% endif %}
+          </td>
+
+          {% if category == 'organizer' %}
+          <td style="font-size:.85rem;color:#555;">{{ s.role or '—' }}</td>
+
+          {% elif category == 'selector' %}
+          <td style="font-size:.85rem;color:#555;">{{ s.assignment or '—' }}</td>
+
+          {% elif category == 'musician' %}
+          <td style="font-size:.85rem;">
+            {% if s.instrument %}
+            <span class="ev-tag">{{ s.instrument }}</span>
+            {% else %}—{% endif %}
+          </td>
+          <td style="font-size:.85rem;color:#555;">{{ s.role or '—' }}</td>
+
+          {% elif category == 'catering' %}
+          <td style="font-weight:600;font-size:.88rem;">{{ s.company or '—' }}</td>
+          <td style="font-size:.82rem;color:#555;">{{ s.menu_items or '—' }}</td>
+          {% endif %}
+
+          <td style="font-size:.78rem;color:#aaa;">
+            {{ s.notes[:40] + '…' if s.notes and s.notes|length > 40 else (s.notes or '—') }}
+          </td>
+          <td>
+            <span class="badge-status badge-{{ s.status }}">
+              {{ staff_status.get(s.status, s.status) }}
+            </span>
+          </td>
+          <td style="font-size:.75rem;color:#aaa;white-space:nowrap;">
+            {{ s.created_at[:10] if s.created_at else '—' }}
+          </td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary rounded-pill dropdown-toggle"
+                      data-bs-toggle="dropdown" style="font-size:.75rem;padding:3px 10px;">
+                <i class="bi bi-three-dots"></i>
+              </button>
+              <ul class="dropdown-menu shadow-sm border-0 rounded-3">
+                {% for st_key, st_label in staff_status.items() %}
+                <li>
+                  <form method="POST" action="{{ url_for('admin_staff_action', slug=slug) }}">
+                    <input type="hidden" name="staff_id" value="{{ s.id }}">
+                    <input type="hidden" name="action" value="{{ st_key }}">
+                    <input type="hidden" name="category" value="{{ category }}">
+                    <button type="submit"
+                            class="dropdown-item {{ 'fw-bold' if s.status==st_key }}"
+                            style="font-size:.85rem;">
+                      <span class="badge-status badge-{{ st_key }} me-2">{{ st_label }}</span>
+                    </button>
+                  </form>
+                </li>
+                {% endfor %}
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <form method="POST" action="{{ url_for('admin_staff_action', slug=slug) }}"
+                        onsubmit="return confirm('Удалить?')">
+                    <input type="hidden" name="staff_id" value="{{ s.id }}">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="category" value="{{ category }}">
+                    <button type="submit" class="dropdown-item text-danger" style="font-size:.85rem;">
+                      <i class="bi bi-trash me-2"></i>Удалить
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

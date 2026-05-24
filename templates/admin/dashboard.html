@@ -1,0 +1,114 @@
+{% extends "admin/base.html" %}
+{% block title %}Обзор{% endblock %}
+{% block page_title %}Обзор мероприятий{% endblock %}
+
+{% block content %}
+
+<!-- Total stats -->
+<div class="row g-3 mb-5">
+  {% set total_all = namespace(n=0) %}
+  {% set conf_all  = namespace(n=0) %}
+  {% for slug, st in stats.items() %}
+    {% set total_all.n = total_all.n + (st.total or 0) %}
+    {% set conf_all.n  = conf_all.n  + (st.confirmed or 0) %}
+  {% endfor %}
+
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="--ev-primary:#6366f1;">
+      <div class="stat-num">{{ events|length }}</div>
+      <div class="stat-label"><i class="bi bi-calendar-event me-1"></i>Мероприятий</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="--ev-primary:#059669;">
+      <div class="stat-num">{{ total_all.n }}</div>
+      <div class="stat-label"><i class="bi bi-people me-1"></i>Всего заявок</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="--ev-primary:#0284c7;">
+      <div class="stat-num">{{ conf_all.n }}</div>
+      <div class="stat-label"><i class="bi bi-check-circle me-1"></i>Подтверждено</div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card" style="--ev-primary:#dc2626;">
+      <div class="stat-num">{{ total_all.n - conf_all.n }}</div>
+      <div class="stat-label"><i class="bi bi-hourglass-split me-1"></i>Ожидают</div>
+    </div>
+  </div>
+</div>
+
+<!-- Events cards -->
+<div class="mb-3 d-flex align-items-center justify-content-between">
+  <h2 style="font-size:1.15rem;font-weight:800;margin:0;">Ваши мероприятия</h2>
+</div>
+
+<div class="row g-4">
+  {% for slug, ev in events.items() %}
+  {% set st = stats.get(slug, {}) %}
+  <div class="col-lg-6 col-xl-4">
+    <div class="ev-summary-card" style="--ev-primary:{{ev.primary}};--ev-secondary:{{ev.secondary}};">
+      <div class="ev-summary-top"></div>
+      <div class="ev-summary-body">
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <span style="font-size:2rem;line-height:1;">{{ ev.emoji }}</span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-weight:800;font-size:.95rem;line-height:1.3;color:#1a1a2e;">{{ ev.name }}</div>
+            <div style="font-size:.78rem;color:#aaa;margin-top:3px;">
+              <i class="bi bi-calendar3 me-1"></i>{{ ev.date }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Mini stats -->
+        <div class="row g-2 mb-3">
+          <div class="col-4 text-center">
+            <div style="font-size:1.4rem;font-weight:900;color:{{ev.primary}};">{{ st.total or 0 }}</div>
+            <div style="font-size:.7rem;color:#aaa;font-weight:600;">Всего</div>
+          </div>
+          <div class="col-4 text-center">
+            <div style="font-size:1.4rem;font-weight:900;color:#059669;">{{ st.confirmed or 0 }}</div>
+            <div style="font-size:.7rem;color:#aaa;font-weight:600;">Подтв.</div>
+          </div>
+          <div class="col-4 text-center">
+            <div style="font-size:1.4rem;font-weight:900;color:#0284c7;">{{ st.attended or 0 }}</div>
+            <div style="font-size:.7rem;color:#aaa;font-weight:600;">Пришли</div>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        {% if (st.total or 0) > 0 %}
+        <div style="background:#f0f0f0;border-radius:4px;height:5px;margin-bottom:14px;">
+          <div style="height:5px;border-radius:4px;background:{{ev.primary}};
+                      width:{{ ((st.confirmed or 0) / (st.total or 1) * 100)|round|int }}%;
+                      transition:width .5s;"></div>
+        </div>
+        {% endif %}
+
+        <div class="d-flex gap-2">
+          <a href="{{ url_for('admin_participants', slug=slug) }}"
+             class="btn btn-sm rounded-pill flex-grow-1 text-white fw-600"
+             style="background:{{ev.primary}};font-weight:600;">
+            <i class="bi bi-people me-1"></i>Участники
+          </a>
+          {% if ev.has_staff %}
+          <a href="{{ url_for('admin_staff', slug=slug) }}"
+             class="btn btn-sm btn-outline-secondary rounded-pill"
+             title="Команда">
+            <i class="bi bi-person-badge"></i>
+          </a>
+          {% endif %}
+          <a href="{{ url_for('event_detail', slug=slug) }}"
+             class="btn btn-sm btn-outline-secondary rounded-pill" target="_blank"
+             title="Открыть страницу">
+            <i class="bi bi-box-arrow-up-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

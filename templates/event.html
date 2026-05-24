@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% block title %}{{ ev.name }} — ATLAS Events{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="event-hero">
+  {% if ev.theme == 'india' %}
+  <div class="india-deco">🪷</div>
+  {% endif %}
+  <div class="container event-hero-content">
+
+    <!-- Language switcher (Netherlands) -->
+    {% if ev.languages|length > 1 %}
+    <div class="lang-switcher mb-4">
+      {% for l in ev.languages %}
+      <a href="{{ url_for('event_detail', slug=slug, lang=l) }}"
+         class="btn btn-sm me-1 {{ 'btn-light' if lang==l else 'btn-outline-light' }}">
+        {{ {'ru':'🇷🇺 RU','en':'🇬🇧 EN','nl':'🇳🇱 NL'}[l] }}
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <nav aria-label="breadcrumb" class="mb-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Мероприятия</a></li>
+        <li class="breadcrumb-item active">{{ ev.name }}</li>
+      </ol>
+    </nav>
+
+    <span class="event-hero-emoji">{{ ev.emoji }}</span>
+    <h1 class="event-hero-name">
+      {% if lang == 'en' and ev.get('name_en') %}{{ ev.name_en }}
+      {% elif lang == 'nl' and ev.get('name_nl') %}{{ ev.name_nl }}
+      {% else %}{{ ev.name }}{% endif %}
+    </h1>
+    <div class="event-hero-date">
+      <i class="bi bi-calendar3 me-2"></i>{{ ev.date }}
+    </div>
+    <div class="event-hero-venue">
+      <i class="bi bi-geo-alt me-2"></i>{{ ev.venue }}, {{ ev.city }}
+    </div>
+
+    <div class="mt-4 d-flex flex-wrap gap-2">
+      <a href="{{ url_for('register', slug=slug, lang=lang) }}"
+         class="btn btn-light fw-700 rounded-pill px-4 py-2"
+         style="font-weight:700;color:{{ ev.primary }};">
+        <i class="bi bi-person-plus me-2"></i>{{ tr('register_btn', lang) }}
+      </a>
+      <a href="#schedule" class="btn btn-outline-light rounded-pill px-4 py-2">
+        <i class="bi bi-list-ol me-2"></i>{{ tr('schedule', lang) }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Main content -->
+<div class="container py-5" style="--ev-primary:{{ev.primary}};--ev-secondary:{{ev.secondary}};">
+  <div class="row g-4">
+
+    <!-- Left column -->
+    <div class="col-lg-8">
+
+      <!-- About -->
+      <div class="section-block">
+        <div class="section-title">
+          <i class="bi bi-info-circle" style="color:{{ev.primary}};"></i>
+          {{ tr('about', lang) }}
+        </div>
+        <p style="color:#555;line-height:1.75;">{{ ev.description }}</p>
+      </div>
+
+      <!-- Goals -->
+      <div class="section-block">
+        <div class="section-title">
+          <i class="bi bi-bullseye" style="color:{{ev.primary}};"></i>
+          {{ tr('goals', lang) }}
+        </div>
+        <ul class="goals-list">
+          {% for goal in ev.goals %}
+          <li>{{ goal }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Schedule -->
+      <div class="section-block" id="schedule">
+        <div class="section-title">
+          <i class="bi bi-calendar-week" style="color:{{ev.primary}};"></i>
+          {{ tr('schedule', lang) }}
+        </div>
+
+        {% if ev.schedule|length > 1 %}
+        <!-- Multiple days: tabs -->
+        <ul class="nav nav-pills mb-4 gap-2" id="dayTabs">
+          {% for day in ev.schedule %}
+          <li class="nav-item">
+            <button class="nav-link rounded-pill {{ 'active' if loop.first }}"
+                    data-bs-toggle="pill"
+                    data-bs-target="#day{{ day.day }}"
+                    style="{% if loop.first %}background:{{ev.primary}};{% endif %}">
+              {{ day.date }}
+            </button>
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="tab-content">
+          {% for day in ev.schedule %}
+          <div class="tab-pane fade {{ 'show active' if loop.first }}" id="day{{ day.day }}">
+            {% for item in day.items %}
+            <div class="schedule-item">
+              <div class="schedule-time">{{ item.time }}</div>
+              <div class="schedule-content">
+                <div class="schedule-title">{{ item.title }}</div>
+                {% if item.get('speaker') %}
+                <div class="schedule-speaker"><i class="bi bi-person me-1"></i>{{ item.speaker }}</div>
+                {% endif %}
+                {% if item.get('loc') %}
+                <div class="schedule-loc"><i class="bi bi-pin-map"></i>{{ item.loc }}</div>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+
+        {% else %}
+        <!-- Single day -->
+        {% set day = ev.schedule[0] %}
+        <div class="schedule-day-header">{{ day.date }}</div>
+        {% for item in day.items %}
+        <div class="schedule-item">
+          <div class="schedule-time">{{ item.time }}</div>
+          <div class="schedule-content">
+            <div class="schedule-title">{{ item.title }}</div>
+            {% if item.get('speaker') %}
+            <div class="schedule-speaker"><i class="bi bi-person me-1"></i>{{ item.speaker }}</div>
+            {% endif %}
+            {% if item.get('loc') %}
+            <div class="schedule-loc"><i class="bi bi-pin-map"></i>{{ item.loc }}</div>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+
+    </div>
+
+    <!-- Right column -->
+    <div class="col-lg-4">
+
+      <!-- Info card -->
+      <div class="section-block mb-4">
+        <div style="font-weight:800;font-size:1rem;margin-bottom:16px;">Детали мероприятия</div>
+        <div class="d-flex flex-column gap-3">
+          <div>
+            <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#aaa;">
+              {{ tr('date', lang) }}
+            </div>
+            <div style="font-weight:600;color:#333;margin-top:3px;">{{ ev.date }}</div>
+          </div>
+          <div>
+            <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#aaa;">
+              {{ tr('venue', lang) }}
+            </div>
+            <div style="font-weight:600;color:#333;margin-top:3px;">{{ ev.venue }}</div>
+            <div style="font-size:.82rem;color:#888;">{{ ev.city }}</div>
+          </div>
+          <div>
+            <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#aaa;">Категория</div>
+            <div style="margin-top:4px;">
+              {% for tag in ev.tags %}
+              <span class="ev-tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% if ev.languages|length > 1 %}
+          <div>
+            <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#aaa;">Языки</div>
+            <div style="margin-top:4px;">
+              {% for l in ev.languages %}
+              <span class="ev-tag">{{ {'ru':'Русский','en':'English','nl':'Nederlands'}[l] }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Register CTA -->
+      <div class="register-cta" style="background:linear-gradient(135deg,{{ev.primary}},{{ev.secondary}});">
+        <i class="bi bi-person-plus display-6 mb-3 d-block"></i>
+        <h4>{{ tr('register_btn', lang) }}</h4>
+        <p style="opacity:.85;font-size:.9rem;margin:10px 0 20px;">
+          {% if lang == 'ru' %}Зарегистрируйтесь как участник или гость
+          {% elif lang == 'en' %}Register as participant or guest
+          {% elif lang == 'nl' %}Registreer als deelnemer of gast
+          {% endif %}
+        </p>
+        {% for type_key, type_label in ev.reg_types.items() %}
+        <a href="{{ url_for('register', slug=slug, lang=lang) }}?reg_type={{ type_key }}"
+           class="btn btn-light w-100 rounded-pill fw-600 mb-2"
+           style="font-weight:600;color:{{ev.primary}};">
+          {{ type_label }}
+        </a>
+        {% endfor %}
+      </div>
+
+      <!-- Share -->
+      <div class="section-block mt-4 text-center">
+        <div style="font-size:.85rem;color:#888;margin-bottom:12px;">Поделиться мероприятием</div>
+        <div class="d-flex justify-content-center gap-2">
+          <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('Ссылка скопирована!'))"
+                  class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+            <i class="bi bi-link-45deg me-1"></i>Скопировать ссылку
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

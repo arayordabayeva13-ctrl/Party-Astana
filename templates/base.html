@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="{{ lang|default('ru') }}" data-theme="{{ (ev.theme if ev is defined else '') }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}ATLAS Events{% endblock %}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  {% if ev is defined %}
+  <style>
+    :root {
+      --ev-primary:   {{ ev.primary }};
+      --ev-secondary: {{ ev.secondary }};
+      --ev-accent:    {{ ev.accent }};
+      --ev-bg:        {{ ev.bg }};
+      --ev-text-on:   {{ ev.text_primary }};
+    }
+  </style>
+  {% endif %}
+  {% block head %}{% endblock %}
+</head>
+<body data-theme="{{ (ev.theme if ev is defined else '') }}">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="ATLAS Events" height="38">
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Меню">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}"><i class="bi bi-calendar-event me-1"></i>Мероприятия</a></li>
+        {% if session.user_id %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_dashboard') }}"><i class="bi bi-speedometer2 me-1"></i>Панель</a></li>
+          <li class="nav-item ms-1">
+            <a class="btn btn-sm btn-outline-secondary rounded-pill px-3" href="{{ url_for('logout') }}">
+              <i class="bi bi-box-arrow-right me-1"></i>Выйти
+            </a>
+          </li>
+        {% else %}
+          <li class="nav-item ms-1">
+            <a class="btn btn-sm btn-outline-primary rounded-pill px-3" href="{{ url_for('login') }}">
+              <i class="bi bi-lock me-1"></i>Войти
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="container mt-3">
+  {% for cat, msg in messages %}
+  <div class="alert alert-{{ 'danger' if cat=='error' else 'success' }} alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+    <i class="bi bi-{{ 'exclamation-circle' if cat=='error' else 'check-circle' }} me-2"></i>{{ msg }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-logo mb-3">
+          <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="ATLAS Events" height="34">
+        </div>
+        <p style="font-size:.88rem;color:rgba(255,255,255,.5);max-width:260px;line-height:1.6;">
+          Платформа для управления социальными, культурными и дипломатическими мероприятиями.
+        </p>
+      </div>
+      <div class="col-lg-2 offset-lg-2">
+        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.35);margin-bottom:12px;">Мероприятия</div>
+        {% for slug, ev in {'india-week':{'name':'Неделя Индии'},'kings-day':{'name':'День Короля'},'charity-fair':{'name':'Ярмарка'},'storytelling':{'name':'Сторителлинг'},'city-day':{'name':'День города'}}.items() %}
+        <a href="{{ url_for('event_detail', slug=slug) }}" class="footer-link">{{ ev.name }}</a>
+        {% endfor %}
+      </div>
+      <div class="col-lg-2">
+        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.35);margin-bottom:12px;">Навигация</div>
+        <a href="{{ url_for('index') }}" class="footer-link">Все мероприятия</a>
+        <a href="{{ url_for('login') }}" class="footer-link">Администраторам</a>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-copy text-center">© 2024 ATLAS Events · Все права защищены</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

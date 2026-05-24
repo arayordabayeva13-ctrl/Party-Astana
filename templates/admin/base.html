@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Панель управления{% endblock %} — ATLAS Events</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  {% if ev is defined %}
+  <style>
+    :root {
+      --ev-primary:   {{ ev.primary }};
+      --ev-secondary: {{ ev.secondary }};
+    }
+  </style>
+  {% endif %}
+</head>
+<body style="background:#f0f2f7;">
+
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-head">
+      <a href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="ATLAS" height="32"
+             style="filter:brightness(10);opacity:.9;">
+      </a>
+    </div>
+
+    <div class="admin-user">
+      <div class="admin-user-name">
+        <i class="bi bi-person-circle me-2"></i>{{ session.name }}
+      </div>
+      <div class="admin-user-role">
+        {% if session.role == 'superadmin' %}Главный администратор
+        {% elif session.role == 'admin' %}Координатор
+        {% else %}Сотрудник{% endif %}
+      </div>
+    </div>
+
+    <nav class="admin-nav">
+      <div class="admin-nav-section">Навигация</div>
+      <a href="{{ url_for('admin_dashboard') }}"
+         class="admin-nav-link {{ 'active' if request.endpoint == 'admin_dashboard' }}">
+        <i class="bi bi-speedometer2"></i>Обзор
+      </a>
+      <a href="{{ url_for('index') }}" class="admin-nav-link" target="_blank">
+        <i class="bi bi-box-arrow-up-right"></i>Открыть сайт
+      </a>
+
+      {% set all_events = {
+        'india-week':    {'name':'🇮🇳 Неделя Индии',    'primary':'#FF9933'},
+        'kings-day':     {'name':'🇳🇱 День Короля',      'primary':'#F96E11'},
+        'charity-fair':  {'name':'❤️ Ярмарка',           'primary':'#C0392B'},
+        'storytelling':  {'name':'📖 Сторителлинг',      'primary':'#6C3483'},
+        'city-day':      {'name':'🏙️ День города',       'primary':'#1ABC9C'},
+      } %}
+
+      {% set visible = namespace(found=false) %}
+      {% for slug, info in all_events.items() %}
+        {% if session.role == 'superadmin' or session.event_slug == slug %}
+          {% if not visible.found %}
+          <div class="admin-nav-section" style="margin-top:12px;">Мероприятия</div>
+          {% set visible.found = true %}
+          {% endif %}
+
+          <div style="margin-left:4px;margin-bottom:2px;">
+            <a href="{{ url_for('admin_participants', slug=slug) }}"
+               class="admin-nav-link {{ 'active' if request.endpoint in ('admin_participants','admin_staff') and (slug_current is defined and slug_current == slug) }}"
+               style="font-size:.83rem;">
+              <span style="width:10px;height:10px;border-radius:50%;background:{{info.primary}};display:inline-block;flex-shrink:0;"></span>
+              {{ info.name }}
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </nav>
+
+    <div class="admin-sidebar-foot">
+      <a href="{{ url_for('logout') }}" class="admin-nav-link" style="color:rgba(255,100,100,.7);">
+        <i class="bi bi-box-arrow-right"></i>Выйти
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <div class="admin-topbar">
+      <h1>{% block page_title %}Панель управления{% endblock %}</h1>
+      <div class="d-flex align-items-center gap-3">
+        {% block topbar_actions %}{% endblock %}
+        <span class="text-muted" style="font-size:.82rem;">{{ session.name }}</span>
+      </div>
+    </div>
+
+    <!-- Flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="px-4 pt-3">
+      {% for cat, msg in messages %}
+      <div class="alert alert-{{ 'danger' if cat=='error' else 'success' }} alert-dismissible fade show rounded-3">
+        {{ msg }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="admin-content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

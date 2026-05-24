@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 72" width="300" height="72">
+  <defs>
+    <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#FF9933"/>
+      <stop offset="40%"  stop-color="#6C3483"/>
+      <stop offset="100%" stop-color="#003DA5"/>
+    </linearGradient>
+    <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#FF9933"/>
+      <stop offset="50%"  stop-color="#6C3483"/>
+      <stop offset="100%" stop-color="#003DA5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: constellation nodes -->
+  <!-- Center node -->
+  <circle cx="32" cy="36" r="9" fill="url(#lg)"/>
+  <!-- Satellite nodes -->
+  <circle cx="56" cy="14" r="5.5" fill="#FF9933" opacity="0.92"/>
+  <circle cx="60" cy="54" r="6.5" fill="#6C3483" opacity="0.92"/>
+  <circle cx="10" cy="18" r="4.5" fill="#138808" opacity="0.90"/>
+  <circle cx="8"  cy="55" r="5"   fill="#003DA5" opacity="0.90"/>
+  <circle cx="68" cy="36" r="4"   fill="#E74C3C" opacity="0.85"/>
+
+  <!-- Connecting lines -->
+  <line x1="32" y1="36" x2="56" y2="14" stroke="#FF9933" stroke-width="1.8" opacity="0.45"/>
+  <line x1="32" y1="36" x2="60" y2="54" stroke="#6C3483" stroke-width="1.8" opacity="0.45"/>
+  <line x1="32" y1="36" x2="10" y2="18" stroke="#138808" stroke-width="1.8" opacity="0.45"/>
+  <line x1="32" y1="36" x2="8"  y2="55" stroke="#003DA5" stroke-width="1.8" opacity="0.45"/>
+  <line x1="32" y1="36" x2="68" y2="36" stroke="#E74C3C" stroke-width="1.8" opacity="0.45"/>
+  <!-- Cross lines -->
+  <line x1="10" y1="18" x2="56" y2="14" stroke="#aaa" stroke-width="0.8" opacity="0.25"/>
+  <line x1="8"  y1="55" x2="60" y2="54" stroke="#aaa" stroke-width="0.8" opacity="0.25"/>
+  <line x1="56" y1="14" x2="68" y2="36" stroke="#aaa" stroke-width="0.8" opacity="0.20"/>
+
+  <!-- Wordmark -->
+  <text x="86" y="30" font-family="'Arial Black', Arial, sans-serif"
+        font-weight="900" font-size="24" letter-spacing="4" fill="#1a1a2e">ATLAS</text>
+  <text x="86" y="50" font-family="Arial, sans-serif"
+        font-weight="400" font-size="10" letter-spacing="6.5" fill="#888">EVENTS</text>
+
+  <!-- Gradient accent line -->
+  <rect x="86" y="34" width="106" height="2.5" fill="url(#lg2)" rx="1.25"/>
+</svg>
