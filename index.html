@@ -611,6 +611,8 @@
       window.scrollY > 20 ? '0 4px 28px rgba(0,0,0,.12)' : '0 2px 20px rgba(0,0,0,.06)';
   });
 
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxws_GElFNd2XbqsjAiwnDx0qEJvoabpTjVLc1msyzI0385fde9xKaRetO3dJ2Z0F7nFw/exec';
+
   // Form submit
   function handleSubmit(e) {
     e.preventDefault();
@@ -618,11 +620,33 @@
     const btn  = form.querySelector('button[type=submit]');
     btn.disabled = true;
     btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Отправляем...';
-    // Simulate send (replace with Formspree or EmailJS for real email)
-    setTimeout(() => {
+
+    const data = {
+      name:         form.name.value,
+      phone:        form.phone.value,
+      email:        form.email.value,
+      organization: form.organization.value,
+      event:        form.event.value,
+      type:         form.type.value,
+      language:     form.language.value,
+      notes:        form.notes.value,
+    };
+
+    fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    .then(() => {
       document.getElementById('regForm').style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
-    }, 1200);
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="bi bi-check2-circle me-2"></i>Отправить заявку';
+      alert('Ошибка отправки. Проверьте интернет и попробуйте снова.');
+    });
   }
 
   function resetForm() {
