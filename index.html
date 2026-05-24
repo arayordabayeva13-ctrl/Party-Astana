@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Party Astana — Мероприятия</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #f5f6fa; color: #1a1a2e; }
+
+    /* NAV */
+    .navbar {
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,.07);
+      padding: 14px 0;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,.06);
+    }
+    .nav-logo {
+      font-size: 1.4rem; font-weight: 900; letter-spacing: 2px;
+      background: linear-gradient(90deg,#FF9933,#6C3483,#003DA5);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; text-decoration: none;
+    }
+    .nav-logo span { font-weight: 300; letter-spacing: 4px; font-size: .9rem; display: block; color: #888; -webkit-text-fill-color: #888; }
+    .nav-link { font-weight: 500; color: #444 !important; transition: color .2s; }
+    .nav-link:hover { color: #6C3483 !important; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #fff; padding: 100px 0 80px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 80% 40%, rgba(255,153,51,.2) 0%, transparent 60%),
+                  radial-gradient(ellipse at 15% 80%, rgba(108,52,131,.25) 0%, transparent 55%);
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-block; padding: 6px 16px; border-radius: 50px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      font-size: .8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,.8); margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900;
+      line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px;
+    }
+    .hero h1 span {
+      background: linear-gradient(90deg,#FF9933,#f1c40f,#1abc9c);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p { font-size: 1.1rem; color: rgba(255,255,255,.72); max-width: 520px; line-height: 1.7; }
+    .btn-hero {
+      display: inline-block; padding: 14px 32px; border-radius: 50px;
+      background: linear-gradient(135deg,#FF9933,#e67e22);
+      color: #fff; font-weight: 700; font-size: 1rem;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all .25s; margin-top: 28px;
+      box-shadow: 0 8px 30px rgba(255,153,51,.35);
+    }
+    .btn-hero:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(255,153,51,.45); color: #fff; }
+    .btn-hero-outline {
+      display: inline-block; padding: 14px 32px; border-radius: 50px;
+      background: transparent; color: rgba(255,255,255,.85); font-weight: 600;
+      border: 2px solid rgba(255,255,255,.3); text-decoration: none;
+      transition: all .25s; margin-top: 28px; margin-left: 12px;
+    }
+    .btn-hero-outline:hover { background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.6); }
+
+    /* floating badges */
+    .float-badges { position: relative; height: 320px; }
+    .fbadge {
+      position: absolute; padding: 12px 18px; border-radius: 16px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px); font-size: .85rem; font-weight: 600;
+      color: rgba(255,255,255,.9); white-space: nowrap;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)}
+    }
+
+    /* EVENTS */
+    .events-section { padding: 80px 0; }
+    .section-label {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 3px; color: #aaa; margin-bottom: 8px;
+    }
+    .section-title { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 900; line-height: 1.2; }
+
+    .ev-card {
+      border: none; border-radius: 20px; overflow: hidden;
+      background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.07);
+      transition: transform .25s, box-shadow .25s; height: 100%;
+    }
+    .ev-card:hover { transform: translateY(-8px); box-shadow: 0 16px 50px rgba(0,0,0,.14); }
+    .ev-top {
+      padding: 28px 26px 22px; color: #fff; position: relative; overflow: hidden;
+      min-height: 140px;
+    }
+    .ev-top::after {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 150px; height: 150px;
+      background: rgba(255,255,255,.1); border-radius: 50%;
+    }
+    .ev-top::before {
+      content: '';
+      position: absolute; bottom: -50px; left: -30px;
+      width: 100px; height: 100px;
+      background: rgba(0,0,0,.08); border-radius: 50%;
+    }
+    .ev-emoji { font-size: 2.6rem; display: block; margin-bottom: 8px; position: relative; z-index: 1; }
+    .ev-name  { font-size: 1rem; font-weight: 800; position: relative; z-index: 1; line-height: 1.3; }
+    .ev-date  { font-size: .78rem; opacity: .82; margin-top: 5px; position: relative; z-index: 1; }
+    .ev-body  { padding: 18px 24px 22px; }
+    .ev-desc  { font-size: .875rem; color: #555; line-height: 1.6; margin-bottom: 14px; }
+    .ev-tag   {
+      display: inline-block; padding: 3px 10px; border-radius: 50px;
+      font-size: .7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .4px; margin: 2px; background: rgba(0,0,0,.055); color: #666;
+    }
+
+    /* ABOUT */
+    .about-section {
+      background: linear-gradient(135deg,#0f0c29,#302b63);
+      color: #fff; padding: 80px 0;
+    }
+    .about-stat { text-align: center; }
+    .about-stat-num {
+      font-size: 2.8rem; font-weight: 900;
+      background: linear-gradient(90deg,#FF9933,#f1c40f);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .about-stat-label { font-size: .88rem; color: rgba(255,255,255,.6); margin-top: 4px; }
+
+    /* REGISTER */
+    .register-section { padding: 80px 0; background: #fff; }
+    .reg-card {
+      border-radius: 24px; overflow: hidden;
+      box-shadow: 0 8px 50px rgba(0,0,0,.10);
+      max-width: 800px; margin: 0 auto;
+    }
+    .reg-top {
+      background: linear-gradient(135deg,#6C3483,#1A5276);
+      color: #fff; padding: 40px 48px;
+    }
+    .reg-body { padding: 40px 48px; background: #fff; }
+    .form-control, .form-select {
+      border: 2px solid #eee; border-radius: 12px;
+      padding: 12px 16px; font-size: .92rem;
+      transition: border-color .2s;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #6C3483; box-shadow: 0 0 0 3px rgba(108,52,131,.12); outline: none;
+    }
+    .form-label { font-weight: 600; font-size: .875rem; color: #555; margin-bottom: 5px; }
+    .btn-submit {
+      background: linear-gradient(135deg,#6C3483,#1A5276);
+      color: #fff; border: none; border-radius: 50px;
+      padding: 14px 36px; font-weight: 700; font-size: 1rem;
+      cursor: pointer; transition: all .25s; width: 100%;
+    }
+    .btn-submit:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(108,52,131,.35); }
+
+    /* SUCCESS message */
+    #successMsg {
+      display: none; text-align: center; padding: 40px 20px;
+    }
+    .success-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg,#6C3483,#1A5276);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; font-size: 2rem; color: #fff;
+    }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(180deg,#1a1a2e,#0f0c29);
+      color: rgba(255,255,255,.6); padding: 50px 0 24px;
+    }
+    .footer-logo {
+      font-size: 1.3rem; font-weight: 900; letter-spacing: 3px; color: #fff; margin-bottom: 8px;
+    }
+    .footer-sub { font-size: .85rem; max-width: 260px; line-height: 1.6; }
+    .footer-link {
+      display: block; color: rgba(255,255,255,.55); text-decoration: none;
+      font-size: .88rem; margin-bottom: 8px; transition: color .2s;
+    }
+    .footer-link:hover { color: #fff; }
+    .footer-divider { border-color: rgba(255,255,255,.1); margin: 32px 0 20px; }
+    .footer-copy { font-size: .8rem; color: rgba(255,255,255,.3); text-align: center; }
+
+    @media(max-width:768px) {
+      .hero { padding: 70px 0 56px; }
+      .float-badges { display: none; }
+      .reg-top, .reg-body { padding: 28px 24px; }
+      .btn-hero-outline { margin-left: 0; margin-top: 10px; display: block; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="nav-logo" href="#top">
+      PARTY<span>ASTANA EVENTS</span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto gap-2 align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#events">Мероприятия</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
+        <li class="nav-item ms-2">
+          <a href="#register"
+             class="btn btn-sm rounded-pill px-4 py-2 text-white fw-600"
+             style="background:linear-gradient(135deg,#FF9933,#e67e22);font-weight:600;">
+            Регистрация
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 hero-content">
+        <div class="hero-badge">🌐 Астана · Казахстан</div>
+        <h1>Культура.<br>Дипломатия.<br><span>Общество.</span></h1>
+        <p>
+          Социальные, культурные и дипломатические мероприятия —
+          от Недели Индии до Дня Короля Нидерландов.
+          Регистрируйтесь и участвуйте.
+        </p>
+        <a href="#events" class="btn-hero">
+          <i class="bi bi-calendar-event me-2"></i>Смотреть мероприятия
+        </a>
+        <a href="#register" class="btn-hero-outline">
+          Зарегистрироваться
+        </a>
+      </div>
+      <div class="col-lg-5 d-none d-lg-block">
+        <div class="float-badges">
+          <div class="fbadge" style="top:10px;left:80px;animation-delay:0s;">🇮🇳 Неделя Индии</div>
+          <div class="fbadge" style="top:80px;left:10px;animation-delay:.8s;">🇳🇱 День Короля</div>
+          <div class="fbadge" style="top:155px;left:110px;animation-delay:1.6s;">❤️ Ярмарка</div>
+          <div class="fbadge" style="top:60px;left:200px;animation-delay:2.4s;">📖 Сторителлинг</div>
+          <div class="fbadge" style="top:220px;left:30px;animation-delay:3.2s;">🏙️ День города</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-section" id="events">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-label">Наши проекты</div>
+      <div class="section-title">Ближайшие мероприятия</div>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- India -->
+      <div class="col-lg-4 col-md-6">
+        <div class="ev-card">
+          <div class="ev-top" style="background:linear-gradient(135deg,#FF9933,#138808);">
+            <span class="ev-emoji">🇮🇳</span>
+            <div class="ev-name">Неделя культуры Индии в Казахстане</div>
+            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>15–22 сентября 2024</div>
+          </div>
+          <div class="ev-body">
+            <p class="ev-desc">Погружение в богатую культуру Индии: живопись, классические танцы, музыка, кухня и йога.</p>
+            <div>
+              <span class="ev-tag">культура</span>
+              <span class="ev-tag">посольство</span>
+              <span class="ev-tag">Алматы</span>
+            </div>
+            <div class="mt-3" style="font-size:.82rem;color:#888;">
+              <i class="bi bi-geo-alt me-1"></i>Гос. музей искусств им. Кастеева, Алматы
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Netherlands -->
+      <div class="col-lg-4 col-md-6">
+        <div class="ev-card">
+          <div class="ev-top" style="background:linear-gradient(135deg,#F96E11,#003DA5);">
+            <span class="ev-emoji">🇳🇱</span>
+            <div class="ev-name">День Короля Нидерландов</div>
+            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>27 апреля 2024</div>
+          </div>
+          <div class="ev-body">
+            <p class="ev-desc">Торжественный приём по случаю Дня Рождения Его Величества Короля Нидерландов. RU / EN / NL.</p>
+            <div>
+              <span class="ev-tag">дипломатия</span>
+              <span class="ev-tag">посольство</span>
+              <span class="ev-tag">Астана</span>
+            </div>
+            <div class="mt-3" style="font-size:.82rem;color:#888;">
+              <i class="bi bi-geo-alt me-1"></i>Резиденция Посла Нидерландов, Астана
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charity -->
+      <div class="col-lg-4 col-md-6">
+        <div class="ev-card">
+          <div class="ev-top" style="background:linear-gradient(135deg,#C0392B,#E67E22);">
+            <span class="ev-emoji">❤️</span>
+            <div class="ev-name">Благотворительная ярмарка</div>
+            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>7 декабря 2024</div>
+          </div>
+          <div class="ev-body">
+            <p class="ev-desc">НКО, мастера, музыканты и неравнодушные горожане. Все средства направляются на социальные проекты.</p>
+            <div>
+              <span class="ev-tag">благотворительность</span>
+              <span class="ev-tag">социальный</span>
+              <span class="ev-tag">Астана</span>
+            </div>
+            <div class="mt-3" style="font-size:.82rem;color:#888;">
+              <i class="bi bi-geo-alt me-1"></i>EXPO Convention Center, Астана
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Storytelling -->
+      <div class="col-lg-4 col-md-6">
+        <div class="ev-card">
+          <div class="ev-top" style="background:linear-gradient(135deg,#6C3483,#1A5276);">
+            <span class="ev-emoji">📖</span>
+            <div class="ev-name">Фестиваль сторителлинга</div>
+            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>20 октября 2024</div>
+          </div>
+          <div class="ev-body">
+            <p class="ev-desc">Истории, которые меняют жизнь. Живые выступления выдающихся людей страны — без слайдов, только слова.</p>
+            <div>
+              <span class="ev-tag">культура</span>
+              <span class="ev-tag">вдохновение</span>
+              <span class="ev-tag">Алматы</span>
+            </div>
+            <div class="mt-3" style="font-size:.82rem;color:#888;">
+              <i class="bi bi-geo-alt me-1"></i>Центр современного искусства, Алматы
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- City Day -->
+      <div class="col-lg-4 col-md-6">
+        <div class="ev-card">
+          <div class="ev-top" style="background:linear-gradient(135deg,#1ABC9C,#2980B9);">
+            <span class="ev-emoji">🏙️</span>
+            <div class="ev-name">День города Астаны</div>
+            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>6–7 июля 2024</div>
+          </div>
+          <div class="ev-body">
+            <p class="ev-desc">Масштабный городской праздник: парад, концерты, выставки, спорт и фейерверк для всей семьи.</p>
+            <div>
+              <span class="ev-tag">город</span>
+              <span class="ev-tag">праздник</span>
+              <span class="ev-tag">Астана</span>
+            </div>
+            <div class="mt-3" style="font-size:.82rem;color:#888;">
+              <i class="bi bi-geo-alt me-1"></i>Площадь Независимости и EXPO, Астана
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA card -->
+      <div class="col-lg-4 col-md-6">
+        <div class="ev-card d-flex align-items-center justify-content-center text-center"
+             style="background:linear-gradient(135deg,#1a1a2e,#302b63);min-height:300px;">
+          <div style="padding:32px 24px;">
+            <div style="font-size:3rem;margin-bottom:16px;">✨</div>
+            <div style="color:#fff;font-size:1.1rem;font-weight:800;margin-bottom:10px;">
+              Хотите участвовать?
+            </div>
+            <div style="color:rgba(255,255,255,.6);font-size:.88rem;margin-bottom:24px;line-height:1.6;">
+              Зарегистрируйтесь как участник или гость любого мероприятия
+            </div>
+            <a href="#register"
+               class="btn btn-sm rounded-pill px-4 py-2 text-white"
+               style="background:linear-gradient(135deg,#FF9933,#e67e22);font-weight:700;">
+              Регистрация →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="section-label" style="color:rgba(255,255,255,.4);">О платформе</div>
+        <h2 style="font-size:2rem;font-weight:900;color:#fff;margin:8px 0 20px;line-height:1.2;">
+          Объединяем людей<br>через события
+        </h2>
+        <p style="color:rgba(255,255,255,.65);line-height:1.8;font-size:.95rem;">
+          Party Astana — платформа для организации социальных, культурных и
+          дипломатических мероприятий в Казахстане. Мы работаем с посольствами,
+          НКО, городскими институтами и творческими сообществами.
+        </p>
+        <div class="mt-4" style="display:flex;gap:12px;flex-wrap:wrap;">
+          <div style="padding:10px 18px;border-radius:50px;background:rgba(255,255,255,.1);
+                      border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);font-size:.85rem;font-weight:600;">
+            🇮🇳 Посольство Индии
+          </div>
+          <div style="padding:10px 18px;border-radius:50px;background:rgba(255,255,255,.1);
+                      border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);font-size:.85rem;font-weight:600;">
+            🇳🇱 Посольство Нидерландов
+          </div>
+          <div style="padding:10px 18px;border-radius:50px;background:rgba(255,255,255,.1);
+                      border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);font-size:.85rem;font-weight:600;">
+            🏙️ Акимат Астаны
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-4">
+          <div class="col-6">
+            <div class="about-stat">
+              <div class="about-stat-num">5+</div>
+              <div class="about-stat-label">Мероприятий в год</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="about-stat">
+              <div class="about-stat-num">1000+</div>
+              <div class="about-stat-label">Участников</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="about-stat">
+              <div class="about-stat-num">10+</div>
+              <div class="about-stat-label">Стран-партнёров</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="about-stat">
+              <div class="about-stat-num">3</div>
+              <div class="about-stat-label">Языка регистрации</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="register-section" id="register">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-label">Присоединяйтесь</div>
+      <div class="section-title">Регистрация на мероприятие</div>
+      <p class="text-muted mt-3" style="max-width:480px;margin:12px auto 0;">
+        Выберите мероприятие, укажите свои данные — мы свяжемся с вами для подтверждения
+      </p>
+    </div>
+
+    <div class="reg-card">
+      <div class="reg-top">
+        <h3 style="font-weight:800;font-size:1.4rem;margin-bottom:6px;">Оставить заявку</h3>
+        <p style="opacity:.8;font-size:.9rem;margin:0;">
+          Заполните форму и мы свяжемся с вами в течение 24 часов
+        </p>
+      </div>
+      <div class="reg-body">
+
+        <!-- Success message -->
+        <div id="successMsg">
+          <div class="success-icon">✓</div>
+          <h4 style="font-weight:800;margin-bottom:10px;">Заявка отправлена!</h4>
+          <p class="text-muted">Мы свяжемся с вами в ближайшее время для подтверждения.</p>
+          <button onclick="resetForm()"
+                  class="btn btn-sm btn-outline-secondary rounded-pill mt-3 px-4">
+            Отправить ещё одну заявку
+          </button>
+        </div>
+
+        <!-- Form -->
+        <form id="regForm" onsubmit="handleSubmit(event)">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Имя и фамилия *</label>
+              <input type="text" class="form-control" name="name" placeholder="Айгерим Сейткали" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email *</label>
+              <input type="email" class="form-control" name="email" placeholder="email@example.com" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Телефон</label>
+              <input type="tel" class="form-control" name="phone" placeholder="+7 (___) ___-__-__">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Организация</label>
+              <input type="text" class="form-control" name="organization" placeholder="Название организации">
+            </div>
+            <div class="col-12">
+              <label class="form-label">Мероприятие *</label>
+              <select class="form-select" name="event" required>
+                <option value="" disabled selected>Выберите мероприятие</option>
+                <option>🇮🇳 Неделя культуры Индии (15–22 сен 2024)</option>
+                <option>🇳🇱 День Короля Нидерландов (27 апр 2024)</option>
+                <option>❤️ Благотворительная ярмарка (7 дек 2024)</option>
+                <option>📖 Фестиваль сторителлинга (20 окт 2024)</option>
+                <option>🏙️ День города Астаны (6–7 июл 2024)</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Тип участия</label>
+              <select class="form-select" name="type">
+                <option>Гость</option>
+                <option>Участник программы</option>
+                <option>Волонтёр</option>
+                <option>Представитель СМИ</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Язык общения</label>
+              <select class="form-select" name="language">
+                <option>Русский</option>
+                <option>English</option>
+                <option>Nederlands</option>
+                <option>Қазақша</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Дополнительно</label>
+              <textarea class="form-control" name="notes" rows="2"
+                        placeholder="Пожелания, вопросы, дополнительная информация..."></textarea>
+            </div>
+            <div class="col-12 mt-2">
+              <button type="submit" class="btn-submit">
+                <i class="bi bi-check2-circle me-2"></i>Отправить заявку
+              </button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-logo">PARTY ASTANA</div>
+        <p class="footer-sub">
+          Платформа управления культурными, дипломатическими и социальными мероприятиями Казахстана.
+        </p>
+      </div>
+      <div class="col-lg-2 offset-lg-2">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+                    color:rgba(255,255,255,.3);margin-bottom:14px;">Мероприятия</div>
+        <a href="#events" class="footer-link">🇮🇳 Неделя Индии</a>
+        <a href="#events" class="footer-link">🇳🇱 День Короля</a>
+        <a href="#events" class="footer-link">❤️ Ярмарка</a>
+        <a href="#events" class="footer-link">📖 Сторителлинг</a>
+        <a href="#events" class="footer-link">🏙️ День города</a>
+      </div>
+      <div class="col-lg-2">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+                    color:rgba(255,255,255,.3);margin-bottom:14px;">Навигация</div>
+        <a href="#top" class="footer-link">Главная</a>
+        <a href="#events" class="footer-link">Мероприятия</a>
+        <a href="#about" class="footer-link">О нас</a>
+        <a href="#register" class="footer-link">Регистрация</a>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <p class="footer-copy">© 2024 Party Astana Events · Все права защищены</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Navbar shadow on scroll
+  window.addEventListener('scroll', () => {
+    document.querySelector('.navbar').style.boxShadow =
+      window.scrollY > 20 ? '0 4px 28px rgba(0,0,0,.12)' : '0 2px 20px rgba(0,0,0,.06)';
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('regForm');
+    const btn  = form.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Отправляем...';
+    // Simulate send (replace with Formspree or EmailJS for real email)
+    setTimeout(() => {
+      document.getElementById('regForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }, 1200);
+  }
+
+  function resetForm() {
+    document.getElementById('regForm').style.display = 'block';
+    document.getElementById('successMsg').style.display = 'none';
+    document.getElementById('regForm').reset();
+    document.querySelector('button[type=submit]').disabled = false;
+    document.querySelector('button[type=submit]').innerHTML =
+      '<i class="bi bi-check2-circle me-2"></i>Отправить заявку';
+  }
+</script>
+</body>
+</html>
