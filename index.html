@@ -919,13 +919,13 @@
     const el = document.createElement('div');
     el.className = 'fl-sax';
     el.innerHTML = SAX;
-    const sz  = 36  + Math.random() * 38;
-    const dur = 13  + Math.random() * 10;
+    const sz  = 60  + Math.random() * 50;
+    const dur = 12  + Math.random() * 8;
     el.style.cssText = `
-      left:${2 + Math.random() * 90}%;
-      bottom:-130px;
+      left:${2 + Math.random() * 88}%;
+      bottom:-140px;
       width:${sz}px;
-      color:${color(0.15 + Math.random() * 0.13)};
+      color:${color(0.38 + Math.random() * 0.22)};
       animation-duration:${dur}s;
     `;
     bg.appendChild(el);
@@ -935,12 +935,12 @@
   /* initial burst */
   for (let i = 0; i < 7; i++) setTimeout(() => spawnNote(), i * 400);
   for (let i = 0; i < 3; i++) setTimeout(() => spawnBal(),  i * 2800 + 800);
-  for (let i = 0; i < 2; i++) setTimeout(() => spawnSax(),  i * 3500 + 2000);
+  for (let i = 0; i < 4; i++) setTimeout(() => spawnSax(),  i * 1800 + 300);
 
   /* continuous */
   setInterval(spawnNote, 1100);
   setInterval(spawnBal,  4200);
-  setInterval(spawnSax,  3800);
+  setInterval(spawnSax,  2600);
 })();
 </script>
 </body>
