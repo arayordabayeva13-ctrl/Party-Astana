@@ -378,48 +378,78 @@
     }
 
     /* ── RESPONSIVE ─────────────────────────────────────── */
+
+    /* Tablet (≤991px) */
     @media(max-width:991px) {
-      .hero { min-height: auto; padding: 80px 0 50px; }
-      .events-section, .about-section, .fest-about, .org-section, .register-section { padding: 70px 0; }
+      .hero { min-height: auto; padding: 90px 0 60px; }
+      .events-section, .fest-about, .org-section, .register-section { padding: 72px 0; }
     }
+
+    /* Mobile (≤767px) */
     @media(max-width:767px) {
       /* Navbar */
-      .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.85)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
-      .navbar-collapse { background: rgba(21,40,64,.98); border-radius: 16px; margin-top: 12px; padding: 16px; border: 1px solid rgba(0,201,232,.15); }
+      .navbar { padding: 12px 0; }
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.85)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+      .navbar-collapse {
+        background: rgba(21,40,64,.98); border-radius: 16px;
+        margin-top: 10px; padding: 16px 20px;
+        border: 1px solid rgba(0,201,232,.15);
+      }
+      .navbar-nav { gap: 4px !important; }
+      .btn-nav { display: block; text-align: center; margin-top: 8px; }
 
       /* Hero */
-      .hero { padding: 70px 0 40px; }
-      .hero-title { letter-spacing: -1px; }
+      .hero { padding: 70px 0 48px; }
+      .hero-title { letter-spacing: -1px; margin-bottom: 20px; }
       .hero-eyebrow { font-size: .7rem; padding: 6px 14px; }
-      .hero-btns { flex-direction: column; align-items: center; }
-      .btn-primary-hero, .btn-secondary-hero { text-align: center; width: 100%; max-width: 320px; }
+      .hero-desc { font-size: .95rem; margin-bottom: 28px; }
+      .hero-btns { flex-direction: column; align-items: center; gap: 10px; }
+      .btn-primary-hero, .btn-secondary-hero { width: 100%; max-width: 340px; text-align: center; }
 
       /* Trilingual slogan */
-      .hero-slogan-text { font-size: 1rem !important; }
+      .hero-slogan-text { font-size: 1.05rem !important; }
 
-      /* Event card → column on mobile */
+      /* Event card → column */
       .ev-card-horiz { flex-direction: column !important; }
       .ev-top-horiz { min-width: unset !important; width: 100% !important; }
 
-      /* Sections */
-      .events-section, .about-section, .fest-about, .org-section, .register-section { padding: 55px 0; }
-      .reg-top, .reg-body { padding: 28px 20px; }
+      /* About / Fest cards */
+      .events-section, .fest-about, .org-section, .register-section { padding: 56px 0; }
+      .fest-card { padding: 24px 18px; }
+      .fest-quote { padding: 16px 20px; font-size: .95rem; }
       .about-card { padding: 28px 20px; }
-      .reg-wrap { border-radius: 20px; }
-      .fest-card { padding: 24px 20px; }
 
-      /* Registration type buttons */
-      .type-label { min-width: 70px; font-size: .75rem; padding: 9px 6px; }
+      /* Organizers bottom strip */
+      .org-partner-strip {
+        flex-direction: column !important; gap: 12px !important;
+        text-align: center; padding: 20px !important; border-radius: 20px !important;
+      }
+
+      /* Registration */
+      .reg-wrap { border-radius: 18px; }
+      .reg-top, .reg-body { padding: 28px 20px; }
+      .reg-top h3 { font-size: 1.5rem; }
+      .type-cards { gap: 6px; }
+      .type-label { min-width: 65px; font-size: .72rem; padding: 8px 5px; }
+
+      /* Past events */
+      #past { padding: 56px 0 !important; }
 
       /* Footer */
       footer { padding: 44px 0 24px; }
       .footer-desc { max-width: 100%; }
     }
+
+    /* Small phones (≤480px) */
     @media(max-width:480px) {
-      .hero-title { font-size: clamp(2.2rem, 12vw, 3.5rem); }
-      .hero-slogan-text { font-size: .9rem !important; }
-      .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
-      .reg-top h3 { font-size: 1.4rem; }
+      .hero-title { font-size: clamp(2rem, 11vw, 3rem); }
+      .hero-slogan-text { font-size: .88rem !important; }
+      .section-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+      .reg-top h3 { font-size: 1.3rem; }
+      .about-stat-num { font-size: 2.2rem; }
+      .type-label { min-width: 58px; font-size: .68rem; padding: 8px 4px; }
     }
   </style>
 </head>
@@ -587,7 +617,7 @@
     </div>
 
     <!-- Фото сетка -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;">
       <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
         <img src="static/img/usa250/photo1.jpg" alt="America 250"
              style="width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .3s;"
@@ -761,7 +791,7 @@
     </div>
 
     <div class="text-center mt-5">
-      <div style="display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:16px 32px;">
+      <div class="org-partner-strip" style="display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:16px 32px;">
         <span style="font-size:1.1rem;">📩</span>
         <span style="color:rgba(255,255,255,.7);font-size:.9rem;">Хотите стать партнёром или волонтёром?</span>
         <a href="#register" style="color:#00C9E8;font-weight:700;font-size:.9rem;text-decoration:none;">Написать нам →</a>
