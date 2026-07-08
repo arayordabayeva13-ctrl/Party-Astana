@@ -301,6 +301,37 @@
     .tl-text.en { font-size: .9rem; font-weight: 700; color: rgba(255,255,255,.55); font-style: italic; }
     .tl-sep { width: 40px; height: 1px; background: rgba(255,255,255,.2); margin: 6px 0 6px 52px; }
 
+    /* ── BACKGROUND ANIMATION ──────────────────────────── */
+    .anim-bg {
+      position: absolute; inset: 0; z-index: 1;
+      pointer-events: none; overflow: hidden;
+    }
+    .fl-note {
+      position: absolute; pointer-events: none; user-select: none;
+      line-height: 1; animation: noteRise linear forwards;
+    }
+    .fl-bal {
+      position: absolute; pointer-events: none;
+      animation: balRise ease-in-out forwards;
+    }
+    .fl-bal svg { display: block; }
+    @keyframes noteRise {
+      0%   { opacity: 0;   transform: translateY(0)      translateX(0)    rotate(0deg); }
+      8%   { opacity: 1; }
+      45%  {               transform: translateY(-45vh)  translateX(18px) rotate(12deg); }
+      80%  { opacity: .5; }
+      100% { opacity: 0;   transform: translateY(-108vh) translateX(-12px) rotate(28deg); }
+    }
+    @keyframes balRise {
+      0%   { opacity: 0;  transform: translateY(0)      scaleX(1); }
+      8%   { opacity: 1; }
+      28%  {              transform: translateY(-24vh)  scaleX(1); }
+      50%  {              transform: translateY(-48vh)  scaleX(-1); }
+      72%  {              transform: translateY(-70vh)  scaleX(1); }
+      88%  { opacity: .5; }
+      100% { opacity: 0;  transform: translateY(-106vh) scaleX(-1); }
+    }
+
     /* ── RESPONSIVE ─────────────────────────────────────── */
     @media(max-width:991px) {
       .hero-visual { display: none; }
@@ -346,6 +377,7 @@
 <section class="hero" id="top">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <div class="anim-bg" id="animBg"></div>
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-7 hero-content">
@@ -758,6 +790,92 @@
     btn.disabled = false;
     btn.innerHTML = '<i class="bi bi-check2-circle me-2"></i>Отправить заявку';
   }
+</script>
+<script>
+/* ── BACKGROUND ANIMATION: floating notes + ballerinas ── */
+(function () {
+  const bg = document.getElementById('animBg');
+  if (!bg) return;
+
+  const NOTES   = ['♩','♪','♫','♬','♪','♩','♫','♬'];
+  const PALETTE = [
+    'rgba(0,201,232,OP)',   /* turquoise */
+    'rgba(0,229,180,OP)',   /* emerald   */
+    'rgba(255,107,138,OP)', /* coral     */
+    'rgba(255,255,255,OP)'  /* white     */
+  ];
+
+  /* ── Ballerina SVG (arabesque pose) ── */
+  const BAL = `<svg viewBox="0 0 72 106" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+    <!-- hair bun -->
+    <ellipse cx="36" cy="4"  rx="6" ry="5"/>
+    <!-- head -->
+    <circle  cx="36" cy="14" r="9"/>
+    <!-- torso -->
+    <path d="M33,23 C32,30 31,35 32,41 L40,41 C41,35 40,30 39,23Z"/>
+    <!-- tutu outer -->
+    <path d="M4,35 Q18,50 36,48 Q54,50 68,35 Q54,41 36,39 Q18,41 4,35Z"/>
+    <!-- tutu inner (lighter) -->
+    <path d="M10,33 Q22,46 36,44 Q50,46 62,33 Q50,39 36,37 Q22,39 10,33Z" opacity=".5"/>
+    <!-- left arm raised -->
+    <path d="M33,27 Q20,16 11,7"  stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <!-- right arm side -->
+    <path d="M39,27 Q52,28 63,33" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <!-- standing leg (left) -->
+    <path d="M33,41 Q30,63 29,86" stroke="currentColor" stroke-width="5"   stroke-linecap="round" fill="none"/>
+    <!-- arabesque leg (right, raised) -->
+    <path d="M39,41 Q52,50 64,44 Q71,38 73,28" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <!-- pointe foot -->
+    <path d="M29,86 Q24,93 18,95" stroke="currentColor" stroke-width="3"   stroke-linecap="round" fill="none"/>
+  </svg>`;
+
+  function color(opacity) {
+    return PALETTE[Math.floor(Math.random() * PALETTE.length)]
+      .replace('OP', opacity.toFixed(2));
+  }
+
+  function spawnNote() {
+    const el = document.createElement('div');
+    el.className = 'fl-note';
+    el.textContent = NOTES[Math.floor(Math.random() * NOTES.length)];
+    const sz  = 1.1 + Math.random() * 1.9;
+    const dur = 9   + Math.random() * 9;
+    el.style.cssText = `
+      left:${2 + Math.random() * 93}%;
+      bottom:-60px;
+      font-size:${sz}rem;
+      color:${color(0.35 + Math.random() * 0.3)};
+      animation-duration:${dur}s;
+    `;
+    bg.appendChild(el);
+    setTimeout(() => el.remove(), (dur + 0.6) * 1000);
+  }
+
+  function spawnBal() {
+    const el = document.createElement('div');
+    el.className = 'fl-bal';
+    el.innerHTML = BAL;
+    const sz  = 38  + Math.random() * 40;
+    const dur = 14  + Math.random() * 10;
+    el.style.cssText = `
+      left:${2 + Math.random() * 90}%;
+      bottom:-120px;
+      width:${sz}px;
+      color:${color(0.16 + Math.random() * 0.14)};
+      animation-duration:${dur}s;
+    `;
+    bg.appendChild(el);
+    setTimeout(() => el.remove(), (dur + 0.6) * 1000);
+  }
+
+  /* initial burst */
+  for (let i = 0; i < 7; i++) setTimeout(() => spawnNote(), i * 400);
+  for (let i = 0; i < 3; i++) setTimeout(() => spawnBal(),  i * 2800 + 800);
+
+  /* continuous */
+  setInterval(spawnNote, 1100);
+  setInterval(spawnBal,  4200);
+})();
 </script>
 </body>
 </html>
