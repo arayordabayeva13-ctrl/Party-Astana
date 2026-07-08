@@ -555,7 +555,7 @@
 
 
         <div class="col-lg-5 col-md-6">
-          <div class="ev-card" style="opacity:.65;filter:saturate(.5);">
+          <div class="ev-card" style="opacity:.8;filter:saturate(.6);">
             <div class="ev-top" style="background:linear-gradient(135deg,#B22234 0%,#3C3B6E 100%);position:relative;">
               <span style="position:absolute;top:14px;right:14px;font-size:.65rem;font-weight:700;letter-spacing:1.5px;background:rgba(0,0,0,.45);color:rgba(255,255,255,.7);padding:3px 10px;border-radius:50px;text-transform:uppercase;">Прошло</span>
               <span class="ev-emoji">🇺🇸</span>
@@ -565,7 +565,10 @@
             <div class="ev-body">
               <p class="ev-desc">Торжественное мероприятие в честь 250-летия провозглашения независимости США. Культура, история и дипломатия на Арбате.</p>
               <div class="ev-venue"><i class="bi bi-geo-alt me-1"></i>Арбат Астана</div>
-              <div><span class="ev-tag">дипломатия</span><span class="ev-tag">США</span><span class="ev-tag">юбилей</span></div>
+              <div style="margin-bottom:14px;"><span class="ev-tag">дипломатия</span><span class="ev-tag">США</span><span class="ev-tag">юбилей</span></div>
+              <button onclick="openUSAGallery()" class="ev-btn" style="background:rgba(178,34,52,.2);border-color:rgba(178,34,52,.5);color:#fff;cursor:pointer;">
+                <i class="bi bi-images me-1"></i>Фото и видео →
+              </button>
             </div>
           </div>
         </div>
@@ -577,6 +580,69 @@
   </div>
 </section>
 
+
+<!-- USA GALLERY MODAL -->
+<div id="usaModal" onclick="closeUSAGallery(event)"
+     style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:8000;
+            overflow-y:auto;padding:32px 16px;">
+  <div onclick="event.stopPropagation()" style="max-width:900px;margin:0 auto;background:#0C1C2C;border-radius:24px;padding:32px;position:relative;">
+    <button onclick="closeUSAGallery(event)"
+            style="position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.6);font-size:1.8rem;cursor:pointer;line-height:1;z-index:10;">✕</button>
+    <div style="margin-bottom:24px;">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#B22234;margin-bottom:8px;">3 июля 2026 · Арбат Астана</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:#fff;margin:0;">🇺🇸 250 лет независимости США</h3>
+      <p style="color:rgba(255,255,255,.5);font-size:.88rem;margin-top:8px;">Совместное выступление военного оркестра США и Казахстана</p>
+    </div>
+
+    <!-- Видео -->
+    <div style="border-radius:16px;overflow:hidden;margin-bottom:16px;background:#000;">
+      <video controls style="width:100%;max-height:420px;display:block;" poster="static/img/usa250/photo3.jpg">
+        <source src="static/img/usa250/video.mov" type="video/mp4">
+        <source src="static/img/usa250/video.mov" type="video/quicktime">
+      </video>
+    </div>
+
+    <!-- Фото сетка -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+      <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+        <img src="static/img/usa250/photo1.jpg" alt="America 250"
+             style="width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .3s;"
+             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+             onclick="openLightbox(this.src)">
+      </div>
+      <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+        <img src="static/img/usa250/photo2.jpg" alt="America 250"
+             style="width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .3s;"
+             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+             onclick="openLightbox(this.src)">
+      </div>
+      <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+        <img src="static/img/usa250/photo3.jpg" alt="America 250"
+             style="width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .3s;"
+             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+             onclick="openLightbox(this.src)">
+      </div>
+      <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+        <img src="static/img/usa250/photo4.jpg" alt="America 250"
+             style="width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .3s;"
+             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+             onclick="openLightbox(this.src)">
+      </div>
+      <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+        <img src="static/img/usa250/photo5.jpg" alt="America 250"
+             style="width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .3s;"
+             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+             onclick="openLightbox(this.src)">
+      </div>
+      <div style="border-radius:12px;overflow:hidden;aspect-ratio:4/3;">
+        <img src="static/img/usa250/photo7.jpg" alt="America 250"
+             style="width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .3s;"
+             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+             onclick="openLightbox(this.src)">
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox()"
@@ -906,6 +972,18 @@
       alert('Ошибка. Проверьте интернет и попробуйте снова.');
     });
   }
+
+  function openUSAGallery() {
+    document.getElementById('usaModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeUSAGallery(e) {
+    if (!e || e.target === document.getElementById('usaModal')) {
+      document.getElementById('usaModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeUSAGallery(); });
 
   function openLightbox(src) {
     const lb = document.getElementById('lightbox');
