@@ -208,6 +208,44 @@
       color: rgba(255,255,255,.75); font-size: .82rem; font-weight: 600; margin: 4px;
     }
 
+    /* ── ABOUT FEST ─────────────────────────────────────── */
+    .fest-about { padding: 100px 0; background: #07142A; }
+    .fest-about .section-eyebrow { color: #00E5B4; }
+    .fest-card {
+      background: rgba(0,201,232,.06); border: 1px solid rgba(0,201,232,.14);
+      border-radius: 20px; padding: 32px 28px; height: 100%;
+      transition: transform .25s, border-color .25s;
+    }
+    .fest-card:hover { transform: translateY(-4px); border-color: rgba(0,201,232,.35); }
+    .fest-card-icon { font-size: 2rem; margin-bottom: 14px; }
+    .fest-card-title { font-weight: 800; font-size: 1rem; color: #fff; margin-bottom: 8px; }
+    .fest-card-text { font-size: .88rem; color: rgba(255,255,255,.6); line-height: 1.7; }
+    .fest-quote {
+      border-left: 3px solid #00C9E8; padding: 20px 28px;
+      background: rgba(0,201,232,.06); border-radius: 0 16px 16px 0;
+      font-family: 'Playfair Display', serif; font-size: 1.15rem;
+      color: rgba(255,255,255,.85); line-height: 1.7; font-style: italic;
+      margin: 40px 0 0;
+    }
+
+    /* ── ORGANIZERS ──────────────────────────────────────── */
+    .org-section { padding: 100px 0; background: #050E1C; }
+    .org-card {
+      background: #0C1C2C; border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px; padding: 32px 24px; text-align: center;
+      transition: transform .25s, border-color .25s; height: 100%;
+    }
+    .org-card:hover { transform: translateY(-5px); border-color: rgba(0,201,232,.3); }
+    .org-avatar {
+      width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 18px;
+      background: linear-gradient(135deg, #00C9E8, #00E5B4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .org-name { font-weight: 800; font-size: 1rem; color: #fff; margin-bottom: 4px; }
+    .org-role { font-size: .8rem; color: #00C9E8; font-weight: 600; letter-spacing: .5px; margin-bottom: 12px; }
+    .org-desc { font-size: .83rem; color: rgba(255,255,255,.5); line-height: 1.65; }
+
     /* ── REGISTER ───────────────────────────────────────── */
     .register-section { padding: 100px 0; background: #050E1C; }
     .reg-wrap {
@@ -366,7 +404,8 @@
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav ms-auto gap-2 align-items-center">
         <li><a class="nav-link" href="#events">Мероприятия</a></li>
-        <li><a class="nav-link" href="#about">О фесте</a></li>
+        <li><a class="nav-link" href="#about">О фестивале</a></li>
+        <li><a class="nav-link" href="#organizers">Организаторы</a></li>
         <li class="ms-2"><a href="#register" class="btn-nav">Регистрация</a></li>
       </ul>
     </div>
@@ -549,48 +588,142 @@
           style="position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;">✕</button>
 </div>
 
-<!-- ABOUT -->
-<section class="about-section" id="about">
+<!-- О ФЕСТИВАЛЕ -->
+<section class="fest-about" id="about">
   <div class="container">
-    <div class="row g-5 align-items-center">
-      <div class="col-lg-5">
-        <div class="section-eyebrow" style="color:#FFB703;">О фестивале</div>
-        <h2 class="section-title" style="margin-bottom:20px;color:#fff;">
-          Arbat Astana — <span style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#FFB703,#00E5B4);-webkit-background-clip:text;background-clip:text;">место встречи</span> культур
+    <div class="row align-items-end mb-5">
+      <div class="col-lg-7">
+        <div class="section-eyebrow">О фестивале</div>
+        <h2 class="section-title" style="color:#fff;">
+          Арбат Астана — <span style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#00C9E8,#00E5B4);-webkit-background-clip:text;background-clip:text;">сцена для таланта</span>
         </h2>
-        <p style="color:rgba(255,255,255,.8);line-height:1.8;font-size:.95rem;margin-bottom:24px;">
-          Arbat Astana Fest — платформа для организации культурных,
-          дипломатических и социальных мероприятий Казахстана.
-          Работаем с посольствами, НКО и городскими институтами.
+      </div>
+      <div class="col-lg-5 mt-3 mt-lg-0">
+        <p style="color:rgba(255,255,255,.6);line-height:1.75;font-size:.93rem;">
+          ART Фестиваль музыки и танца — открытая площадка для артистов, музыкантов,
+          танцоров и художников в самом сердце Астаны.
         </p>
-        <div>
-          <span class="partner-tag">🇮🇳 Посольство Индии</span>
-          <span class="partner-tag">🇳🇱 Посольство Нидерландов</span>
-          <span class="partner-tag">🏙️ Акимат Астаны</span>
-          <span class="partner-tag">❤️ НКО Казахстана</span>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="fest-card">
+          <div class="fest-card-icon">🎵</div>
+          <div class="fest-card-title">Живая музыка</div>
+          <div class="fest-card-text">Выступления музыкантов и бэндов разных жанров на открытой сцене Арбата.</div>
         </div>
       </div>
-      <div class="col-lg-7">
-        <div class="about-card">
-          <div class="row g-4">
-            <div class="col-6">
-              <div class="about-stat-num">5+</div>
-              <div class="about-stat-label">Мероприятий в год</div>
-            </div>
-            <div class="col-6">
-              <div class="about-stat-num">1000+</div>
-              <div class="about-stat-label">Участников ежегодно</div>
-            </div>
-            <div class="col-6">
-              <div class="about-stat-num">10+</div>
-              <div class="about-stat-label">Стран-партнёров</div>
-            </div>
-            <div class="col-6">
-              <div class="about-stat-num">3</div>
-              <div class="about-stat-label">Языка регистрации</div>
-            </div>
-          </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="fest-card">
+          <div class="fest-card-icon">💃</div>
+          <div class="fest-card-title">Танец</div>
+          <div class="fest-card-text">Балет, contemporary, народные и эстрадные танцы — все стили на одной площадке.</div>
         </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="fest-card">
+          <div class="fest-card-icon">🎨</div>
+          <div class="fest-card-title">Визуальное искусство</div>
+          <div class="fest-card-text">Художники, скульпторы и арт-перформеры представляют работы прямо на улице.</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="fest-card">
+          <div class="fest-card-icon">🧒</div>
+          <div class="fest-card-title">Детские коллективы</div>
+          <div class="fest-card-text">Специальная программа для юных талантов — отдельная сцена и номинации.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-2">
+      <div class="col-md-4">
+        <div class="fest-card" style="background:rgba(0,229,180,.06);border-color:rgba(0,229,180,.14);">
+          <div class="fest-card-icon">📍</div>
+          <div class="fest-card-title">Место проведения</div>
+          <div class="fest-card-text">Арбат Астана — главная пешеходная артерия столицы, в центре культурной жизни города.</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="fest-card" style="background:rgba(255,107,138,.06);border-color:rgba(255,107,138,.14);">
+          <div class="fest-card-icon">📅</div>
+          <div class="fest-card-title">Даты фестиваля</div>
+          <div class="fest-card-text">18–19 июля 2026. Два дня с утра до вечера — непрерывная программа и живые выступления.</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="fest-card" style="background:rgba(0,201,232,.06);border-color:rgba(0,201,232,.14);">
+          <div class="fest-card-icon">🌍</div>
+          <div class="fest-card-title">Миссия</div>
+          <div class="fest-card-text">Объединить артистов Казахстана и зарубежных гостей, сделать искусство доступным для каждого.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fest-quote">
+      «Арбат Арт Фест — это не просто мероприятие. Это пространство, где рождается новое казахстанское искусство.»
+    </div>
+  </div>
+</section>
+
+<!-- ОРГАНИЗАТОРЫ -->
+<section class="org-section" id="organizers">
+  <div class="container">
+    <div class="row align-items-end mb-5">
+      <div class="col-lg-7">
+        <div class="section-eyebrow" style="color:#FF6B8A;">Команда</div>
+        <h2 class="section-title" style="color:#fff;">
+          <span style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#FF6B8A,#00C9E8);-webkit-background-clip:text;background-clip:text;">Организаторы</span> фестиваля
+        </h2>
+      </div>
+      <div class="col-lg-5 mt-3 mt-lg-0">
+        <p style="color:rgba(255,255,255,.5);font-size:.9rem;line-height:1.7;">
+          Команда профессионалов, которая создаёт атмосферу праздника и культуры на Арбате.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-sm-6 col-lg-3">
+        <div class="org-card">
+          <div class="org-avatar">🎭</div>
+          <div class="org-name">Арт-дирекция</div>
+          <div class="org-role">Художественный руководитель</div>
+          <div class="org-desc">Формирование программы, отбор участников и общая концепция фестиваля.</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="org-card">
+          <div class="org-avatar" style="background:linear-gradient(135deg,#FF6B8A,#FFB703);">🎙️</div>
+          <div class="org-name">Продюсерский центр</div>
+          <div class="org-role">Продакшн и сцена</div>
+          <div class="org-desc">Техническое оснащение, звук, свет и организация сценического пространства.</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="org-card">
+          <div class="org-avatar" style="background:linear-gradient(135deg,#00E5B4,#00C9E8);">🤝</div>
+          <div class="org-name">PR и партнёры</div>
+          <div class="org-role">Коммуникации</div>
+          <div class="org-desc">Работа со СМИ, посольствами, спонсорами и партнёрскими организациями.</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="org-card">
+          <div class="org-avatar" style="background:linear-gradient(135deg,#FFB703,#FF6B8A);">📋</div>
+          <div class="org-name">Координация</div>
+          <div class="org-role">Операционный менеджмент</div>
+          <div class="org-desc">Регистрация участников, расписание выступлений и логистика мероприятия.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <div style="display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:16px 32px;">
+        <span style="font-size:1.1rem;">📩</span>
+        <span style="color:rgba(255,255,255,.7);font-size:.9rem;">Хотите стать партнёром или волонтёром?</span>
+        <a href="#register" style="color:#00C9E8;font-weight:700;font-size:.9rem;text-decoration:none;">Написать нам →</a>
       </div>
     </div>
   </div>
