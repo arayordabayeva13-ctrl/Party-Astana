@@ -446,10 +446,10 @@
             <div class="hero-card-name">Фестиваль музыки и танца</div>
             <div class="hero-card-date"><span class="hero-card-dot" style="background:#00C9E8;"></span>18–19 июля · Арбат</div>
           </div>
-          <div class="hero-card" style="top:280px;left:20px;width:230px;">
-            <span class="hero-card-emoji">🇺🇸</span>
-            <div class="hero-card-name">250 лет независимости США</div>
-            <div class="hero-card-date"><span class="hero-card-dot" style="background:#B22234;"></span>3 июля</div>
+          <div class="hero-card" style="top:240px;left:20px;width:230px;cursor:pointer;" onclick="document.getElementById('past').scrollIntoView({behavior:'smooth'})">
+            <span style="font-size:.6rem;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,.5);text-transform:uppercase;display:block;margin-bottom:6px;">Прошедшие</span>
+            <div class="hero-card-name" style="font-size:.82rem;">🇺🇸 250 лет США &amp; другие</div>
+            <div class="hero-card-date" style="margin-top:6px;"><span style="font-size:.72rem;color:rgba(255,255,255,.5);">Смотреть архив →</span></div>
           </div>
         </div>
       </div>
@@ -507,7 +507,7 @@
     </div>
 
     <!-- ПРОШЕДШИЕ МЕРОПРИЯТИЯ -->
-    <div style="margin-top:56px;">
+    <div id="past" style="margin-top:56px;">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
         <div style="font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#8AAABB;">Прошедшие мероприятия</div>
         <div style="flex:1;height:1px;background:rgba(0,201,232,.15);"></div>
