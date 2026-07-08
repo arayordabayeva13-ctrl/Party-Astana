@@ -78,9 +78,21 @@
       font-weight: 900; line-height: .95;
       letter-spacing: -2px; margin-bottom: 28px;
     }
-    .hero-title .line-1 { display: block; color: #fff; }
-    .hero-title .line-2 { display: block; color: #fff; }
-    .hero-title .line-3 { display: block; color: rgba(255,255,255,.85); }
+    .hero-title .line-1 {
+      display: block;
+      background: linear-gradient(90deg, #fff 0%, #00C9E8 60%, #00E5B4 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-title .line-2 {
+      display: block;
+      background: linear-gradient(90deg, #00C9E8 0%, #FF6B8A 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-title .line-3 {
+      display: block;
+      background: linear-gradient(90deg, #FF6B8A 0%, #fff 80%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
 
     .hero-desc {
       font-size: 1.05rem; color: rgba(255,255,255,.85);
