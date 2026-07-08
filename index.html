@@ -43,6 +43,17 @@
     }
     .btn-nav:hover { filter: brightness(1.08); transform: translateY(-1px); color: #fff !important; box-shadow: 0 8px 28px rgba(0,201,232,.4); }
 
+    /* ── LANG SWITCHER ──────────────────────────────────── */
+    .lang-switcher { display: flex; gap: 4px; align-items: center; }
+    .lang-btn {
+      background: none; border: 1.5px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.45); font-size: .7rem; font-weight: 800;
+      letter-spacing: 1.5px; padding: 4px 10px; border-radius: 7px;
+      cursor: pointer; transition: all .2s; line-height: 1.4;
+    }
+    .lang-btn:hover { border-color: #00C9E8; color: #00C9E8; }
+    .lang-btn.active { border-color: #00C9E8; color: #00C9E8; background: rgba(0,201,232,.12); }
+
     /* ── HERO ───────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
@@ -473,21 +484,26 @@
       <ul class="navbar-nav ms-auto gap-2 align-items-center">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#events" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-             style="color:rgba(255,255,255,.7)!important;">Мероприятия</a>
+             style="color:rgba(255,255,255,.7)!important;" data-i18n="nav.events">Мероприятия</a>
           <ul class="dropdown-menu" style="background:#1F3555;border:1px solid rgba(0,201,232,.2);border-radius:12px;min-width:200px;">
             <li><a class="dropdown-item" href="#events"
-                   style="color:rgba(255,255,255,.85);font-size:.88rem;padding:10px 18px;">
+                   style="color:rgba(255,255,255,.85);font-size:.88rem;padding:10px 18px;" data-i18n="nav.upcoming">
               🎵 Предстоящие
             </a></li>
             <li><a class="dropdown-item" href="#past"
-                   style="color:rgba(255,255,255,.85);font-size:.88rem;padding:10px 18px;">
+                   style="color:rgba(255,255,255,.85);font-size:.88rem;padding:10px 18px;" data-i18n="nav.past">
               🕐 Прошедшие
             </a></li>
           </ul>
         </li>
-        <li><a class="nav-link" href="#about">О фестивале</a></li>
-        <li><a class="nav-link" href="#organizers">Организаторы</a></li>
-        <li class="ms-2"><a href="#register" class="btn-nav">Регистрация</a></li>
+        <li><a class="nav-link" href="#about" data-i18n="nav.about">О фестивале</a></li>
+        <li><a class="nav-link" href="#organizers" data-i18n="nav.organizers">Организаторы</a></li>
+        <li class="lang-switcher ms-1">
+          <button class="lang-btn active" onclick="setLang('ru')" id="btn-ru">RU</button>
+          <button class="lang-btn" onclick="setLang('kz')" id="btn-kz">KZ</button>
+          <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+        </li>
+        <li class="ms-1"><a href="#register" class="btn-nav" data-i18n="nav.register">Регистрация</a></li>
       </ul>
     </div>
   </div>
@@ -499,40 +515,40 @@
   <div class="anim-bg" id="animBg"></div>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-8 hero-content text-center">
-        <div class="hero-eyebrow" style="justify-content:center;">
-          <span></span>18–19 июля 2026 · Арбат Астана
+      <div class="col-lg-8 hero-content">
+        <div class="hero-eyebrow" style="justify-content:flex-start;">
+          <span></span><span data-i18n="hero.eyebrow">18–19 июля 2026 · Арбат Астана</span>
         </div>
-        <h1 class="hero-title">
+        <h1 class="hero-title" style="text-align:left;">
           <span class="line-1">ARBAT ASTANA</span>
           <span class="line-2">ART</span>
           <span class="line-3">FEST</span>
         </h1>
         <!-- Tagline trilingual -->
-        <div style="margin-bottom:32px;display:flex;flex-direction:column;gap:14px;align-items:flex-start;">
+        <div style="margin-bottom:32px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
           <div style="display:flex;align-items:center;gap:14px;">
-            <span style="font-size:.75rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:28px;flex-shrink:0;">KZ</span>
-            <span class="hero-slogan-text" style="font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:.3px;">Мәдениет пен өнер кездесетін жер</span>
+            <span style="font-size:.7rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:26px;flex-shrink:0;">KZ</span>
+            <span class="hero-slogan-text" style="font-size:1.4rem;font-weight:700;color:#fff;letter-spacing:.2px;">Мәдениет пен өнер кездесетін жер</span>
           </div>
           <div style="display:flex;align-items:center;gap:14px;">
-            <span style="font-size:.75rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:28px;flex-shrink:0;">EN</span>
-            <span class="hero-slogan-text" style="font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.3px;">Where culture and art meet</span>
+            <span style="font-size:.7rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:26px;flex-shrink:0;">EN</span>
+            <span class="hero-slogan-text" style="font-size:1.4rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.2px;">Where culture and art meet</span>
           </div>
           <div style="display:flex;align-items:center;gap:14px;">
-            <span style="font-size:.75rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:28px;flex-shrink:0;">RU</span>
-            <span class="hero-slogan-text" style="font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.3px;">Место, где встречается культура и искусство</span>
+            <span style="font-size:.7rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:26px;flex-shrink:0;">RU</span>
+            <span class="hero-slogan-text" style="font-size:1.4rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.2px;">Место, где встречается культура и искусство</span>
           </div>
         </div>
 
-        <p class="hero-desc" style="margin-left:auto;margin-right:auto;">
+        <p class="hero-desc" data-i18n="hero.desc">
           Два дня живых выступлений на Арбат Арт Фест.
           Музыканты, артисты и группы на одной сцене под открытым небом.
         </p>
-        <div class="hero-btns" style="justify-content:center;">
+        <div class="hero-btns">
           <a href="#register" class="btn-primary-hero">
-            <i class="bi bi-ticket-perforated me-2"></i>Подать заявку
+            <i class="bi bi-ticket-perforated me-2"></i><span data-i18n="hero.btn1">Подать заявку</span>
           </a>
-          <a href="#events" class="btn-secondary-hero">
+          <a href="#events" class="btn-secondary-hero" data-i18n="hero.btn2">
             Программа фестиваля →
           </a>
         </div>
@@ -546,11 +562,11 @@
   <div class="container">
     <div class="row align-items-end mb-5">
       <div class="col-lg-7">
-        <div class="section-eyebrow">Программа · Июль 2026</div>
-        <h2 class="section-title">Мероприятия <span>на Арбате</span></h2>
+        <div class="section-eyebrow" data-i18n="events.eyebrow">Программа · Июль 2026</div>
+        <h2 class="section-title" data-i18n-html="events.title">Мероприятия <span>на Арбате</span></h2>
       </div>
       <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
-        <a href="#register" class="btn-nav">Зарегистрироваться на событие</a>
+        <a href="#register" class="btn-nav" data-i18n="events.register">Зарегистрироваться на событие</a>
       </div>
     </div>
 
@@ -561,8 +577,8 @@
         <div class="ev-card ev-card-horiz" style="flex-direction:row;min-height:200px;">
           <div class="ev-top ev-top-horiz" style="background:linear-gradient(135deg,#00C9E8 0%,#00E5B4 60%,#FF6B8A 100%);min-width:260px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
             <span class="ev-emoji" style="font-size:3rem;">🎵</span>
-            <div class="ev-name" style="font-size:1.15rem;">Арбат Астана Арт Фест</div>
-            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>18–19 июля 2026</div>
+            <div class="ev-name" style="font-size:1.15rem;" data-i18n="ev.name">Арбат Астана Арт Фест</div>
+            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i><span data-i18n="ev.date">18–19 июля 2026</span></div>
           </div>
           <div class="ev-body" style="display:flex;flex-direction:column;justify-content:center;">
             <div style="margin-bottom:8px;">
@@ -577,13 +593,13 @@
               <span style="font-size:.68rem;font-weight:800;color:#00C9E8;letter-spacing:1px;">RU</span>
               <span style="font-size:.9rem;color:rgba(255,255,255,.85);font-weight:700;margin-left:8px;">Место, где встречается культура и искусство</span>
             </div>
-            <p class="ev-desc" style="margin-bottom:12px;">Два дня живых выступлений на Арбат Арт Фест. Музыканты, артисты, группы и исполнители на одной сцене.</p>
-            <div style="margin-bottom:12px;"><span class="ev-venue"><i class="bi bi-geo-alt me-1"></i>Арбат Астана</span></div>
+            <p class="ev-desc" style="margin-bottom:12px;" data-i18n="ev.desc">Два дня живых выступлений на Арбат Арт Фест. Музыканты, артисты, группы и исполнители на одной сцене.</p>
+            <div style="margin-bottom:12px;"><span class="ev-venue"><i class="bi bi-geo-alt me-1"></i><span data-i18n="ev.venue">Арбат Астана</span></span></div>
             <div style="margin-bottom:0;">
               <span class="ev-tag">🎸 музыка</span><span class="ev-tag">💃 танец</span>
               <span class="ev-tag">🎤 вокал</span>
             </div>
-            <a href="#register" class="ev-btn" style="align-self:flex-start;margin-top:14px;border-color:rgba(0,201,232,.5);color:#FF6B8A;">Подать заявку →</a>
+            <a href="#register" class="ev-btn" style="align-self:flex-start;margin-top:14px;border-color:rgba(0,201,232,.5);color:#FF6B8A;" data-i18n="ev.btn">Подать заявку →</a>
           </div>
         </div>
       </div>
@@ -673,15 +689,14 @@
   <div class="container">
     <div class="row align-items-end mb-5">
       <div class="col-lg-7">
-        <div class="section-eyebrow">О фестивале</div>
-        <h2 class="section-title" style="color:#fff;">
+        <div class="section-eyebrow" data-i18n="about.eyebrow">О фестивале</div>
+        <h2 class="section-title" style="color:#fff;" data-i18n-html="about.title">
           Арбат Астана — <span style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#00C9E8,#00E5B4);-webkit-background-clip:text;background-clip:text;">сцена для творчества</span>
         </h2>
       </div>
       <div class="col-lg-5 mt-3 mt-lg-0">
         <p style="color:rgba(255,255,255,.6);line-height:1.75;font-size:.93rem;">
-          ART Фестиваль музыки и танца — открытая площадка для артистов, музыкантов,
-          танцоров и художников в самом сердце Астаны.
+          <span data-i18n="about.subtitle">ART Фестиваль музыки и танца — открытая площадка для артистов, музыкантов, танцоров и художников в самом сердце Астаны.</span>
         </p>
       </div>
     </div>
@@ -690,29 +705,29 @@
       <div class="col-md-6 col-lg-3">
         <div class="fest-card">
           <div class="fest-card-icon">🎵</div>
-          <div class="fest-card-title">Живая музыка</div>
-          <div class="fest-card-text">Оркестры, ансамбли, группы и вокалисты — живые выступления на открытой сцене Арбата.</div>
+          <div class="fest-card-title" data-i18n="about.music.title">Живая музыка</div>
+          <div class="fest-card-text" data-i18n="about.music.text">Оркестры, ансамбли, группы и вокалисты — живые выступления на открытой сцене Арбата.</div>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="fest-card">
           <div class="fest-card-icon">💃</div>
-          <div class="fest-card-title">Танец</div>
-          <div class="fest-card-text">Балет, contemporary, народные и эстрадные танцы — все стили на одной площадке.</div>
+          <div class="fest-card-title" data-i18n="about.dance.title">Танец</div>
+          <div class="fest-card-text" data-i18n="about.dance.text">Балет, contemporary, народные и эстрадные танцы — все стили на одной площадке.</div>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="fest-card">
           <div class="fest-card-icon">🎨</div>
-          <div class="fest-card-title">Визуальное искусство</div>
-          <div class="fest-card-text">Художники, скульпторы и арт-перформеры представляют работы прямо на улице.</div>
+          <div class="fest-card-title" data-i18n="about.art.title">Визуальное искусство</div>
+          <div class="fest-card-text" data-i18n="about.art.text">Художники, скульпторы и арт-перформеры представляют работы прямо на улице.</div>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="fest-card">
           <div class="fest-card-icon">🧒</div>
-          <div class="fest-card-title">Детские коллективы</div>
-          <div class="fest-card-text">Специальная программа для детских коллективов.</div>
+          <div class="fest-card-title" data-i18n="about.kids.title">Детские коллективы</div>
+          <div class="fest-card-text" data-i18n="about.kids.text">Специальная программа для детских коллективов.</div>
         </div>
       </div>
     </div>
@@ -721,27 +736,27 @@
       <div class="col-md-4">
         <div class="fest-card" style="background:rgba(0,229,180,.06);border-color:rgba(0,229,180,.14);">
           <div class="fest-card-icon">📍</div>
-          <div class="fest-card-title">Место проведения</div>
-          <div class="fest-card-text">Арбат Астана — главная пешеходная артерия столицы, в центре культурной жизни города.</div>
+          <div class="fest-card-title" data-i18n="about.venue.title">Место проведения</div>
+          <div class="fest-card-text" data-i18n="about.venue.text">Арбат Астана — главная пешеходная артерия столицы, в центре культурной жизни города.</div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="fest-card" style="background:rgba(255,107,138,.06);border-color:rgba(255,107,138,.14);">
           <div class="fest-card-icon">📅</div>
-          <div class="fest-card-title">Даты фестиваля</div>
-          <div class="fest-card-text">18–19 июля 2026. Два дня с утра до вечера — непрерывная программа и живые выступления.</div>
+          <div class="fest-card-title" data-i18n="about.dates.title">Даты фестиваля</div>
+          <div class="fest-card-text" data-i18n="about.dates.text">18–19 июля 2026. Два дня с утра до вечера — непрерывная программа и живые выступления.</div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="fest-card" style="background:rgba(0,201,232,.06);border-color:rgba(0,201,232,.14);">
           <div class="fest-card-icon">🌍</div>
-          <div class="fest-card-title">Миссия</div>
-          <div class="fest-card-text">Объединить артистов Казахстана и зарубежных гостей, сделать искусство доступным для каждого.</div>
+          <div class="fest-card-title" data-i18n="about.mission.title">Миссия</div>
+          <div class="fest-card-text" data-i18n="about.mission.text">Объединить артистов Казахстана и зарубежных гостей, сделать искусство доступным для каждого.</div>
         </div>
       </div>
     </div>
 
-    <div class="fest-quote">
+    <div class="fest-quote" data-i18n="about.quote">
       «Арбат Арт Фест — это не просто мероприятие. Это пространство, где рождается новое казахстанское искусство.»
     </div>
   </div>
@@ -752,14 +767,14 @@
   <div class="container">
     <div class="row align-items-end mb-5">
       <div class="col-lg-7">
-        <div class="section-eyebrow" style="color:#FF6B8A;">Команда</div>
-        <h2 class="section-title" style="color:#fff;">
+        <div class="section-eyebrow" style="color:#FF6B8A;" data-i18n="org.eyebrow">Команда</div>
+        <h2 class="section-title" style="color:#fff;" data-i18n-html="org.title">
           <span style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#FF6B8A,#00C9E8);-webkit-background-clip:text;background-clip:text;">Организаторы</span> фестиваля
         </h2>
       </div>
       <div class="col-lg-5 mt-3 mt-lg-0">
         <p style="color:rgba(255,255,255,.5);font-size:.9rem;line-height:1.7;">
-          Команда профессионалов, которая создаёт атмосферу праздника и культуры на Арбате.
+          <span data-i18n="org.desc">Команда профессионалов, которая создаёт атмосферу праздника и культуры на Арбате.</span>
         </p>
       </div>
     </div>
@@ -768,24 +783,24 @@
       <div class="col-sm-6 col-lg-3">
         <div class="org-card">
           <div class="org-avatar">🎭</div>
-          <div class="org-name">Арт-дирекция</div>
-          <div class="org-desc">Формирование программы, отбор участников и общая концепция фестиваля.</div>
+          <div class="org-name" data-i18n="org.art.name">Арт-дирекция</div>
+          <div class="org-desc" data-i18n="org.art.desc">Формирование программы, отбор участников и общая концепция фестиваля.</div>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3">
         <div class="org-card">
           <div class="org-avatar" style="background:linear-gradient(135deg,#00E5B4,#00C9E8);">🤝</div>
-          <div class="org-name">PR и партнёры</div>
-          <div class="org-role">Коммуникации</div>
-          <div class="org-desc">Работа со СМИ, посольствами, спонсорами и партнёрскими организациями.</div>
+          <div class="org-name" data-i18n="org.pr.name">PR и партнёры</div>
+          <div class="org-role" data-i18n="org.pr.role">Коммуникации</div>
+          <div class="org-desc" data-i18n="org.pr.desc">Работа со СМИ, посольствами, спонсорами и партнёрскими организациями.</div>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3">
         <div class="org-card">
           <div class="org-avatar" style="background:linear-gradient(135deg,#FFB703,#FF6B8A);">📋</div>
-          <div class="org-name">Координация</div>
-          <div class="org-role">Операционный менеджмент</div>
-          <div class="org-desc">Регистрация участников, расписание выступлений и логистика мероприятия.</div>
+          <div class="org-name" data-i18n="org.coord.name">Координация</div>
+          <div class="org-role" data-i18n="org.coord.role">Операционный менеджмент</div>
+          <div class="org-desc" data-i18n="org.coord.desc">Регистрация участников, расписание выступлений и логистика мероприятия.</div>
         </div>
       </div>
     </div>
@@ -793,8 +808,8 @@
     <div class="text-center mt-5">
       <div class="org-partner-strip" style="display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:16px 32px;">
         <span style="font-size:1.1rem;">📩</span>
-        <span style="color:rgba(255,255,255,.7);font-size:.9rem;">Хотите стать партнёром или волонтёром?</span>
-        <a href="#register" style="color:#00C9E8;font-weight:700;font-size:.9rem;text-decoration:none;">Написать нам →</a>
+        <span style="color:rgba(255,255,255,.7);font-size:.9rem;" data-i18n="org.partner">Хотите стать партнёром или волонтёром?</span>
+        <a href="#register" style="color:#00C9E8;font-weight:700;font-size:.9rem;text-decoration:none;" data-i18n="org.partner.btn">Написать нам →</a>
       </div>
     </div>
   </div>
@@ -804,9 +819,9 @@
 <section class="register-section" id="register">
   <div class="container">
     <div class="text-center mb-5">
-      <div class="section-eyebrow">Присоединяйтесь</div>
-      <h2 class="section-title">Оставить <span>заявку</span></h2>
-      <p style="color:rgba(255,255,255,.45);margin-top:12px;font-size:.92rem;">
+      <div class="section-eyebrow" data-i18n="reg.eyebrow">Присоединяйтесь</div>
+      <h2 class="section-title" data-i18n-html="reg.title">Оставить <span>заявку</span></h2>
+      <p style="color:rgba(255,255,255,.45);margin-top:12px;font-size:.92rem;" data-i18n="reg.subtitle">
         Заполните форму — мы свяжемся в течение 24 часов
       </p>
     </div>
@@ -814,8 +829,8 @@
     <div class="reg-wrap">
       <div class="reg-top">
         <div class="reg-top-content">
-          <h3>Регистрация участника</h3>
-          <p style="margin-bottom:14px;">Арбат Астана · Казахстан</p>
+          <h3 data-i18n="reg.header">Регистрация участника</h3>
+          <p style="margin-bottom:14px;" data-i18n="reg.location">Арбат Астана · Казахстан</p>
           <div style="display:flex;flex-direction:column;gap:3px;opacity:.85;">
             <div style="font-size:.88rem;color:rgba(255,255,255,.9);">🇰🇿 Мәдениет пен өнер кездесетін жер</div>
             <div style="font-size:.88rem;color:rgba(255,255,255,.9);">🌍 Where culture and art meet</div>
@@ -827,9 +842,9 @@
 
         <div id="successMsg">
           <div class="success-icon">✓</div>
-          <h4 style="font-weight:800;font-size:1.4rem;margin-bottom:10px;">Заявка принята!</h4>
-          <p style="color:rgba(255,255,255,.5);">Мы свяжемся с вами в ближайшее время.</p>
-          <button onclick="resetForm()" class="btn-nav mt-4" style="border:none;cursor:pointer;">
+          <h4 style="font-weight:800;font-size:1.4rem;margin-bottom:10px;" data-i18n="success.title">Заявка принята!</h4>
+          <p style="color:rgba(255,255,255,.5);" data-i18n="success.msg">Мы свяжемся с вами в ближайшее время.</p>
+          <button onclick="resetForm()" class="btn-nav mt-4" style="border:none;cursor:pointer;" data-i18n="success.btn">
             Отправить ещё одну
           </button>
         </div>
@@ -837,53 +852,53 @@
         <form id="regForm" onsubmit="handleSubmit(event)">
           <div class="row g-3">
             <div class="col-md-6">
-              <label class="form-label">Имя и фамилия *</label>
-              <input type="text" class="form-control" name="name" placeholder="Айгерим Сейткали" required>
+              <label class="form-label" data-i18n="form.name.label">Имя и фамилия *</label>
+              <input type="text" class="form-control" name="name" placeholder="Айгерим Сейткали" required data-i18n-placeholder="form.name.ph">
             </div>
             <div class="col-md-6">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-control" name="email" placeholder="email@example.com">
+              <label class="form-label" data-i18n="form.email.label">Email</label>
+              <input type="email" class="form-control" name="email" placeholder="email@example.com" data-i18n-placeholder="form.email.ph">
             </div>
             <div class="col-md-6">
-              <label class="form-label">Телефон</label>
-              <input type="tel" class="form-control" name="phone" placeholder="+7 (___) ___-__-__">
+              <label class="form-label" data-i18n="form.phone.label">Телефон</label>
+              <input type="tel" class="form-control" name="phone" placeholder="+7 (___) ___-__-__" data-i18n-placeholder="form.phone.ph">
             </div>
             <div class="col-md-6">
-              <label class="form-label">Организация</label>
-              <input type="text" class="form-control" name="organization" placeholder="Название организации">
+              <label class="form-label" data-i18n="form.org.label">Организация</label>
+              <input type="text" class="form-control" name="organization" placeholder="Название организации" data-i18n-placeholder="form.org.ph">
             </div>
             <div class="col-12">
-              <label class="form-label">Мероприятие *</label>
+              <label class="form-label" data-i18n="form.event.label">Мероприятие *</label>
               <select class="form-select" name="event" required>
                 <option value="" disabled selected>Выберите мероприятие</option>
-                <option selected>🎵 Арбат Астана Арт Фест — Арбат Астана Арт Фест (18–19 июл 2026)</option>
+                <option selected data-i18n="form.event.opt">🎵 Арбат Астана Арт Фест (18–19 июл 2026)</option>
               </select>
             </div>
             <div class="col-12">
-              <label class="form-label">Категория участника</label>
+              <label class="form-label" data-i18n="form.cat.label">Категория участника</label>
               <div class="type-cards">
                 <input class="type-radio" type="radio" name="type" id="t1" value="Артист" checked>
-                <label class="type-label" for="t1">🎭 Артист</label>
+                <label class="type-label" for="t1" data-i18n="type.t1">🎭 Артист</label>
                 <input class="type-radio" type="radio" name="type" id="t2" value="Музыкант">
-                <label class="type-label" for="t2">🎸 Музыкант</label>
+                <label class="type-label" for="t2" data-i18n="type.t2">🎸 Музыкант</label>
                 <input class="type-radio" type="radio" name="type" id="t3" value="Танцор">
-                <label class="type-label" for="t3">💃 Танцор</label>
+                <label class="type-label" for="t3" data-i18n="type.t3">💃 Танцор</label>
                 <input class="type-radio" type="radio" name="type" id="t4" value="Вокалист">
-                <label class="type-label" for="t4">🎤 Вокалист</label>
+                <label class="type-label" for="t4" data-i18n="type.t4">🎤 Вокалист</label>
                 <input class="type-radio" type="radio" name="type" id="t5" value="Группа">
-                <label class="type-label" for="t5">🎶 Группа</label>
+                <label class="type-label" for="t5" data-i18n="type.t5">🎶 Группа</label>
                 <input class="type-radio" type="radio" name="type" id="t6" value="Другое">
-                <label class="type-label" for="t6">✨ Другое</label>
+                <label class="type-label" for="t6" data-i18n="type.t6">✨ Другое</label>
                 <input class="type-radio" type="radio" name="type" id="t7" value="Гость">
-                <label class="type-label" for="t7">👤 Гость</label>
+                <label class="type-label" for="t7" data-i18n="type.t7">👤 Гость</label>
                 <input class="type-radio" type="radio" name="type" id="t8" value="Детский коллектив">
-                <label class="type-label" for="t8">🧒 Детский коллектив</label>
+                <label class="type-label" for="t8" data-i18n="type.t8">🧒 Детский коллектив</label>
                 <input class="type-radio" type="radio" name="type" id="t9" value="Художник">
-                <label class="type-label" for="t9">🎨 Художник</label>
+                <label class="type-label" for="t9" data-i18n="type.t9">🎨 Художник</label>
               </div>
             </div>
             <div class="col-md-6">
-              <label class="form-label">Язык общения</label>
+              <label class="form-label" data-i18n="form.lang.label">Язык общения</label>
               <select class="form-select" name="language">
                 <option>Русский</option>
                 <option>English</option>
@@ -892,12 +907,12 @@
               </select>
             </div>
             <div class="col-md-6">
-              <label class="form-label">Примечание</label>
-              <input type="text" class="form-control" name="notes" placeholder="Дополнительная информация...">
+              <label class="form-label" data-i18n="form.notes.label">Примечание</label>
+              <input type="text" class="form-control" name="notes" placeholder="Дополнительная информация..." data-i18n-placeholder="form.notes.ph">
             </div>
             <div class="col-12 mt-2">
               <button type="submit" class="btn-submit">
-                <i class="bi bi-check2-circle me-2"></i>Отправить заявку
+                <i class="bi bi-check2-circle me-2"></i><span data-i18n="form.submit">Отправить заявку</span>
               </button>
             </div>
           </div>
@@ -911,7 +926,7 @@
 <section id="past" style="padding:80px 0;background:#030B18;">
   <div class="container">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:40px;">
-      <div style="font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#8AAABB;">Прошедшие мероприятия</div>
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#8AAABB;" data-i18n="past.label">Прошедшие мероприятия</div>
       <div style="flex:1;height:1px;background:rgba(0,201,232,.15);"></div>
     </div>
     <div class="row g-4 justify-content-center">
@@ -920,15 +935,15 @@
           <div class="ev-top" style="background:linear-gradient(135deg,#B22234 0%,#3C3B6E 100%);position:relative;">
             <span style="position:absolute;top:14px;right:14px;font-size:.65rem;font-weight:700;letter-spacing:1.5px;background:rgba(0,0,0,.45);color:rgba(255,255,255,.7);padding:3px 10px;border-radius:50px;text-transform:uppercase;">Прошло</span>
             <span class="ev-emoji">🇺🇸</span>
-            <div class="ev-name">250 лет независимости США</div>
-            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>3 июля 2026</div>
+            <div class="ev-name" data-i18n="past.usa.name">250 лет независимости США</div>
+            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i><span data-i18n="past.usa.date">3 июля 2026</span></div>
           </div>
           <div class="ev-body">
-            <p class="ev-desc">Торжественное мероприятие в честь 250-летия провозглашения независимости США. Культура, история и дипломатия на Арбате.</p>
+            <p class="ev-desc" data-i18n="past.usa.desc">Торжественное мероприятие в честь 250-летия провозглашения независимости США. Культура, история и дипломатия на Арбате.</p>
             <div class="ev-venue"><i class="bi bi-geo-alt me-1"></i>Арбат Астана</div>
             <div style="margin-bottom:14px;"><span class="ev-tag">дипломатия</span><span class="ev-tag">США</span><span class="ev-tag">юбилей</span></div>
             <button onclick="openUSAGallery()" class="ev-btn" style="background:rgba(178,34,52,.2);border-color:rgba(178,34,52,.5);color:#fff;cursor:pointer;">
-              <i class="bi bi-images me-1"></i>Фото и видео →
+              <i class="bi bi-images me-1"></i><span data-i18n="past.usa.btn">Фото и видео →</span>
             </button>
           </div>
         </div>
@@ -944,25 +959,25 @@
       <div class="col-lg-4">
         <div class="footer-logo-main">ARBAT ASTANA ART FEST</div>
         <div class="footer-logo-sub">events platform</div>
-        <p class="footer-desc">
+        <p class="footer-desc" data-i18n="footer.desc">
           Культурные, дипломатические и социальные мероприятия Казахстана.
         </p>
       </div>
       <div class="col-lg-2 offset-lg-2">
-        <div class="footer-head">Мероприятия</div>
-        <a href="#events" class="footer-link">🎵 Фестиваль музыки и танца</a>
-        <a href="#events" class="footer-link">🇺🇸 250 лет независимости США</a>
+        <div class="footer-head" data-i18n="footer.events">Мероприятия</div>
+        <a href="#events" class="footer-link" data-i18n="footer.link1">🎵 Фестиваль музыки и танца</a>
+        <a href="#events" class="footer-link" data-i18n="footer.link2">🇺🇸 250 лет независимости США</a>
       </div>
       <div class="col-lg-2">
-        <div class="footer-head">Навигация</div>
-        <a href="#top" class="footer-link">Главная</a>
-        <a href="#events" class="footer-link">Мероприятия</a>
-        <a href="#about" class="footer-link">О фесте</a>
-        <a href="#register" class="footer-link">Регистрация</a>
+        <div class="footer-head" data-i18n="footer.nav">Навигация</div>
+        <a href="#top" class="footer-link" data-i18n="footer.nav1">Главная</a>
+        <a href="#events" class="footer-link" data-i18n="footer.nav2">Мероприятия</a>
+        <a href="#about" class="footer-link" data-i18n="footer.nav3">О фесте</a>
+        <a href="#register" class="footer-link" data-i18n="footer.nav4">Регистрация</a>
       </div>
     </div>
     <hr class="footer-divider">
-    <p class="footer-copy">© 2024 Arbat Astana Fest · Все права защищены</p>
+    <p class="footer-copy" data-i18n="footer.copy">© 2024 Arbat Astana Fest · Все права защищены</p>
   </div>
 </footer>
 
@@ -1135,6 +1150,212 @@
   /* continuous */
   setInterval(spawnNote, 1100);
   setInterval(spawnBal,  4200);
+})();
+
+/* ── I18N ────────────────────────────────────────────── */
+const GRAD_ABOUT = `style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#00C9E8,#00E5B4);-webkit-background-clip:text;background-clip:text;"`;
+const GRAD_ORG   = `style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#FF6B8A,#00C9E8);-webkit-background-clip:text;background-clip:text;"`;
+const GRAD_REG   = `style="background:linear-gradient(90deg,#00C9E8,#00E5B4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"`;
+
+const translations = {
+  ru: {
+    'nav.events':'Мероприятия','nav.upcoming':'🎵 Предстоящие','nav.past':'🕐 Прошедшие',
+    'nav.about':'О фестивале','nav.organizers':'Организаторы','nav.register':'Регистрация',
+    'hero.eyebrow':'18–19 июля 2026 · Арбат Астана',
+    'hero.desc':'Два дня живых выступлений на Арбат Арт Фест. Музыканты, артисты и группы на одной сцене под открытым небом.',
+    'hero.btn1':'Подать заявку','hero.btn2':'Программа фестиваля →',
+    'events.eyebrow':'Программа · Июль 2026',
+    'events.title':'Мероприятия <span>на Арбате</span>',
+    'events.register':'Зарегистрироваться на событие',
+    'ev.name':'Арбат Астана Арт Фест','ev.date':'18–19 июля 2026',
+    'ev.desc':'Два дня живых выступлений на Арбат Арт Фест. Музыканты, артисты, группы и исполнители на одной сцене.',
+    'ev.venue':'Арбат Астана','ev.btn':'Подать заявку →',
+    'about.eyebrow':'О фестивале',
+    'about.title':`Арбат Астана — <span ${GRAD_ABOUT}>сцена для творчества</span>`,
+    'about.subtitle':'ART Фестиваль музыки и танца — открытая площадка для артистов, музыкантов, танцоров и художников в самом сердце Астаны.',
+    'about.music.title':'Живая музыка','about.music.text':'Оркестры, ансамбли, группы и вокалисты — живые выступления на открытой сцене Арбата.',
+    'about.dance.title':'Танец','about.dance.text':'Балет, contemporary, народные и эстрадные танцы — все стили на одной площадке.',
+    'about.art.title':'Визуальное искусство','about.art.text':'Художники, скульпторы и арт-перформеры представляют работы прямо на улице.',
+    'about.kids.title':'Детские коллективы','about.kids.text':'Специальная программа для детских коллективов.',
+    'about.venue.title':'Место проведения','about.venue.text':'Арбат Астана — главная пешеходная артерия столицы, в центре культурной жизни города.',
+    'about.dates.title':'Даты фестиваля','about.dates.text':'18–19 июля 2026. Два дня с утра до вечера — непрерывная программа и живые выступления.',
+    'about.mission.title':'Миссия','about.mission.text':'Объединить артистов Казахстана и зарубежных гостей, сделать искусство доступным для каждого.',
+    'about.quote':'«Арбат Арт Фест — это не просто мероприятие. Это пространство, где рождается новое казахстанское искусство.»',
+    'org.eyebrow':'Команда',
+    'org.title':`<span ${GRAD_ORG}>Организаторы</span> фестиваля`,
+    'org.desc':'Команда профессионалов, которая создаёт атмосферу праздника и культуры на Арбате.',
+    'org.art.name':'Арт-дирекция','org.art.desc':'Формирование программы, отбор участников и общая концепция фестиваля.',
+    'org.pr.name':'PR и партнёры','org.pr.role':'Коммуникации','org.pr.desc':'Работа со СМИ, посольствами, спонсорами и партнёрскими организациями.',
+    'org.coord.name':'Координация','org.coord.role':'Операционный менеджмент','org.coord.desc':'Регистрация участников, расписание выступлений и логистика мероприятия.',
+    'org.partner':'Хотите стать партнёром или волонтёром?','org.partner.btn':'Написать нам →',
+    'reg.eyebrow':'Присоединяйтесь',
+    'reg.title':'Оставить <span>заявку</span>',
+    'reg.subtitle':'Заполните форму — мы свяжемся в течение 24 часов',
+    'reg.header':'Регистрация участника','reg.location':'Арбат Астана · Казахстан',
+    'form.name.label':'Имя и фамилия *','form.name.ph':'Айгерим Сейткали',
+    'form.email.label':'Email','form.email.ph':'email@example.com',
+    'form.phone.label':'Телефон','form.phone.ph':'+7 (___) ___-__-__',
+    'form.org.label':'Организация','form.org.ph':'Название организации',
+    'form.event.label':'Мероприятие *','form.event.opt':'🎵 Арбат Астана Арт Фест (18–19 июл 2026)',
+    'form.cat.label':'Категория участника','form.lang.label':'Язык общения',
+    'form.notes.label':'Примечание','form.notes.ph':'Дополнительная информация...',
+    'form.submit':'Отправить заявку',
+    'type.t1':'🎭 Артист','type.t2':'🎸 Музыкант','type.t3':'💃 Танцор','type.t4':'🎤 Вокалист',
+    'type.t5':'🎶 Группа','type.t6':'✨ Другое','type.t7':'👤 Гость','type.t8':'🧒 Детский коллектив','type.t9':'🎨 Художник',
+    'success.title':'Заявка принята!','success.msg':'Мы свяжемся с вами в ближайшее время.','success.btn':'Отправить ещё одну',
+    'past.label':'Прошедшие мероприятия',
+    'past.usa.name':'250 лет независимости США','past.usa.date':'3 июля 2026',
+    'past.usa.desc':'Торжественное мероприятие в честь 250-летия провозглашения независимости США. Культура, история и дипломатия на Арбате.',
+    'past.usa.btn':'Фото и видео →',
+    'footer.desc':'Культурные, дипломатические и социальные мероприятия Казахстана.',
+    'footer.events':'Мероприятия','footer.link1':'🎵 Фестиваль музыки и танца','footer.link2':'🇺🇸 250 лет независимости США',
+    'footer.nav':'Навигация','footer.nav1':'Главная','footer.nav2':'Мероприятия','footer.nav3':'О фесте','footer.nav4':'Регистрация',
+    'footer.copy':'© 2026 Arbat Astana Fest · Все права защищены',
+  },
+  kz: {
+    'nav.events':'Іс-шаралар','nav.upcoming':'🎵 Алдағы','nav.past':'🕐 Өткендер',
+    'nav.about':'Фестиваль туралы','nav.organizers':'Ұйымдастырушылар','nav.register':'Тіркелу',
+    'hero.eyebrow':'18–19 шілде 2026 · Арбат Астана',
+    'hero.desc':'Арбат Арт Фестте екі күн тікелей концерт. Музыканттар, артистер және топтар бір сахнада ашық аспан астында.',
+    'hero.btn1':'Өтінім беру','hero.btn2':'Фестиваль бағдарламасы →',
+    'events.eyebrow':'Бағдарлама · Шілде 2026',
+    'events.title':'Арбаттағы <span>іс-шаралар</span>',
+    'events.register':'Іс-шараға тіркелу',
+    'ev.name':'Арбат Астана Арт Фест','ev.date':'18–19 шілде 2026',
+    'ev.desc':'Арбат Арт Фестте екі күн тікелей концерт. Музыканттар, артистер, топтар мен орындаушылар бір сахнада.',
+    'ev.venue':'Арбат Астана','ev.btn':'Өтінім беру →',
+    'about.eyebrow':'Фестиваль туралы',
+    'about.title':`Арбат Астана — <span ${GRAD_ABOUT}>шығармашылық сахнасы</span>`,
+    'about.subtitle':'Музыка және би ART фестивалі — Астананың жүрегіндегі артистер, музыканттар, биші және суретшілерге арналған ашық алаң.',
+    'about.music.title':'Тікелей музыка','about.music.text':'Оркестрлер, ансамблдер, топтар және вокалистер — Арбаттың ашық сахнасындағы тікелей концерттер.',
+    'about.dance.title':'Би','about.dance.text':'Балет, contemporary, халық және эстрадалық билер — барлық стильдер бір алаңда.',
+    'about.art.title':'Визуалды өнер','about.art.text':'Суретшілер, мүсіншілер және арт-перформерлер өз жұмыстарын тікелей көшеде ұсынады.',
+    'about.kids.title':'Балалар ұжымдары','about.kids.text':'Балалар ұжымдарына арналған арнайы бағдарлама.',
+    'about.venue.title':'Өткізу орны','about.venue.text':'Арбат Астана — қаланың мәдени өміріндегі орталық пешеходтық артерия.',
+    'about.dates.title':'Фестиваль күндері','about.dates.text':'18–19 шілде 2026. Екі күн таңнан кешке дейін — үздіксіз бағдарлама мен тікелей концерттер.',
+    'about.mission.title':'Миссия','about.mission.text':'Қазақстан артистері мен шетелдік қонақтарды біріктіру, өнерді баршаға қолжетімді ету.',
+    'about.quote':'«Арбат Арт Фест — бұл жай ғана іс-шара емес. Бұл жаңа қазақстандық өнер дүниеге келетін кеңістік.»',
+    'org.eyebrow':'Топ',
+    'org.title':`<span ${GRAD_ORG}>Ұйымдастырушылар</span> фестивалі`,
+    'org.desc':'Арбаттағы мейрам мен мәдениет атмосферасын жасайтын кәсіпқойлар командасы.',
+    'org.art.name':'Арт-дирекция','org.art.desc':'Бағдарламаны қалыптастыру, қатысушыларды іріктеу және фестивальдің жалпы тұжырымдамасы.',
+    'org.pr.name':'PR және серіктестер','org.pr.role':'Коммуникациялар','org.pr.desc':'БАҚ, елшіліктер, демеушілер және серіктестік ұйымдармен жұмыс.',
+    'org.coord.name':'Үйлестіру','org.coord.role':'Операциялық менеджмент','org.coord.desc':'Қатысушыларды тіркеу, орындау кестесі және іс-шара логистикасы.',
+    'org.partner':'Серіктес немесе волонтер болғыңыз келе ме?','org.partner.btn':'Бізге жазу →',
+    'reg.eyebrow':'Қосылыңыз',
+    'reg.title':'Өтінім <span>беру</span>',
+    'reg.subtitle':'Форманы толтырыңыз — 24 сағат ішінде хабарласамыз',
+    'reg.header':'Қатысушыны тіркеу','reg.location':'Арбат Астана · Қазақстан',
+    'form.name.label':'Аты-жөні *','form.name.ph':'Айгерім Сейткали',
+    'form.email.label':'Email','form.email.ph':'email@example.com',
+    'form.phone.label':'Телефон','form.phone.ph':'+7 (___) ___-__-__',
+    'form.org.label':'Ұйым','form.org.ph':'Ұйым атауы',
+    'form.event.label':'Іс-шара *','form.event.opt':'🎵 Арбат Астана Арт Фест (18–19 шіл 2026)',
+    'form.cat.label':'Қатысушы санаты','form.lang.label':'Байланыс тілі',
+    'form.notes.label':'Ескертпе','form.notes.ph':'Қосымша ақпарат...',
+    'form.submit':'Өтінім жіберу',
+    'type.t1':'🎭 Артист','type.t2':'🎸 Музыкант','type.t3':'💃 Биші','type.t4':'🎤 Вокалист',
+    'type.t5':'🎶 Топ','type.t6':'✨ Басқа','type.t7':'👤 Қонақ','type.t8':'🧒 Бала ұжымы','type.t9':'🎨 Суретші',
+    'success.title':'Өтінім қабылданды!','success.msg':'Жақын арада сізбен хабарласамыз.','success.btn':'Тағы бір өтінім жіберу',
+    'past.label':'Өткен іс-шаралар',
+    'past.usa.name':'АҚШ тәуелсіздігінің 250 жылдығы','past.usa.date':'3 шілде 2026',
+    'past.usa.desc':'АҚШ тәуелсіздігінің 250 жылдығын мерекелеу. Арбаттағы мәдениет, тарих және дипломатия.',
+    'past.usa.btn':'Фото және бейне →',
+    'footer.desc':'Қазақстанның мәдени, дипломатиялық және әлеуметтік іс-шаралары.',
+    'footer.events':'Іс-шаралар','footer.link1':'🎵 Музыка және би фестивалі','footer.link2':'🇺🇸 АҚШ тәуелсіздігінің 250 жылдығы',
+    'footer.nav':'Навигация','footer.nav1':'Басты','footer.nav2':'Іс-шаралар','footer.nav3':'Фест туралы','footer.nav4':'Тіркелу',
+    'footer.copy':'© 2026 Arbat Astana Fest · Барлық құқықтар қорғалған',
+  },
+  en: {
+    'nav.events':'Events','nav.upcoming':'🎵 Upcoming','nav.past':'🕐 Past Events',
+    'nav.about':'About','nav.organizers':'Organizers','nav.register':'Register',
+    'hero.eyebrow':'July 18–19, 2026 · Arbat Astana',
+    'hero.desc':'Two days of live performances at Arbat Art Fest. Musicians, artists and bands on one stage under the open sky.',
+    'hero.btn1':'Apply Now','hero.btn2':'Festival Program →',
+    'events.eyebrow':'Program · July 2026',
+    'events.title':'Events <span>at Arbat</span>',
+    'events.register':'Register for the Event',
+    'ev.name':'Arbat Astana Art Fest','ev.date':'July 18–19, 2026',
+    'ev.desc':'Two days of live performances at Arbat Art Fest. Musicians, artists, bands and performers on one stage.',
+    'ev.venue':'Arbat Astana','ev.btn':'Apply →',
+    'about.eyebrow':'About the Festival',
+    'about.title':`Arbat Astana — <span ${GRAD_ABOUT}>a stage for creativity</span>`,
+    'about.subtitle':'ART Festival of Music and Dance — an open platform for artists, musicians, dancers and visual artists in the heart of Astana.',
+    'about.music.title':'Live Music','about.music.text':'Orchestras, ensembles, bands and vocalists — live performances on Arbat\'s open stage.',
+    'about.dance.title':'Dance','about.dance.text':'Ballet, contemporary, folk and pop dances — all styles on one platform.',
+    'about.art.title':'Visual Art','about.art.text':'Painters, sculptors and art performers present their works right on the street.',
+    'about.kids.title':'Children\'s Groups','about.kids.text':'A special program for children\'s performing groups.',
+    'about.venue.title':'Venue','about.venue.text':'Arbat Astana — the main pedestrian artery of the capital, at the center of the city\'s cultural life.',
+    'about.dates.title':'Festival Dates','about.dates.text':'July 18–19, 2026. Two days from morning to evening — a continuous program and live performances.',
+    'about.mission.title':'Mission','about.mission.text':'To unite artists from Kazakhstan and international guests, making art accessible to everyone.',
+    'about.quote':'«Arbat Art Fest is not just an event. It is a space where new Kazakhstani art is born.»',
+    'org.eyebrow':'Team',
+    'org.title':`<span ${GRAD_ORG}>Organizers</span> of the Festival`,
+    'org.desc':'A team of professionals creating a celebration and cultural atmosphere on Arbat.',
+    'org.art.name':'Art Direction','org.art.desc':'Program formation, participant selection and the overall festival concept.',
+    'org.pr.name':'PR & Partners','org.pr.role':'Communications','org.pr.desc':'Working with media, embassies, sponsors and partner organizations.',
+    'org.coord.name':'Coordination','org.coord.role':'Operations Management','org.coord.desc':'Participant registration, performance scheduling and event logistics.',
+    'org.partner':'Want to become a partner or volunteer?','org.partner.btn':'Contact us →',
+    'reg.eyebrow':'Join Us',
+    'reg.title':'Submit <span>an Application</span>',
+    'reg.subtitle':'Fill out the form — we\'ll get back to you within 24 hours',
+    'reg.header':'Participant Registration','reg.location':'Arbat Astana · Kazakhstan',
+    'form.name.label':'Full Name *','form.name.ph':'Your full name',
+    'form.email.label':'Email','form.email.ph':'email@example.com',
+    'form.phone.label':'Phone','form.phone.ph':'+7 (___) ___-__-__',
+    'form.org.label':'Organization','form.org.ph':'Organization name',
+    'form.event.label':'Event *','form.event.opt':'🎵 Arbat Astana Art Fest (Jul 18–19, 2026)',
+    'form.cat.label':'Participant Category','form.lang.label':'Language',
+    'form.notes.label':'Notes','form.notes.ph':'Additional information...',
+    'form.submit':'Submit Application',
+    'type.t1':'🎭 Artist','type.t2':'🎸 Musician','type.t3':'💃 Dancer','type.t4':'🎤 Vocalist',
+    'type.t5':'🎶 Band','type.t6':'✨ Other','type.t7':'👤 Guest','type.t8':'🧒 Children\'s Group','type.t9':'🎨 Visual Artist',
+    'success.title':'Application Submitted!','success.msg':'We will contact you shortly.','success.btn':'Submit Another',
+    'past.label':'Past Events',
+    'past.usa.name':'250 Years of US Independence','past.usa.date':'July 3, 2026',
+    'past.usa.desc':'Celebration of the 250th anniversary of US independence. Culture, history and diplomacy on Arbat.',
+    'past.usa.btn':'Photos & Video →',
+    'footer.desc':'Cultural, diplomatic and social events of Kazakhstan.',
+    'footer.events':'Events','footer.link1':'🎵 Music & Dance Festival','footer.link2':'🇺🇸 250 Years of US Independence',
+    'footer.nav':'Navigation','footer.nav1':'Home','footer.nav2':'Events','footer.nav3':'About','footer.nav4':'Register',
+    'footer.copy':'© 2026 Arbat Astana Fest · All rights reserved',
+  }
+};
+
+function setLang(lang) {
+  const t = translations[lang];
+  // text
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (t[k] !== undefined) el.textContent = t[k];
+  });
+  // html (for gradient spans etc)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const k = el.getAttribute('data-i18n-html');
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  // placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const k = el.getAttribute('data-i18n-placeholder');
+    if (t[k] !== undefined) el.placeholder = t[k];
+  });
+  // option text
+  document.querySelectorAll('option[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (t[k] !== undefined) el.textContent = t[k];
+  });
+  // active button
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('btn-' + lang);
+  if (btn) btn.classList.add('active');
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+}
+
+// Init on load
+(function() {
+  const saved = localStorage.getItem('lang') || 'ru';
+  setLang(saved);
 })();
 </script>
 </body>
