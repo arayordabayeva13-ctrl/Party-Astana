@@ -379,16 +379,47 @@
 
     /* ── RESPONSIVE ─────────────────────────────────────── */
     @media(max-width:991px) {
-      .hero-visual { display: none; }
-      .hero { min-height: auto; padding: 100px 0 60px; }
+      .hero { min-height: auto; padding: 80px 0 50px; }
+      .events-section, .about-section, .fest-about, .org-section, .register-section { padding: 70px 0; }
     }
     @media(max-width:767px) {
+      /* Navbar */
+      .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.85)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+      .navbar-collapse { background: rgba(21,40,64,.98); border-radius: 16px; margin-top: 12px; padding: 16px; border: 1px solid rgba(0,201,232,.15); }
+
+      /* Hero */
+      .hero { padding: 70px 0 40px; }
       .hero-title { letter-spacing: -1px; }
-      .hero-stats { gap: 24px; }
-      .reg-top, .reg-body { padding: 28px 24px; }
-      .about-card { padding: 32px 24px; }
-      .hero-btns { flex-direction: column; }
-      .btn-primary-hero, .btn-secondary-hero { text-align: center; }
+      .hero-eyebrow { font-size: .7rem; padding: 6px 14px; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn-primary-hero, .btn-secondary-hero { text-align: center; width: 100%; max-width: 320px; }
+
+      /* Trilingual slogan */
+      .hero-slogan-text { font-size: 1rem !important; }
+
+      /* Event card → column on mobile */
+      .ev-card-horiz { flex-direction: column !important; }
+      .ev-top-horiz { min-width: unset !important; width: 100% !important; }
+
+      /* Sections */
+      .events-section, .about-section, .fest-about, .org-section, .register-section { padding: 55px 0; }
+      .reg-top, .reg-body { padding: 28px 20px; }
+      .about-card { padding: 28px 20px; }
+      .reg-wrap { border-radius: 20px; }
+      .fest-card { padding: 24px 20px; }
+
+      /* Registration type buttons */
+      .type-label { min-width: 70px; font-size: .75rem; padding: 9px 6px; }
+
+      /* Footer */
+      footer { padding: 44px 0 24px; }
+      .footer-desc { max-width: 100%; }
+    }
+    @media(max-width:480px) {
+      .hero-title { font-size: clamp(2.2rem, 12vw, 3.5rem); }
+      .hero-slogan-text { font-size: .9rem !important; }
+      .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+      .reg-top h3 { font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -450,16 +481,16 @@
         <!-- Tagline trilingual -->
         <div style="margin-bottom:32px;display:flex;flex-direction:column;gap:14px;align-items:center;">
           <div style="display:flex;align-items:center;gap:14px;">
-            <span style="font-size:.75rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:28px;">KZ</span>
-            <span style="font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:.3px;">Мәдениет пен өнер кездесетін жер</span>
+            <span style="font-size:.75rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:28px;flex-shrink:0;">KZ</span>
+            <span class="hero-slogan-text" style="font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:.3px;">Мәдениет пен өнер кездесетін жер</span>
           </div>
           <div style="display:flex;align-items:center;gap:14px;">
-            <span style="font-size:.75rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:28px;">EN</span>
-            <span style="font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.3px;">Where culture and art meet</span>
+            <span style="font-size:.75rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:28px;flex-shrink:0;">EN</span>
+            <span class="hero-slogan-text" style="font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.3px;">Where culture and art meet</span>
           </div>
           <div style="display:flex;align-items:center;gap:14px;">
-            <span style="font-size:.75rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:28px;">RU</span>
-            <span style="font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.3px;">Место, где встречается культура и искусство</span>
+            <span style="font-size:.75rem;font-weight:800;letter-spacing:2px;color:#00C9E8;min-width:28px;flex-shrink:0;">RU</span>
+            <span class="hero-slogan-text" style="font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.3px;">Место, где встречается культура и искусство</span>
           </div>
         </div>
 
@@ -497,8 +528,8 @@
 
       <!-- ГЛАВНАЯ КАРТОЧКА ФЕСТИВАЛЯ -->
       <div class="col-12">
-        <div class="ev-card" style="flex-direction:row;min-height:200px;">
-          <div class="ev-top" style="background:linear-gradient(135deg,#00C9E8 0%,#00E5B4 60%,#FF6B8A 100%);min-width:260px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
+        <div class="ev-card ev-card-horiz" style="flex-direction:row;min-height:200px;">
+          <div class="ev-top ev-top-horiz" style="background:linear-gradient(135deg,#00C9E8 0%,#00E5B4 60%,#FF6B8A 100%);min-width:260px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
             <span class="ev-emoji" style="font-size:3rem;">🎵</span>
             <div class="ev-name" style="font-size:1.15rem;">Арбат Астана Арт Фест</div>
             <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>18–19 июля 2026</div>
