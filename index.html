@@ -501,37 +501,50 @@
         </div>
       </div>
 
-      <div class="col-lg-5 col-md-6">
-        <div class="ev-card">
-          <div class="ev-top" style="background:linear-gradient(135deg,#1ABC9C 0%,#2980B9 100%);">
-            <span class="ev-emoji">🏙️</span>
-            <div class="ev-name">День города Астаны</div>
-            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>6–7 июля 2026</div>
-          </div>
-          <div class="ev-body">
-            <p class="ev-desc">Масштабный городской праздник: парад, концерты, выставки, спорт и фейерверк для всей семьи.</p>
-            <div class="ev-venue"><i class="bi bi-geo-alt me-1"></i>Площадь Независимости и EXPO</div>
-            <div><span class="ev-tag">город</span><span class="ev-tag">праздник</span><span class="ev-tag">семья</span></div>
-            <a href="#register" class="ev-btn w-100">Зарегистрироваться →</a>
-          </div>
-        </div>
-      </div>
+    </div>
 
-      <div class="col-lg-5 col-md-6">
-        <div class="ev-card">
-          <div class="ev-top" style="background:linear-gradient(135deg,#B22234 0%,#3C3B6E 100%);">
-            <span class="ev-emoji">🇺🇸</span>
-            <div class="ev-name">250 лет независимости США</div>
-            <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>3 июля 2026</div>
-          </div>
-          <div class="ev-body">
-            <p class="ev-desc">Торжественное мероприятие в честь 250-летия провозглашения независимости Соединённых Штатов Америки. Культура, история и дипломатия на Арбате.</p>
-            <div class="ev-venue"><i class="bi bi-geo-alt me-1"></i>Арбат, Астана</div>
-            <div><span class="ev-tag">дипломатия</span><span class="ev-tag">США</span><span class="ev-tag">юбилей</span></div>
-            <a href="#register" class="ev-btn w-100" style="border-color:rgba(178,34,52,.5);color:#fff;">Зарегистрироваться →</a>
+    <!-- ПРОШЕДШИЕ МЕРОПРИЯТИЯ -->
+    <div style="margin-top:56px;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+        <div style="font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);">Прошедшие мероприятия</div>
+        <div style="flex:1;height:1px;background:rgba(255,255,255,.07);"></div>
+      </div>
+      <div class="row g-4 justify-content-center">
+
+        <div class="col-lg-5 col-md-6">
+          <div class="ev-card" style="opacity:.65;filter:saturate(.5);">
+            <div class="ev-top" style="background:linear-gradient(135deg,#1ABC9C 0%,#2980B9 100%);position:relative;">
+              <span style="position:absolute;top:14px;right:14px;font-size:.65rem;font-weight:700;letter-spacing:1.5px;background:rgba(0,0,0,.45);color:rgba(255,255,255,.7);padding:3px 10px;border-radius:50px;text-transform:uppercase;">Прошло</span>
+              <span class="ev-emoji">🏙️</span>
+              <div class="ev-name">День города Астаны</div>
+              <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>6–7 июля 2026</div>
+            </div>
+            <div class="ev-body">
+              <p class="ev-desc">Масштабный городской праздник: парад, концерты, выставки, спорт и фейерверк для всей семьи.</p>
+              <div class="ev-venue"><i class="bi bi-geo-alt me-1"></i>Площадь Независимости и EXPO</div>
+              <div><span class="ev-tag">город</span><span class="ev-tag">праздник</span><span class="ev-tag">семья</span></div>
+            </div>
           </div>
         </div>
+
+        <div class="col-lg-5 col-md-6">
+          <div class="ev-card" style="opacity:.65;filter:saturate(.5);">
+            <div class="ev-top" style="background:linear-gradient(135deg,#B22234 0%,#3C3B6E 100%);position:relative;">
+              <span style="position:absolute;top:14px;right:14px;font-size:.65rem;font-weight:700;letter-spacing:1.5px;background:rgba(0,0,0,.45);color:rgba(255,255,255,.7);padding:3px 10px;border-radius:50px;text-transform:uppercase;">Прошло</span>
+              <span class="ev-emoji">🇺🇸</span>
+              <div class="ev-name">250 лет независимости США</div>
+              <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>3 июля 2026</div>
+            </div>
+            <div class="ev-body">
+              <p class="ev-desc">Торжественное мероприятие в честь 250-летия провозглашения независимости США. Культура, история и дипломатия на Арбате.</p>
+              <div class="ev-venue"><i class="bi bi-geo-alt me-1"></i>Арбат, Астана</div>
+              <div><span class="ev-tag">дипломатия</span><span class="ev-tag">США</span><span class="ev-tag">юбилей</span></div>
+            </div>
+          </div>
+        </div>
+
       </div>
+    </div>
 
     </div>
   </div>
@@ -710,8 +723,6 @@
               <select class="form-select" name="event" required>
                 <option value="" disabled selected>Выберите мероприятие</option>
                 <option selected>🎵 Арбат Астана Фест — фестиваль музыки и танца (18–19 июл 2026)</option>
-                <option>🇺🇸 250 лет независимости США (3 июл 2026)</option>
-                <option>🏙️ День города Астаны (6–7 июл 2026)</option>
               </select>
             </div>
             <div class="col-12">
