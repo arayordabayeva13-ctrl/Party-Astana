@@ -10,41 +10,41 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #FFFFFF; color: #0B1E35; }
+    body { font-family: 'Inter', sans-serif; background: #050E1C; color: #fff; }
 
     /* ── NAVBAR ─────────────────────────────────────────── */
     .navbar {
-      background: rgba(255,255,255,.95);
+      background: rgba(5,14,28,.95);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0,153,255,.15);
+      border-bottom: 1px solid rgba(0,201,232,.15);
       padding: 16px 0;
       position: sticky; top: 0; z-index: 200;
-      box-shadow: 0 2px 24px rgba(0,153,255,.08);
+      box-shadow: 0 2px 24px rgba(0,0,0,.3);
     }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo-icon {
       width: 38px; height: 38px; border-radius: 10px;
-      background: linear-gradient(135deg, #0099FF, #FF3366);
+      background: linear-gradient(135deg, #00C9E8, #FF6B8A);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.1rem; font-weight: 900; color: #fff; letter-spacing: -1px;
     }
     .nav-logo-text { line-height: 1; }
-    .nav-logo-main { font-size: 1rem; font-weight: 900; letter-spacing: 2px; color: #0B1E35; display: block; }
-    .nav-logo-sub  { font-size: .65rem; font-weight: 500; letter-spacing: 3px; color: #0099FF; display: block; text-transform: uppercase; }
-    .nav-link { font-weight: 600; color: #0B1E35 !important; font-size: .9rem; transition: color .2s; }
-    .nav-link:hover { color: #0099FF !important; }
+    .nav-logo-main { font-size: 1rem; font-weight: 900; letter-spacing: 2px; color: #fff; display: block; }
+    .nav-logo-sub  { font-size: .65rem; font-weight: 500; letter-spacing: 3px; color: rgba(255,255,255,.45); display: block; text-transform: uppercase; }
+    .nav-link { font-weight: 500; color: rgba(255,255,255,.7) !important; font-size: .9rem; transition: color .2s; }
+    .nav-link:hover { color: #00C9E8 !important; }
     .btn-nav {
       padding: 9px 22px; border-radius: 50px; font-weight: 700; font-size: .88rem;
-      background: linear-gradient(135deg, #0099FF, #FF3366);
+      background: linear-gradient(135deg, #00C9E8, #FF6B8A);
       color: #fff !important; text-decoration: none; border: none; transition: all .25s;
-      box-shadow: 0 4px 18px rgba(0,153,255,.3);
+      box-shadow: 0 4px 18px rgba(0,201,232,.3);
     }
-    .btn-nav:hover { filter: brightness(1.08); transform: translateY(-1px); color: #fff !important; box-shadow: 0 8px 28px rgba(0,153,255,.4); }
+    .btn-nav:hover { filter: brightness(1.08); transform: translateY(-1px); color: #fff !important; box-shadow: 0 8px 28px rgba(0,201,232,.4); }
 
     /* ── HERO ───────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
-      background: linear-gradient(135deg, #7B2FBE 0%, #0099FF 40%, #00CC88 75%, #FFB703 100%);
+      background: #050E1C;
       position: relative; overflow: hidden;
       display: flex; align-items: center;
       padding: 120px 0 80px;
@@ -52,9 +52,9 @@
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
       background:
-        radial-gradient(ellipse at 80% 10%, rgba(255,255,255,.3) 0%, transparent 45%),
-        radial-gradient(ellipse at 5% 85%, rgba(255,183,3,.3) 0%, transparent 40%),
-        radial-gradient(ellipse at 55% 55%, rgba(123,47,190,.15) 0%, transparent 50%);
+        radial-gradient(ellipse at 70% 20%, rgba(0,201,232,.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 15% 80%, rgba(0,229,180,.2) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 75%, rgba(255,107,138,.18) 0%, transparent 40%);
     }
     .hero-grid {
       position: absolute; inset: 0; z-index: 0;
@@ -95,12 +95,12 @@
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn-primary-hero {
       padding: 14px 32px; border-radius: 50px; font-weight: 700;
-      background: #fff; color: #0099FF;
+      background: #fff; color: #00C9E8;
       text-decoration: none; font-size: .95rem;
       transition: all .25s; border: none; cursor: pointer;
       box-shadow: 0 8px 32px rgba(0,0,0,.15);
     }
-    .btn-primary-hero:hover { transform: translateY(-3px); box-shadow: 0 16px 44px rgba(0,0,0,.2); color: #0099FF; }
+    .btn-primary-hero:hover { transform: translateY(-3px); box-shadow: 0 16px 44px rgba(0,0,0,.2); color: #00C9E8; }
     .btn-secondary-hero {
       padding: 14px 32px; border-radius: 50px; font-weight: 600;
       background: rgba(255,255,255,.15); color: #fff;
@@ -130,32 +130,32 @@
     .hero-card-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
 
     /* ── EVENTS ─────────────────────────────────────────── */
-    .events-section { padding: 100px 0; background: #F0FBFF; }
+    .events-section { padding: 100px 0; background: #050E1C; }
     .section-eyebrow {
       font-size: .72rem; font-weight: 700; letter-spacing: 3px;
-      text-transform: uppercase; color: #0099FF; margin-bottom: 12px;
+      text-transform: uppercase; color: #00C9E8; margin-bottom: 12px;
     }
     .section-title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 900; color: #0B1E35; line-height: 1.15;
+      font-weight: 900; color: #fff; line-height: 1.15;
     }
     .section-title span {
-      background: linear-gradient(90deg, #0099FF, #00CC88);
+      background: linear-gradient(90deg, #00C9E8, #00E5B4);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
     .ev-card {
       border-radius: 20px; overflow: hidden;
-      background: #fff;
-      border: 1px solid rgba(0,153,255,.15);
-      box-shadow: 0 4px 24px rgba(0,180,220,.08);
+      background: #0C1C2C;
+      border: 1px solid rgba(255,255,255,.07);
+      box-shadow: none;
       transition: transform .3s, box-shadow .3s;
       height: 100%; display: flex; flex-direction: column;
     }
     .ev-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0,180,220,.18);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
     }
     .ev-top {
       padding: 28px 26px 22px; position: relative; overflow: hidden; min-height: 150px;
@@ -173,114 +173,115 @@
     .ev-emoji { font-size: 2.4rem; display: block; margin-bottom: 10px; position: relative; z-index: 1; }
     .ev-name  { font-size: 1rem; font-weight: 800; color: #fff; position: relative; z-index: 1; line-height: 1.3; }
     .ev-date  { font-size: .76rem; color: rgba(255,255,255,.85); margin-top: 6px; position: relative; z-index: 1; }
-    .ev-body  { padding: 18px 24px 22px; flex: 1; display: flex; flex-direction: column; background: #fff; }
-    .ev-desc  { font-size: .875rem; color: #5A7A9A; line-height: 1.65; flex: 1; margin-bottom: 14px; }
-    .ev-venue { font-size: .78rem; color: #8AAABB; margin-bottom: 14px; }
+    .ev-body  { padding: 18px 24px 22px; flex: 1; display: flex; flex-direction: column; }
+    .ev-desc  { font-size: .875rem; color: rgba(255,255,255,.55); line-height: 1.65; flex: 1; margin-bottom: 14px; }
+    .ev-venue { font-size: .78rem; color: rgba(255,255,255,.35); margin-bottom: 14px; }
     .ev-tag   {
       display: inline-block; padding: 3px 10px; border-radius: 50px;
       font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
-      margin: 2px; background: rgba(0,153,255,.1); color: #00A8C8;
+      margin: 2px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.55);
     }
     .ev-btn {
       display: inline-block; margin-top: 16px; padding: 10px 20px; border-radius: 50px;
       font-size: .82rem; font-weight: 700; text-decoration: none; text-align: center;
-      transition: all .2s; border: 1.5px solid rgba(0,153,255,.3); color: #0099FF;
+      transition: all .2s; border: 1.5px solid rgba(255,255,255,.2); color: rgba(255,255,255,.8);
     }
-    .ev-btn:hover { background: #0099FF; color: #fff; border-color: #0099FF; }
+    .ev-btn:hover { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.4); }
 
     /* ── ABOUT ──────────────────────────────────────────── */
-    .about-section { padding: 100px 0; background: linear-gradient(135deg, #7B2FBE 0%, #0099FF 100%); }
+    .about-section { padding: 100px 0; background: #07142A; }
     .about-card {
       border-radius: 24px; padding: 48px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.25);
-      backdrop-filter: blur(12px);
+      background: linear-gradient(135deg, rgba(0,201,232,.15), rgba(0,229,180,.08));
+      border: 1px solid rgba(0,201,232,.25);
     }
     .about-stat-num {
-      font-size: 3rem; font-weight: 900; color: #fff; line-height: 1;
+      font-size: 3rem; font-weight: 900;
+      background: linear-gradient(135deg, #00C9E8, #FF6B8A);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1;
     }
-    .about-stat-label { font-size: .82rem; color: rgba(255,255,255,.7); margin-top: 6px; }
+    .about-stat-label { font-size: .82rem; color: rgba(255,255,255,.5); margin-top: 6px; }
     .partner-tag {
       display: inline-block; padding: 8px 16px; border-radius: 50px;
-      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
-      color: #fff; font-size: .82rem; font-weight: 600; margin: 4px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.75); font-size: .82rem; font-weight: 600; margin: 4px;
     }
 
     /* ── REGISTER ───────────────────────────────────────── */
-    .register-section { padding: 100px 0; background: #F0FBFF; }
+    .register-section { padding: 100px 0; background: #050E1C; }
     .reg-wrap {
       border-radius: 28px; overflow: hidden;
-      border: 1px solid rgba(0,153,255,.2);
+      border: 1px solid rgba(255,255,255,.08);
       max-width: 820px; margin: 0 auto;
-      box-shadow: 0 12px 60px rgba(0,153,255,.15);
     }
     .reg-top {
-      background: linear-gradient(135deg, #0099FF 0%, #00CC88 50%, #062035 100%);
+      background: linear-gradient(135deg, #00C9E8 0%, #00E5B4 50%, #062035 100%);
       padding: 44px 52px; position: relative; overflow: hidden;
     }
     .reg-top::after {
       content: ''; position: absolute; top: -60px; right: -60px;
       width: 240px; height: 240px; border-radius: 50%;
-      background: rgba(255,51,102,.15);
+      background: rgba(255,107,138,.15);
     }
     .reg-top-content { position: relative; z-index: 1; }
     .reg-top h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
     .reg-top p  { color: rgba(255,255,255,.75); font-size: .9rem; }
-    .reg-body   { background: #fff; padding: 44px 52px; }
+    .reg-body   { background: #0C1C2C; padding: 44px 52px; }
 
-    .form-label { font-weight: 600; font-size: .82rem; color: #5A7A9A; margin-bottom: 6px; letter-spacing: .3px; }
+    .form-label { font-weight: 600; font-size: .82rem; color: rgba(255,255,255,.6); margin-bottom: 6px; letter-spacing: .3px; }
     .form-control, .form-select {
-      background: #F0FBFF; border: 1.5px solid rgba(0,153,255,.2);
-      border-radius: 12px; color: #0B1E35; padding: 12px 16px; font-size: .9rem;
+      background: rgba(255,255,255,.05); border: 1.5px solid rgba(255,255,255,.1);
+      border-radius: 12px; color: #fff; padding: 12px 16px; font-size: .9rem;
       transition: border-color .2s, background .2s;
     }
-    .form-control::placeholder { color: #8AAABB; }
+    .form-control::placeholder { color: rgba(255,255,255,.3); }
     .form-control:focus, .form-select:focus {
-      background: #fff; border-color: #0099FF;
-      box-shadow: 0 0 0 3px rgba(0,153,255,.12); outline: none; color: #0B1E35;
+      background: rgba(255,255,255,.08); border-color: #00C9E8;
+      box-shadow: 0 0 0 3px rgba(0,201,232,.15); outline: none; color: #fff;
     }
-    .form-select option { background: #fff; color: #0B1E35; }
+    .form-select option { background: #0C1C2C; color: #fff; }
 
     .type-cards { display: flex; gap: 8px; flex-wrap: wrap; }
     .type-radio { display: none; }
     .type-label {
       flex: 1; min-width: 90px; text-align: center;
       padding: 11px 10px; border-radius: 12px;
-      border: 1.5px solid rgba(0,153,255,.2);
-      background: #F0FBFF;
-      color: #5A7A9A; font-size: .82rem; font-weight: 600;
+      border: 1.5px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.55); font-size: .82rem; font-weight: 600;
       cursor: pointer; transition: all .2s;
     }
-    .type-label:hover { border-color: #0099FF; color: #0099FF; background: rgba(0,153,255,.06); }
+    .type-label:hover { border-color: #00C9E8; color: #00C9E8; background: rgba(0,201,232,.06); }
     .type-radio:checked + .type-label {
-      border-color: #0099FF; background: rgba(0,153,255,.12); color: #0099FF; font-weight: 700;
+      border-color: #00C9E8; background: rgba(0,201,232,.12); color: #00C9E8; font-weight: 700;
     }
 
     .btn-submit {
       width: 100%; padding: 16px; border-radius: 50px; border: none;
-      background: linear-gradient(135deg, #0099FF, #FF3366);
+      background: linear-gradient(135deg, #00C9E8, #FF6B8A);
       color: #fff; font-weight: 800; font-size: 1rem; cursor: pointer;
       transition: all .25s; letter-spacing: .5px;
-      box-shadow: 0 8px 30px rgba(0,153,255,.3);
+      box-shadow: 0 8px 30px rgba(0,201,232,.3);
     }
-    .btn-submit:hover { filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,153,255,.4); }
+    .btn-submit:hover { filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,201,232,.4); }
     .btn-submit:disabled { opacity: .6; transform: none; }
 
     #successMsg { display: none; text-align: center; padding: 48px 20px; }
     .success-icon {
       width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 24px;
-      background: linear-gradient(135deg, #0099FF, #FF3366);
+      background: linear-gradient(135deg, #00C9E8, #FF6B8A);
       display: flex; align-items: center; justify-content: center; font-size: 2rem;
     }
 
     /* ── FOOTER ─────────────────────────────────────────── */
-    footer { background: #0A1E35; padding: 60px 0 28px; border-top: 3px solid #0099FF; }
+    footer { background: #0A1E35; padding: 60px 0 28px; border-top: 3px solid #00C9E8; }
     .footer-logo-main { font-size: 1.1rem; font-weight: 900; letter-spacing: 2px; color: #fff; }
-    .footer-logo-sub  { font-size: .65rem; letter-spacing: 3px; color: #0099FF; text-transform: uppercase; }
+    .footer-logo-sub  { font-size: .65rem; letter-spacing: 3px; color: #00C9E8; text-transform: uppercase; }
     .footer-desc  { font-size: .85rem; color: rgba(255,255,255,.45); max-width: 240px; line-height: 1.65; margin-top: 12px; }
     .footer-head  { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,.3); margin-bottom: 16px; }
     .footer-link  { display: block; color: rgba(255,255,255,.55); text-decoration: none; font-size: .875rem; margin-bottom: 10px; transition: color .2s; }
-    .footer-link:hover { color: #00CC88; }
+    .footer-link:hover { color: #00E5B4; }
     .footer-divider { border-color: rgba(255,255,255,.08); margin: 40px 0 24px; }
     .footer-copy  { font-size: .78rem; color: rgba(255,255,255,.25); text-align: center; }
 
@@ -292,7 +293,7 @@
       padding: 2px 7px; border-radius: 4px; text-transform: uppercase; flex-shrink: 0;
     }
     .tl-lang.ru { background: rgba(255,255,255,.3); color: #fff; }
-    .tl-lang.kz { background: rgba(0,204,136,.3); color: #00CC88; }
+    .tl-lang.kz { background: rgba(0,229,180,.3); color: #00E5B4; }
     .tl-lang.en { background: rgba(255,255,255,.15); color: rgba(255,255,255,.6); }
     .tl-text { font-family: 'Playfair Display', serif; line-height: 1.2; }
     .tl-text.ru { font-size: 1.15rem; font-weight: 700; color: #fff; }
@@ -411,7 +412,7 @@
           <div class="hero-card" style="top:20px;left:30px;width:250px;">
             <span class="hero-card-emoji">🎵</span>
             <div class="hero-card-name">Фестиваль музыки и танца</div>
-            <div class="hero-card-date"><span class="hero-card-dot" style="background:#0099FF;"></span>18–19 июля · Арбат</div>
+            <div class="hero-card-date"><span class="hero-card-dot" style="background:#00C9E8;"></span>18–19 июля · Арбат</div>
           </div>
           <div class="hero-card" style="top:280px;left:20px;width:230px;">
             <span class="hero-card-emoji">🇺🇸</span>
@@ -442,18 +443,18 @@
       <!-- ГЛАВНАЯ КАРТОЧКА ФЕСТИВАЛЯ -->
       <div class="col-12">
         <div class="ev-card" style="flex-direction:row;min-height:200px;">
-          <div class="ev-top" style="background:linear-gradient(135deg,#0099FF 0%,#00CC88 60%,#FF3366 100%);min-width:260px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
+          <div class="ev-top" style="background:linear-gradient(135deg,#00C9E8 0%,#00E5B4 60%,#FF6B8A 100%);min-width:260px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
             <span class="ev-emoji" style="font-size:3rem;">🎵</span>
             <div class="ev-name" style="font-size:1.15rem;">Арбат Астана Фест</div>
             <div class="ev-date"><i class="bi bi-calendar3 me-1"></i>18–19 июля 2026</div>
           </div>
           <div class="ev-body" style="display:flex;flex-direction:column;justify-content:center;">
             <div style="margin-bottom:8px;">
-              <span style="font-size:.68rem;font-weight:800;color:#0099FF;letter-spacing:1px;">RU</span>
+              <span style="font-size:.68rem;font-weight:800;color:#00C9E8;letter-spacing:1px;">RU</span>
               <span style="font-size:.9rem;color:#fff;font-family:'Playfair Display',serif;font-weight:700;margin-left:8px;">Международный фестиваль музыки и танца</span>
             </div>
             <div style="margin-bottom:5px;">
-              <span style="font-size:.68rem;font-weight:800;color:#FF3366;letter-spacing:1px;">KZ</span>
+              <span style="font-size:.68rem;font-weight:800;color:#FF6B8A;letter-spacing:1px;">KZ</span>
               <span style="font-size:.82rem;color:rgba(255,255,255,.7);margin-left:8px;">Халықаралық музыка және би фестивалі</span>
             </div>
             <div style="margin-bottom:16px;">
@@ -466,7 +467,7 @@
               <span class="ev-tag">🎸 музыка</span><span class="ev-tag">💃 танец</span>
               <span class="ev-tag">🎤 вокал</span><span class="ev-tag">🌍 международный</span>
             </div>
-            <a href="#register" class="ev-btn" style="align-self:flex-start;margin-top:14px;border-color:rgba(0,153,255,.5);color:#FF3366;">Подать заявку →</a>
+            <a href="#register" class="ev-btn" style="align-self:flex-start;margin-top:14px;border-color:rgba(0,201,232,.5);color:#FF6B8A;">Подать заявку →</a>
           </div>
         </div>
       </div>
@@ -477,7 +478,7 @@
     <div style="margin-top:56px;">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
         <div style="font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#8AAABB;">Прошедшие мероприятия</div>
-        <div style="flex:1;height:1px;background:rgba(0,153,255,.15);"></div>
+        <div style="flex:1;height:1px;background:rgba(0,201,232,.15);"></div>
       </div>
       <div class="row g-4 justify-content-center">
 
@@ -616,7 +617,7 @@
       <div class="col-lg-5">
         <div class="section-eyebrow" style="color:#FFB703;">О фестивале</div>
         <h2 class="section-title" style="margin-bottom:20px;color:#fff;">
-          Arbat Astana — <span style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#FFB703,#00CC88);-webkit-background-clip:text;background-clip:text;">место встречи</span> культур
+          Arbat Astana — <span style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#FFB703,#00E5B4);-webkit-background-clip:text;background-clip:text;">место встречи</span> культур
         </h2>
         <p style="color:rgba(255,255,255,.8);line-height:1.8;font-size:.95rem;margin-bottom:24px;">
           Arbat Astana Fest — платформа для организации культурных,
@@ -795,7 +796,7 @@
   // Navbar shadow on scroll
   window.addEventListener('scroll', () => {
     document.querySelector('.navbar').style.borderBottomColor =
-      window.scrollY > 30 ? 'rgba(0,153,255,.25)' : 'rgba(255,255,255,.08)';
+      window.scrollY > 30 ? 'rgba(0,201,232,.25)' : 'rgba(255,255,255,.08)';
   }, { passive: true });
 
   function handleSubmit(e) {
