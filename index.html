@@ -10,11 +10,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #050E1C; color: #fff; }
+    body { font-family: 'Inter', sans-serif; background: #152840; color: #fff; }
 
     /* ── NAVBAR ─────────────────────────────────────────── */
     .navbar {
-      background: rgba(5,14,28,.95);
+      background: rgba(21,40,64,.95);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(0,201,232,.15);
       padding: 16px 0;
@@ -46,7 +46,7 @@
     /* ── HERO ───────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
-      background: #050E1C;
+      background: #152840;
       position: relative; overflow: hidden;
       display: flex; align-items: center;
       padding: 120px 0 80px;
@@ -125,7 +125,7 @@
     .hero-card-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
 
     /* ── EVENTS ─────────────────────────────────────────── */
-    .events-section { padding: 100px 0; background: #050E1C; }
+    .events-section { padding: 100px 0; background: #152840; }
     .section-eyebrow {
       font-size: .72rem; font-weight: 700; letter-spacing: 3px;
       text-transform: uppercase; color: #00C9E8; margin-bottom: 12px;
@@ -142,7 +142,7 @@
 
     .ev-card {
       border-radius: 20px; overflow: hidden;
-      background: #0C1C2C;
+      background: #1F3555;
       border: 1px solid rgba(255,255,255,.07);
       box-shadow: none;
       transition: transform .3s, box-shadow .3s;
@@ -184,7 +184,7 @@
     .ev-btn:hover { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.4); }
 
     /* ── ABOUT ──────────────────────────────────────────── */
-    .about-section { padding: 100px 0; background: #07142A; }
+    .about-section { padding: 100px 0; background: #1A3050; }
     .about-card {
       border-radius: 24px; padding: 48px;
       background: linear-gradient(135deg, rgba(0,201,232,.15), rgba(0,229,180,.08));
@@ -204,7 +204,7 @@
     }
 
     /* ── ABOUT FEST ─────────────────────────────────────── */
-    .fest-about { padding: 100px 0; background: #07142A; }
+    .fest-about { padding: 100px 0; background: #1A3050; }
     .fest-about .section-eyebrow { color: #00E5B4; }
     .fest-card {
       background: rgba(0,201,232,.06); border: 1px solid rgba(0,201,232,.14);
@@ -224,9 +224,9 @@
     }
 
     /* ── ORGANIZERS ──────────────────────────────────────── */
-    .org-section { padding: 100px 0; background: #050E1C; }
+    .org-section { padding: 100px 0; background: #152840; }
     .org-card {
-      background: #0C1C2C; border: 1px solid rgba(255,255,255,.08);
+      background: #1F3555; border: 1px solid rgba(255,255,255,.08);
       border-radius: 20px; padding: 32px 24px; text-align: center;
       transition: transform .25s, border-color .25s; height: 100%;
     }
@@ -242,7 +242,7 @@
     .org-desc { font-size: .83rem; color: rgba(255,255,255,.5); line-height: 1.65; }
 
     /* ── REGISTER ───────────────────────────────────────── */
-    .register-section { padding: 100px 0; background: #050E1C; }
+    .register-section { padding: 100px 0; background: #152840; }
     .reg-wrap {
       border-radius: 28px; overflow: hidden;
       border: 1px solid rgba(255,255,255,.08);
@@ -260,7 +260,7 @@
     .reg-top-content { position: relative; z-index: 1; }
     .reg-top h3 { font-family: 'Inter', sans-serif; font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
     .reg-top p  { color: rgba(255,255,255,.75); font-size: .9rem; }
-    .reg-body   { background: #0C1C2C; padding: 44px 52px; }
+    .reg-body   { background: #1F3555; padding: 44px 52px; }
 
     .form-label { font-weight: 600; font-size: .82rem; color: rgba(255,255,255,.6); margin-bottom: 6px; letter-spacing: .3px; }
     .form-control, .form-select {
@@ -273,7 +273,7 @@
       background: rgba(255,255,255,.08); border-color: #00C9E8;
       box-shadow: 0 0 0 3px rgba(0,201,232,.15); outline: none; color: #fff;
     }
-    .form-select option { background: #0C1C2C; color: #fff; }
+    .form-select option { background: #1F3555; color: #fff; }
 
     .type-cards { display: flex; gap: 8px; flex-wrap: wrap; }
     .type-radio { display: none; }
@@ -401,7 +401,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#events" role="button" data-bs-toggle="dropdown" aria-expanded="false"
              style="color:rgba(255,255,255,.7)!important;">Мероприятия</a>
-          <ul class="dropdown-menu" style="background:#0C1C2C;border:1px solid rgba(0,201,232,.2);border-radius:12px;min-width:200px;">
+          <ul class="dropdown-menu" style="background:#1F3555;border:1px solid rgba(0,201,232,.2);border-radius:12px;min-width:200px;">
             <li><a class="dropdown-item" href="#events"
                    style="color:rgba(255,255,255,.85);font-size:.88rem;padding:10px 18px;">
               🎵 Предстоящие
@@ -543,7 +543,7 @@
 <div id="usaModal" onclick="closeUSAGallery(event)"
      style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:8000;
             overflow-y:auto;padding:32px 16px;">
-  <div onclick="event.stopPropagation()" style="max-width:900px;margin:0 auto;background:#0C1C2C;border-radius:24px;padding:32px;position:relative;">
+  <div onclick="event.stopPropagation()" style="max-width:900px;margin:0 auto;background:#1F3555;border-radius:24px;padding:32px;position:relative;">
     <button onclick="closeUSAGallery(event)"
             style="position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.6);font-size:1.8rem;cursor:pointer;line-height:1;z-index:10;">✕</button>
     <div style="margin-bottom:24px;">
