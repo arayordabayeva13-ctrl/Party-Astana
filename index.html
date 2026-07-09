@@ -356,37 +356,6 @@
     .tl-text.en { font-size: 1rem; font-weight: 700; color: rgba(255,255,255,.85); }
     .tl-sep { width: 40px; height: 1px; background: rgba(255,255,255,.2); margin: 6px 0 6px 52px; }
 
-    /* ── BACKGROUND ANIMATION ──────────────────────────── */
-    .anim-bg {
-      position: absolute; inset: 0; z-index: 1;
-      pointer-events: none; overflow: hidden;
-    }
-    .fl-note {
-      position: absolute; pointer-events: none; user-select: none;
-      line-height: 1; animation: noteRise linear forwards;
-    }
-    .fl-bal {
-      position: absolute; pointer-events: none;
-      animation: balRise ease-in-out forwards;
-    }
-    .fl-bal svg { display: block; }
-    @keyframes noteRise {
-      0%   { opacity: 0;   transform: translateY(0)      translateX(0)    rotate(0deg); }
-      8%   { opacity: 1; }
-      45%  {               transform: translateY(-45vh)  translateX(18px) rotate(12deg); }
-      80%  { opacity: .5; }
-      100% { opacity: 0;   transform: translateY(-108vh) translateX(-12px) rotate(28deg); }
-    }
-    @keyframes balRise {
-      0%   { opacity: 0;  transform: translateY(0)       scaleX(1)  rotate(-1deg); }
-      8%   { opacity: 1; }
-      30%  {              transform: translateY(-26vh)   scaleX(1)  rotate(1deg); }
-      52%  {              transform: translateY(-50vh)   scaleX(-1) rotate(-1deg); }
-      74%  {              transform: translateY(-74vh)   scaleX(1)  rotate(1deg); }
-      88%  { opacity: .45; }
-      100% { opacity: 0;  transform: translateY(-108vh)  scaleX(-1) rotate(0deg); }
-    }
-
     /* ── RESPONSIVE ─────────────────────────────────────── */
 
     /* Tablet (≤991px) */
@@ -514,7 +483,6 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-bg"></div>
-  <div class="anim-bg" id="animBg"></div>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8 hero-content">
@@ -1057,101 +1025,6 @@
     btn.innerHTML = '<i class="bi bi-check2-circle me-2"></i>Отправить заявку';
   }
 </script>
-<script>
-/* ── BACKGROUND ANIMATION: floating notes + ballerinas ── */
-(function () {
-  const bg = document.getElementById('animBg');
-  if (!bg) return;
-
-  const NOTES   = ['♩','♪','♫','♬','♪','♩','♫','♬'];
-  const PALETTE = [
-    'rgba(0,201,232,OP)',   /* turquoise */
-    'rgba(0,229,180,OP)',   /* emerald   */
-    'rgba(255,107,138,OP)', /* coral     */
-    'rgba(255,255,255,OP)'  /* white     */
-  ];
-
-/* ── Ballerina SVG (beautiful head, arabesque) ── */
-  const BAL = `<svg viewBox="0 0 112 148" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-    <!-- swept-up hair (chignon shape) -->
-    <path d="M38,10 C35,5 37,0 44,0 C51,0 58,3 59,8 C61,13 58,17 53,16 C48,15 44,12 42,10 C40,9 39,10 38,10Z"/>
-    <!-- hair bun (round, neatly placed) -->
-    <circle cx="53" cy="8" r="9"/>
-    <!-- head — elegant oval, slightly tilted -->
-    <ellipse cx="44" cy="22" rx="13" ry="15"/>
-    <!-- graceful long neck -->
-    <path d="M40,36 C39,40 39,44 40,48 L50,48 C51,44 51,40 50,36 Q44,34 40,36Z"/>
-    <!-- collarbone / shoulder line -->
-    <path d="M30,47 Q44,43 58,47 L60,52 Q44,48 28,52Z"/>
-    <!-- torso — tapered hourglass -->
-    <path d="M32,51 C30,57 29,63 31,70 L59,70 C61,63 60,57 58,51 Q44,47 32,51Z"/>
-    <!-- tutu layer 1 solid -->
-    <path d="M12,66 Q26,82 52,80 Q78,82 92,66 Q76,74 52,72 Q28,74 12,66Z"/>
-    <!-- tutu layer 2 mid -->
-    <path d="M4,62 Q20,82 52,80 Q84,82 100,62 Q82,72 52,70 Q22,72 4,62Z" opacity=".55"/>
-    <!-- tutu layer 3 outer wisp -->
-    <path d="M0,58 Q16,83 52,81 Q88,83 108,58 Q88,69 52,67 Q16,69 0,58Z" opacity=".25"/>
-    <!-- left arm raised high — long graceful S-curve -->
-    <path d="M36,55 C28,44 18,32 8,20" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-    <!-- hand / port de bras curl -->
-    <path d="M8,20 C6,16 5,12 7,9 C9,7 12,8 12,11" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-    <!-- right arm flowing to side — soft second position -->
-    <path d="M58,55 C68,55 80,61 90,69" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-    <!-- standing left leg (straight, on pointe) -->
-    <path d="M46,70 C44,88 42,104 41,122" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-    <!-- pointe foot — fully extended en pointe -->
-    <path d="M41,122 C38,130 32,136 25,139" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <!-- arabesque right leg — high and sweeping -->
-    <path d="M54,70 C70,80 88,76 100,66 C108,58 110,45 106,32" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/>
-  </svg>`;
-
-  function color(opacity) {
-    return PALETTE[Math.floor(Math.random() * PALETTE.length)]
-      .replace('OP', opacity.toFixed(2));
-  }
-
-  function spawnNote() {
-    const el = document.createElement('div');
-    el.className = 'fl-note';
-    el.textContent = NOTES[Math.floor(Math.random() * NOTES.length)];
-    const sz  = 1.1 + Math.random() * 1.9;
-    const dur = 9   + Math.random() * 9;
-    el.style.cssText = `
-      left:${2 + Math.random() * 93}%;
-      bottom:-60px;
-      font-size:${sz}rem;
-      color:${color(0.35 + Math.random() * 0.3)};
-      animation-duration:${dur}s;
-    `;
-    bg.appendChild(el);
-    setTimeout(() => el.remove(), (dur + 0.6) * 1000);
-  }
-
-  function spawnBal() {
-    const el = document.createElement('div');
-    el.className = 'fl-bal';
-    el.innerHTML = BAL;
-    const sz  = 38  + Math.random() * 40;
-    const dur = 14  + Math.random() * 10;
-    el.style.cssText = `
-      left:${2 + Math.random() * 90}%;
-      bottom:-120px;
-      width:${sz}px;
-      color:${color(0.16 + Math.random() * 0.14)};
-      animation-duration:${dur}s;
-    `;
-    bg.appendChild(el);
-    setTimeout(() => el.remove(), (dur + 0.6) * 1000);
-  }
-
-  /* initial burst */
-  for (let i = 0; i < 7; i++) setTimeout(() => spawnNote(), i * 400);
-  for (let i = 0; i < 3; i++) setTimeout(() => spawnBal(),  i * 2800 + 800);
-
-  /* continuous */
-  setInterval(spawnNote, 1100);
-  setInterval(spawnBal,  4200);
-})();
 
 /* ── I18N ────────────────────────────────────────────── */
 const GRAD_ABOUT = `style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#00C9E8,#00E5B4);-webkit-background-clip:text;background-clip:text;"`;
