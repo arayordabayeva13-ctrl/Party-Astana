@@ -910,15 +910,7 @@
               <label class="form-label" data-i18n="form.rider.label">Тех. райдер</label>
               <input type="text" class="form-control" name="tech_rider" placeholder="Звук, свет, микрофоны..." data-i18n-placeholder="form.rider.ph">
             </div>
-            <div class="col-md-6">
-              <label class="form-label" data-i18n="form.lang.label">Язык общения</label>
-              <select class="form-select" name="language">
-                <option>Русский</option>
-                <option>English</option>
-                <option>Қазақша</option>
-              </select>
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
               <label class="form-label" data-i18n="form.notes.label">Примечание</label>
               <input type="text" class="form-control" name="notes" placeholder="Дополнительная информация..." data-i18n-placeholder="form.notes.ph">
             </div>
@@ -1019,7 +1011,6 @@
       group_size:   form.group_size.value,
       duration:     form.duration.value,
       tech_rider:   form.tech_rider.value,
-      language:     form.language.value,
       notes:        form.notes.value,
     };
     fetch(SHEETS_URL, {
@@ -1212,7 +1203,7 @@ const translations = {
     'form.phone.label':'Телефон','form.phone.ph':'+7 (___) ___-__-__',
     'form.org.label':'Организация','form.org.ph':'Название организации',
     'form.event.label':'Мероприятие *','form.event.opt':'🎵 Арбат Астана Арт Фест — 18 и 19 июля 2026',
-    'form.cat.label':'Категория участника','form.lang.label':'Язык общения',
+    'form.cat.label':'Категория участника',
     'form.groupsize.label':'Количество человек в коллективе','form.groupsize.ph':'Напр. 5',
     'form.duration.label':'Длительность программы','form.duration.ph':'Напр. 15 минут',
     'form.rider.label':'Тех. райдер','form.rider.ph':'Звук, свет, микрофоны...',
@@ -1269,7 +1260,7 @@ const translations = {
     'form.phone.label':'Телефон','form.phone.ph':'+7 (___) ___-__-__',
     'form.org.label':'Ұйым','form.org.ph':'Ұйым атауы',
     'form.event.label':'Іс-шара *','form.event.opt':'🎵 Арбат Астана Арт Фест — 18 және 19 шілде 2026',
-    'form.cat.label':'Қатысушы санаты','form.lang.label':'Байланыс тілі',
+    'form.cat.label':'Қатысушы санаты',
     'form.groupsize.label':'Ұжымдағы адам саны','form.groupsize.ph':'Мыс. 5',
     'form.duration.label':'Бағдарлама ұзақтығы','form.duration.ph':'Мыс. 15 минут',
     'form.rider.label':'Тех. райдер','form.rider.ph':'Дыбыс, жарық, микрофондар...',
@@ -1326,7 +1317,7 @@ const translations = {
     'form.phone.label':'Phone','form.phone.ph':'+7 (___) ___-__-__',
     'form.org.label':'Organization','form.org.ph':'Organization name',
     'form.event.label':'Event *','form.event.opt':'🎵 Arbat Astana Art Fest — July 18 and 19, 2026',
-    'form.cat.label':'Participant Category','form.lang.label':'Language',
+    'form.cat.label':'Participant Category',
     'form.groupsize.label':'Number of People in Group','form.groupsize.ph':'E.g. 5',
     'form.duration.label':'Program Duration','form.duration.ph':'E.g. 15 minutes',
     'form.rider.label':'Tech Rider','form.rider.ph':'Sound, light, microphones...',
