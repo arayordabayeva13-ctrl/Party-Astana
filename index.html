@@ -825,6 +825,9 @@
       <p style="color:rgba(255,255,255,.45);margin-top:12px;font-size:.92rem;" data-i18n="reg.subtitle">
         Заполните форму — мы свяжемся в течение 24 часов
       </p>
+      <div id="regDeadlineNotice" style="display:inline-block;margin-top:14px;padding:8px 18px;border-radius:20px;background:rgba(255,183,3,.12);border:1px solid rgba(255,183,3,.35);color:#FFB703;font-size:.85rem;font-weight:700;" data-i18n="reg.deadline">
+        ⏰ Приём заявок открыт до 18:00 14 июля 2026
+      </div>
     </div>
 
     <div class="reg-wrap">
@@ -848,6 +851,12 @@
           <button onclick="resetForm()" class="btn-nav mt-4" style="border:none;cursor:pointer;" data-i18n="success.btn">
             Отправить ещё одну
           </button>
+        </div>
+
+        <div id="closedMsg" style="display:none;text-align:center;padding:48px 20px;">
+          <div class="success-icon" style="background:linear-gradient(135deg,#FF6B8A,#FFB703);">✕</div>
+          <h4 style="font-weight:800;font-size:1.4rem;margin-bottom:10px;" data-i18n="closed.title">Приём заявок завершён</h4>
+          <p style="color:rgba(255,255,255,.5);" data-i18n="closed.msg">Приём заявок закрыт. Спасибо всем, кто откликнулся!</p>
         </div>
 
         <form id="regForm" onsubmit="handleSubmit(event)">
@@ -988,6 +997,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxws_GElFNd2XbqsjAiwnDx0qEJvoabpTjVLc1msyzI0385fde9xKaRetO3dJ2Z0F7nFw/exec';
+
+  // Registration deadline: 18:00, 14 July 2026 (Kazakhstan time, UTC+5)
+  const REG_DEADLINE = new Date('2026-07-14T18:00:00+05:00');
+  function checkRegDeadline() {
+    if (new Date() >= REG_DEADLINE) {
+      document.getElementById('regForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'none';
+      document.getElementById('regDeadlineNotice').style.display = 'none';
+      document.getElementById('closedMsg').style.display = 'block';
+    }
+  }
+  checkRegDeadline();
 
   // Navbar shadow on scroll
   window.addEventListener('scroll', () => {
@@ -1198,6 +1219,8 @@ const translations = {
     'reg.title':'Оставить <span>заявку</span>',
     'reg.subtitle':'Заполните форму — мы свяжемся в течение 24 часов',
     'reg.header':'Регистрация участника','reg.location':'Арбат Астана · Казахстан',
+    'reg.deadline':'⏰ Приём заявок открыт до 18:00 14 июля 2026',
+    'closed.title':'Приём заявок завершён','closed.msg':'Приём заявок закрыт. Спасибо всем, кто откликнулся!',
     'form.name.label':'Имя и фамилия *','form.name.ph':'Айгерим Сейткали',
     'form.email.label':'Email','form.email.ph':'email@example.com',
     'form.phone.label':'Телефон','form.phone.ph':'+7 (___) ___-__-__',
@@ -1255,6 +1278,8 @@ const translations = {
     'reg.title':'Өтінім <span>беру</span>',
     'reg.subtitle':'Форманы толтырыңыз — 24 сағат ішінде хабарласамыз',
     'reg.header':'Қатысушыны тіркеу','reg.location':'Арбат Астана · Қазақстан',
+    'reg.deadline':'⏰ Өтінімдер 2026 жылғы 14 шілде, сағат 18:00-ге дейін қабылданады',
+    'closed.title':'Өтінімдер қабылдау аяқталды','closed.msg':'Өтінімдер қабылдау жабылды. Қатысқандардың барлығына рақмет!',
     'form.name.label':'Аты-жөні *','form.name.ph':'Айгерім Сейткали',
     'form.email.label':'Email','form.email.ph':'email@example.com',
     'form.phone.label':'Телефон','form.phone.ph':'+7 (___) ___-__-__',
@@ -1312,6 +1337,8 @@ const translations = {
     'reg.title':'Submit <span>an Application</span>',
     'reg.subtitle':'Fill out the form — we\'ll get back to you within 24 hours',
     'reg.header':'Participant Registration','reg.location':'Arbat Astana · Kazakhstan',
+    'reg.deadline':'⏰ Applications open until 18:00 on July 14, 2026',
+    'closed.title':'Applications Closed','closed.msg':'We are no longer accepting applications. Thank you to everyone who applied!',
     'form.name.label':'Full Name *','form.name.ph':'Your full name',
     'form.email.label':'Email','form.email.ph':'email@example.com',
     'form.phone.label':'Phone','form.phone.ph':'+7 (___) ___-__-__',
