@@ -84,7 +84,7 @@
       </div>
       <div class="col-lg-2 offset-lg-2">
         <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.35);margin-bottom:12px;">Мероприятия</div>
-        {% for slug, ev in {'india-week':{'name':'Неделя Индии'},'kings-day':{'name':'День Короля'},'charity-fair':{'name':'Ярмарка'},'storytelling':{'name':'Сторителлинг'},'city-day':{'name':'День города'}}.items() %}
+        {% for slug, ev in {'arbat-astana-art-fest':{'name':'Arbat Astana Art Fest'},'india-week':{'name':'Неделя Индии'},'kings-day':{'name':'День Короля'},'charity-fair':{'name':'Ярмарка'},'storytelling':{'name':'Сторителлинг'},'city-day':{'name':'День города'}}.items() %}
         <a href="{{ url_for('event_detail', slug=slug) }}" class="footer-link">{{ ev.name }}</a>
         {% endfor %}
       </div>
