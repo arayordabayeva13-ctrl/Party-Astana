@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Программа фестиваля — ARBAT ASTANA ART FEST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #152840; color: #fff; padding: 48px 20px 80px; }
+    .wrap { max-width: 900px; margin: 0 auto; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: #00C9E8; text-decoration: none; font-size: .9rem; font-weight: 600;
+      margin-bottom: 28px;
+    }
+    .back-link:hover { color: #00E5B4; }
+
+    header { margin-bottom: 36px; }
+    .eyebrow {
+      font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+      color: #00C9E8; margin-bottom: 10px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      margin: 0 0 10px;
+      background: linear-gradient(90deg, #fff 20%, #00C9E8 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    header p { color: rgba(255,255,255,.6); font-size: .95rem; line-height: 1.5; }
+
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #00C9E8, #FF6B8A);
+      color: #fff; text-decoration: none; font-weight: 700; font-size: .92rem;
+      padding: 12px 22px; border-radius: 10px; margin-top: 20px;
+      box-shadow: 0 8px 24px rgba(0,201,232,.25);
+    }
+    .dl-btn:hover { filter: brightness(1.08); }
+
+    section.venue { margin-bottom: 40px; }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin: 0 0 4px;
+      border-left: 3px solid #00C9E8;
+      padding-left: 12px;
+    }
+    h3 {
+      font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+      color: #FF6B8A; margin: 22px 0 10px;
+    }
+
+    .table-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+    table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,.03); font-size: .92rem; min-width: 480px; }
+    thead th {
+      text-align: left; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(255,255,255,.5); padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    tbody td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.08); vertical-align: top; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:nth-child(even) { background: rgba(255,255,255,.02); }
+    td.time { font-variant-numeric: tabular-nums; white-space: nowrap; color: #00C9E8; font-weight: 700; width: 130px; }
+    td.act { font-weight: 600; }
+
+    footer { margin-top: 40px; color: rgba(255,255,255,.4); font-size: .82rem; }
+
+    @media print {
+      body { padding: 0; background: #fff; color: #111; }
+      .back-link, .dl-btn { display: none; }
+      h1 { -webkit-text-fill-color: initial; background: none; color: #111; }
+      table { background: #fff; }
+      td.time { color: #0090AC; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back-link" href="index.html">← На главную</a>
+
+    <header>
+      <div class="eyebrow">18–19 июля 2026 · Арбат Астана, ул. Мамбетова, 1</div>
+      <h1>Программа фестиваля</h1>
+      <p>ARBAT ASTANA ART FEST — расписание выступлений по площадкам</p>
+      <a class="dl-btn" href="arbat-astana-art-fest-program.docx" download>⬇ Скачать программу (.docx)</a>
+    </header>
+
+    <section class="venue">
+      <h2>Площадка 1. Сцена (ЭКРАН)</h2>
+
+      <h3>18 июля</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Время</th><th>Выступление</th></tr></thead>
+          <tbody>
+            <tr><td class="time">18:00–18:30</td><td class="act">Хор флейт (Ансамбль флейт им. К. Жумакенова)</td></tr>
+            <tr><td class="time">18:30–19:00</td><td class="act">Хоровая музыка (рук. Батыржан Смаков)</td></tr>
+            <tr><td class="time">19:00–19:20</td><td class="act">Олжас Сулейменов — Домбра</td></tr>
+            <tr><td class="time">19:20–19:30</td><td class="act">Талгат Бердигулов — Волынка</td></tr>
+            <tr><td class="time">19:30–20:30</td><td class="act">Лилия Долдырина — Поэзия и французские песни</td></tr>
+            <tr><td class="time">20:30–20:45</td><td class="act">Султан Рахимжанов — Рэп-выступление</td></tr>
+            <tr><td class="time">20:45–21:15</td><td class="act">Лекция о саундтреках — Sezim Music Show</td></tr>
+            <tr><td class="time">21:15–22:30</td><td class="act">Концерт — Sezim Music Show</td></tr>
+            <tr><td class="time">22:30–22:40</td><td class="act">Показ фильма — Сабира Пашкевич</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>19 июля</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Время</th><th>Выступление</th></tr></thead>
+          <tbody>
+            <tr><td class="time">18:00–18:30</td><td class="act">Хор флейт (Ансамбль флейт им. К. Жумакенова)</td></tr>
+            <tr><td class="time">18:30–19:00</td><td class="act">Хоровая музыка (рук. Батыржан Смаков)</td></tr>
+            <tr><td class="time">19:00–19:20</td><td class="act">Олжас Сулейменов — Домбра</td></tr>
+            <tr><td class="time">19:20–19:30</td><td class="act">Талгат Бердигулов — Волынка</td></tr>
+            <tr><td class="time">19:30–20:30</td><td class="act">Лилия Долдырина — Поэзия и французские песни</td></tr>
+            <tr><td class="time">20:30–20:45</td><td class="act">Султан Рахимжанов — Рэп-выступление</td></tr>
+            <tr><td class="time">20:45–21:15</td><td class="act">Лекция о саундтреках — Sezim Music Show</td></tr>
+            <tr><td class="time">21:15–22:30</td><td class="act">Концерт — Sezim Music Show</td></tr>
+            <tr><td class="time">22:30–22:40</td><td class="act">Показ фильма — Сабира Пашкевич</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="venue">
+      <h2>Площадка 2. Сцена Арбата</h2>
+
+      <h3>18 июля (Суббота)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Время</th><th>Выступление</th></tr></thead>
+          <tbody>
+            <tr><td class="time">17:00–18:00</td><td class="act">Дети «Ұлы Дала»</td></tr>
+            <tr><td class="time">18:00–18:30</td><td class="act">Театр «Синтез» — Мухтар Дүнгешов</td></tr>
+            <tr><td class="time">18:30–19:00</td><td class="act">Жанали Кемельхаан</td></tr>
+            <tr><td class="time">19:00–19:30</td><td class="act">Азия Бит (Марал Ками)</td></tr>
+            <tr><td class="time">19:30–20:30</td><td class="act">Кося (Акнур Исхак, Madame Puteau)</td></tr>
+            <tr><td class="time">20:30–21:00</td><td class="act">Данело (Danelo Live band)</td></tr>
+            <tr><td class="time">21:00–21:30</td><td class="act">Мадина — Саксофон</td></tr>
+            <tr><td class="time">21:30–22:00</td><td class="act">Мурат Асанаев — Гитара</td></tr>
+            <tr><td class="time">22:00–23:00</td><td class="act">Открытый микрофон</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>19 июля (Воскресенье) — Сцена «Сахна»</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Время</th><th>Выступление</th></tr></thead>
+          <tbody>
+            <tr><td class="time">17:00–18:00</td><td class="act">Культурный центр им. Свами Вивекананда</td></tr>
+            <tr><td class="time">18:00–23:00</td><td class="act">Токио бэнд</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="venue">
+      <h2>Площадка 3. Сцена перед Дворцом школьников</h2>
+
+      <h3>18 июля (Суббота)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Время</th><th>Выступление</th></tr></thead>
+          <tbody>
+            <tr><td class="time">12:00–20:00</td><td class="act">Танцевальный батл Red Bull</td></tr>
+            <tr><td class="time">20:00–21:30</td><td class="act">Брейк-данс (Break Dance)</td></tr>
+            <tr><td class="time">21:30–23:00</td><td class="act">Sezim Music Show &amp; Fire Show</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>19 июля (Воскресенье)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Время</th><th>Выступление</th></tr></thead>
+          <tbody>
+            <tr><td class="time">12:00–20:00</td><td class="act">Танцевальная программа студии Eleven</td></tr>
+            <tr><td class="time">20:00–21:30</td><td class="act">Брейк-данс (Break Dance)</td></tr>
+            <tr><td class="time">21:30–23:00</td><td class="act">Sezim Music Show &amp; Fire Show</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>ARBAT ASTANA ART FEST · 18–19 июля 2026 · arbatastanafest.com</footer>
+  </div>
+</body>
+</html>
